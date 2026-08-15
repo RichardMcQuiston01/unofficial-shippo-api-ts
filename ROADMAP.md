@@ -7,7 +7,8 @@ plan; nothing below has been built yet.
 
 Ship a framework-agnostic, fully-typed TypeScript client for the
 [Shippo](https://goshippo.com) shipping API, publishable to npm as
-`@richardmcquiston01/shippo-api` (name TBD — see Open Questions).
+`@richardmcquiston01/shippo-api` — matching the package name declared in
+`README.md`.
 
 ### Why build this when Shippo already publishes an SDK?
 
@@ -164,7 +165,8 @@ coherent:
 
 ### Stage 7 — Release engineering & v0.1.0 publish
 - Changesets workflow, npm provenance publish action, tag/release notes.
-- Confirm final package name and npm scope availability.
+- Confirm `@richardmcquiston01/shippo-api` npm scope availability (name is
+  locked per §6; this step is just registry-availability confirmation).
 - Decide and document the semver policy (when 1.0.0 is warranted).
 - **Exit criteria**: `npm install <package>` works from the real registry;
   CI publishes on merge-to-main via changesets.
@@ -206,9 +208,9 @@ agents rather than one agent working through resources serially.
 
 ## 6. Open questions (need your input before Stage 0 starts)
 
-1. **Package name**: README currently titles the package
-   `@richardmcquiston01/shippo-api`; the repo is `unofficial-shippo-api-ts`.
-   Which name should actually get published to npm?
+1. ~~**Package name**~~ — resolved: `@richardmcquiston01/shippo-api`, per
+   `README.md` (the repo name `unofficial-shippo-api-ts` is just the GitHub
+   repo slug, not the published package name).
 2. **Platform API**: in scope for v1, a later phase, or explicitly out of
    scope? (Recommendation: out of scope until the Public API is solid.)
 3. **Node/runtime support matrix**: minimum Node version, and is
