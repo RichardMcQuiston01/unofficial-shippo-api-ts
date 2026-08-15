@@ -71,12 +71,16 @@ implementation locks in types — see the mirror caveat below.**
     businesses. **Out of scope** — this package targets a single business
     managing its own shipping, not a reseller platform (see Target User,
     §1).
-- **Resources** (consistent across Python SDK, official JS SDK): Addresses,
-  Parcels, Shipments, Rates, Transactions (labels), Tracking Status,
-  Webhooks, Batches, Refunds, Customs Declarations, Customs Items,
-  Manifests, Orders, Pickups, Carrier Accounts, Carrier Parcel Templates,
-  User Parcel Templates, Service Groups, Rates at Checkout, Shippo
-  Accounts. Full method inventory captured in Stage 2/3 tables below.
+- **Resources**: Addresses, Parcels, Shipments, Rates, Transactions
+  (labels), Tracking Status, Webhooks, Batches, Refunds, Customs
+  Declarations, Customs Items, Manifests, Orders, Pickups, Carrier
+  Accounts, Carrier Parcel Templates, User Parcel Templates, Service
+  Groups, Rates at Checkout, Shippo Accounts (20 resources, ~79 methods).
+  **Confirmed independently across three separately-generated official
+  SDKs** (Python, JavaScript, C# — see below), all agreeing on this exact
+  set and method names, which is strong evidence the *inventory* is
+  accurate even where field-level types aren't yet verified (§ mirror
+  coverage gap). Full method inventory captured in Stage 2/3 tables below.
 - **Pagination**: **confirmed** via the mirror (Addresses resource, and
   consistent with Django REST Framework conventions Shippo appears to
   follow) — list endpoints take `page` (default 1) and `results`
@@ -112,6 +116,45 @@ so itself. It's useful anyway as ground truth for the resources it covers:
   Stage 1/6): a Postman collection, an AsyncAPI spec for webhooks, JSON
   Schema files for Shipment/Transaction, and a Spectral rules file —
   potentially useful for contract-testing fixtures in Stage 5.
+
+### Additional source: the `goshippo` GitHub organization
+
+Beyond the Python and JS SDKs already reviewed, `github.com/goshippo` has
+two more official, Speakeasy-generated SDKs and some adjacent tooling
+worth noting:
+
+- **`shippo-csharp-sdk`** and **`shippo-java-sdk`** — same 20-resource /
+  ~79-method inventory as the Python and JS SDKs, which is what raised the
+  resource-inventory confidence above. Also confirms `2018-02-08` as the
+  API version independently of the OpenAPI mirror.
+- **`shippo-demos-oauth`** (+ `sol-ups-oauth`) — demonstrates the OAuth2
+  Authorization Code flow behind `CarrierAccounts.InitiateOauth2Signin`
+  (Stage 3, Group C): a business connects *its own* UPS/FedEx/etc. account
+  to Shippo, which requires registering an app with Shippo first to get a
+  Client ID, Client Secret, and redirect URL — a prerequisite worth calling
+  out explicitly in Stage 6 docs/examples, since it's a separate
+  registration step outside the npm package itself. Directly relevant to
+  our target user (§1): this is "connect your own carrier account," not a
+  platform managing other businesses' carrier connections.
+- **`ai`** — Shippo's own official Claude Code plugin / Agent Skills,
+  backed by a hosted MCP server (`mcp.shippo.com`) with per-user OAuth
+  instead of API keys. This is a parallel, non-competing offering: it's an
+  agent-facing tool surface for driving Shippo through natural-language
+  skills, not a TypeScript library for embedding in application code. No
+  scope change here, but worth knowing it exists — Stage 6 docs could
+  mention it as "if you want an AI agent to use Shippo directly rather
+  than through your own app code, see `goshippo/ai`" without it competing
+  with this package's goal.
+- **`shipment-extras`** — a Shippo-maintained test suite for discovering
+  which carrier-specific "extra" options (signature required, insurance,
+  saturday delivery, etc.) each carrier supports. Possibly useful as a
+  reference when typing the `Shipment`/`extra` field's carrier-dependent
+  options in Stage 2, though its exact output format hasn't been reviewed
+  yet.
+- Everything else in the org (Ruby/PHP clients, demo apps, Shipping
+  Elements — a separate hosted checkout-UI widget product, not a REST
+  resource — internal Ember tooling) isn't directly relevant to this
+  package's scope.
 
 ## 3. Architecture decisions
 
@@ -303,17 +346,18 @@ agents rather than one agent working through resources serially.
 
 ## 7. Risks
 
-- **Spec accuracy**: for Stage 2's 6 MVP resources plus 3 Stage-3
-  resources (Carrier Accounts, Refunds, Webhooks), real OpenAPI YAML is
-  now available via the `api-evangelist/shippo` mirror (§2), so field-
-  level types are largely de-risked for that subset. The remaining 9
-  Stage-3 resources are still inferred from SDK READMEs and npm metadata
-  only, not any OpenAPI spec — field-level types there (enums, optional
-  vs. required, nested object shapes) remain unverified. Stage 1's spike
-  task should still spot-check the mirror's pagination/error assumptions
-  before Stage 2 starts, and Stage 3 should budget time to verify its
-  uncovered resources against the primary spec if access becomes
-  available.
+- **Spec accuracy**: the *resource/method inventory* is now low-risk —
+  independently confirmed across four official SDKs (Python, JS, C#, plus
+  the API version cross-check) rather than a single source. *Field-level*
+  types are a different story: for Stage 2's 6 MVP resources plus 3
+  Stage-3 resources (Carrier Accounts, Refunds, Webhooks), real OpenAPI
+  YAML is available via the `api-evangelist/shippo` mirror (§2), so those
+  are largely de-risked. The remaining 9 Stage-3 resources still have no
+  OpenAPI backing at all — field-level types there (enums, optional vs.
+  required, nested object shapes) remain unverified. Stage 1's spike task
+  should still spot-check the mirror's pagination/error assumptions before
+  Stage 2 starts, and Stage 3 should budget time to verify its uncovered
+  resources against the primary spec if access becomes available.
 - **Official SDK is a moving target**: it's in beta and can introduce
   breaking changes; if this package aims for field-level parity, resource
   modules may need revisiting as Shippo's API evolves.
