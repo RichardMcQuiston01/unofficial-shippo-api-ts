@@ -26,6 +26,9 @@ This project is deliberately "unofficial" — the differentiation to aim for:
   tree-shakeable named exports, not 75+ generated standalone functions.
 - Idiomatic hand-written types with doc comments, rather than
   spec-generated ones.
+- Built and tested with Bun (`bun:test`, `bun build`) instead of adding
+  Vitest/msw as dependencies — one less layer of tooling, while the
+  published output still runs on Node.js as a consumer runtime.
 
 This is a complement/alternative, not a clone — API-compatible in spirit
 (same resources, same field names) but not required to mirror the official
@@ -66,16 +69,18 @@ implementation locks in types.**
 
 | Decision | Choice | Rationale |
 |---|---|---|
-| Language/target | TypeScript, strict mode, compiled to ESM + CJS | Widest Node/bundler compatibility |
-| HTTP | Native `fetch` (Node 18+), injectable fetch for testing/polyfills | Zero-dependency goal |
+| Language/target | TypeScript, strict mode, compiled to ESM + CJS | Widest Node/Bun/bundler compatibility |
+| Dev runtime & package manager | **Bun** (`bun install`, `bun.lock` committed) | User preference — Bun-first tooling |
+| Published runtime support | Node.js (LTS+) *and* Bun as consumer runtimes, via standard `fetch` + dual ESM/CJS output | Keeps the README's "framework agnostic" promise while developing on Bun |
+| HTTP | Native `fetch` (present in both Bun and Node 18+), injectable fetch for testing/polyfills | Zero-dependency goal |
 | Runtime deps | None targeted (re-evaluate only if hand-rolled validation gets unwieldy) | Differentiator vs. official SDK |
 | Module shape | Single `Shippo` client class (`new Shippo({ apiKey })`) exposing resource namespaces (`shippo.addresses.create(...)`), plus tree-shakeable standalone functions | Ergonomic default, advanced tree-shaking option |
 | Validation | Hand-written runtime guards at the boundary (request shape), trust response types otherwise | Avoid pulling in a schema library |
 | Errors | `ShippoError` base, `ShippoApiError` (status, code, request id) subclass | Predictable catch/narrow pattern |
-| Testing | Vitest + msw (mock the HTTP layer) for unit tests; optional live contract tests behind an env var + real sandbox key | Fast, deterministic default suite |
-| Build | `tsup` (esbuild-based) for dual ESM/CJS + `.d.ts` | Simple, fast, well-understood |
+| Testing | `bun:test` (built-in, Jest-compatible, zero extra dependency) with the injectable-fetch pattern for HTTP mocking instead of a library like msw; optional live contract tests behind an env var + real sandbox key | One fewer dependency than a Vitest+msw setup; still fast and deterministic |
+| Build | `bun build` for the primary ESM output; fall back to `tsup` only if Bun's Node/CJS target proves insufficient for correct dual-format publishing (decide in Stage 0) | Bun-native by default, pragmatic escape hatch |
 | Lint/format | ESLint (typescript-eslint) + Prettier | Standard |
-| Release | Changesets, GitHub Actions, npm provenance publish | Reproducible, auditable releases |
+| Release | Changesets, GitHub Actions (`oven-sh/setup-bun`), npm provenance publish | Reproducible, auditable releases |
 | Versioning | Start at `0.x` during buildout, `1.0.0` once MVP resources + docs + tests meet exit criteria in Stage 7 | Signals stability honestly |
 
 ## 4. Delivery plan
@@ -85,13 +90,19 @@ are explicitly designed to fan out across multiple agents working in
 parallel (see §5).
 
 ### Stage 0 — Foundation & tooling
-- `package.json`, `tsconfig.json` (strict), `tsup` build config, ESLint +
-  Prettier config, Vitest config, `.gitignore`, `.npmignore`/`files` field.
-- GitHub Actions CI skeleton (install, lint, typecheck, test, build) —
-  no publish yet.
+- `package.json`, `tsconfig.json` (strict), `bun build` config (or `tsup`
+  if the Stage 0 spike shows Bun's bundler can't cleanly produce dual
+  ESM/CJS output), ESLint + Prettier config, `bunfig.toml`/`bun:test`
+  setup, `.gitignore`, `.npmignore`/`files` field.
+- GitHub Actions CI skeleton using `oven-sh/setup-bun` (install, lint,
+  typecheck, test, build) — no publish yet. Add a second CI job that
+  installs the *built* package under plain Node.js and runs a minimal
+  import/require smoke test, so Node consumer support is verified from
+  day one, not assumed.
 - `CONTRIBUTING.md`, issue/PR templates.
-- **Exit criteria**: `npm run build && npm test` succeed on a trivial
-  placeholder module; CI green on the branch.
+- **Exit criteria**: `bun run build && bun test` succeed on a trivial
+  placeholder module; both the Bun CI job and the Node smoke-test job are
+  green on the branch.
 
 ### Stage 1 — Core HTTP client & conventions
 - `ShippoClient`/transport: base URL, auth header injection, API-version
@@ -213,8 +224,14 @@ agents rather than one agent working through resources serially.
    repo slug, not the published package name).
 2. **Platform API**: in scope for v1, a later phase, or explicitly out of
    scope? (Recommendation: out of scope until the Public API is solid.)
-3. **Node/runtime support matrix**: minimum Node version, and is
-   browser/edge/Deno/Bun support a goal, or Node-only for now?
+3. ~~**Runtime support matrix**~~ — resolved: **Bun-first**. Bun is the
+   dev runtime, package manager, test runner (`bun:test`), and default
+   bundler; the published package still targets Node.js as a consumer
+   runtime too (dual ESM/CJS, standard `fetch`), keeping the README's
+   "framework agnostic" claim intact. Browser/edge/Deno support stays out
+   of scope unless you ask for it later. Still open: minimum Node LTS
+   version to guarantee in CI (default assumption: current Node LTS at
+   implementation time, revisit in Stage 0).
 4. **Live contract testing**: can you provide a Shippo test-mode API key
    for Stage 5, or should live tests stay a documented-but-unused
    scaffold?
