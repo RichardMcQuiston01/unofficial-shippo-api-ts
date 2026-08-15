@@ -92,6 +92,12 @@ implementation locks in types — see the mirror caveat below.**
   absent from the OpenAPI mirror as well as the SDK READMEs. Remains a
   Stage 1 spike (may require a real API key + a deliberately bad request to
   observe the actual error body shape).
+- **Inbound webhook events**: confirmed via the `api-evangelist/shippo`
+  mirror's AsyncAPI spec (`asyncapi/shippo-webhooks-asyncapi.yaml`) —
+  see the dedicated subsection below. This is distinct from the `Webhooks`
+  *resource* (Stage 3, Group A), which only covers subscription CRUD
+  (registering/listing/deleting a webhook URL); the AsyncAPI spec instead
+  documents what Shippo actually *sends* to that URL.
 
 ### Additional source: `api-evangelist/shippo` OpenAPI mirror
 
@@ -155,6 +161,51 @@ worth noting:
   Elements — a separate hosted checkout-UI widget product, not a REST
   resource — internal Ember tooling) isn't directly relevant to this
   package's scope.
+
+### Inbound webhook events (AsyncAPI spec)
+
+`asyncapi/shippo-webhooks-asyncapi.yaml` in the `api-evangelist/shippo`
+mirror documents what Shippo actually POSTs to a registered webhook URL —
+none of the SDKs reviewed cover this side at all, so this is new ground
+for the package, not just a cross-check.
+
+- **Envelope**: every delivery is `{ event: string, test: boolean, data: {...} }`.
+  `event` is a closed enum (see below); `test` distinguishes sandbox/test-mode
+  deliveries from real ones — worth surfacing in the type so consumers can
+  branch on it without inspecting `data`.
+- **Events** (5 total): `transaction_created`, `transaction_updated` (data:
+  the `Transaction` object — `object_id`, `status` enum `WAITING|QUEUED|
+  SUCCESS|ERROR|REFUNDED|REFUNDPENDING|REFUNDREJECTED`, `tracking_number`,
+  `label_url`, `rate`, `metadata`, ...), `batch_created`,
+  `batch_purchased` (data: the `Batch` object), `track_updated` (data: a
+  `TrackingStatus` object — `carrier`, `tracking_number`, `eta`,
+  `tracking_status.{status,status_details,status_date,location}`,
+  `tracking_history` array).
+- **Delivery details**: HTTPS POST only, subscriber URL capped at 200
+  chars, `Shippo-API-Version` header included on every delivery. No
+  documented retry/backoff policy or expected-response-code contract —
+  another Stage 1 spike item if we want to document "how to ack safely."
+- **No signature verification is documented.** Unlike Stripe/GitHub-style
+  webhooks (HMAC signature + shared secret), Shippo's spec has nothing
+  proving a request actually came from Shippo. This changes what the
+  package can honestly offer — see Architecture decisions and Risks below.
+
+Given this, the plan is to add a **webhook event parsing module**
+(`shippo.webhooks.parseEvent(rawBody)`), separate from the `Webhooks`
+*resource*'s subscription CRUD, that:
+- Parses and type-narrows the envelope into a discriminated union
+  (`ShippoWebhookEvent`, keyed on `event`), so a consumer gets
+  `event.data` typed correctly per event without hand-rolled `switch`
+  boilerplate.
+- Is framework-agnostic by construction — takes a raw body
+  (string/parsed JSON), no Express/Fastify dependency — matching the
+  package's overall design.
+- Does **not** claim to verify authenticity (there's nothing to verify
+  against). Docs will say so explicitly and recommend a mitigation:
+  treat the payload as a *trigger* to re-fetch the referenced object by
+  `object_id` via the API rather than trusting `data` for anything
+  security-sensitive, since only the server-authenticated API response is
+  trustworthy.
 
 ## 3. Architecture decisions
 
@@ -231,7 +282,7 @@ coherent:
 
 | Group | Resources |
 |---|---|
-| A | Webhooks, Batches, Refunds |
+| A | Webhooks (subscription CRUD **+ inbound event parsing module**, see §2), Batches, Refunds |
 | B | Customs Declarations, Customs Items, Manifests, Orders |
 | C | Carrier Accounts, Carrier Parcel Templates, User Parcel Templates, Service Groups |
 | D | Pickups, Rates at Checkout |
@@ -240,7 +291,16 @@ coherent:
   *sub-accounts on behalf of other businesses* — a platform/reseller
   concern, same as the Platform API (see Target User, §1). Not built
   unless the target user changes.
-- **Exit criteria**: same bar as Stage 2 for every resource in every group.
+- Group A's Webhooks scope is two things, not one: the existing
+  subscription-management CRUD (register/list/delete a webhook URL) *and*
+  the new `parseEvent()` module for handling what Shippo actually sends to
+  that URL (5 typed events, no signature verification — see §2). Same
+  agent, since they share the `Webhook`-adjacent types, but call it out
+  explicitly in that agent's brief so it isn't dropped as "just CRUD."
+- **Exit criteria**: same bar as Stage 2 for every resource in every
+  group, plus for Group A specifically: `parseEvent()` correctly
+  discriminates and types all 5 event payloads, with a test fixture per
+  event derived from the AsyncAPI schema.
 
 ### Stage 4 — Integration & consistency pass
 - Wire all resource modules onto the `Shippo` client facade; verify the
@@ -263,9 +323,11 @@ coherent:
 ### Stage 6 — Documentation & examples
 - README: install, quickstart, auth, error handling.
 - Per-resource reference (generated or hand-written, `docs/`).
-- `examples/`: validate an address, create a shipment + buy a label, track
-  a shipment, handle a webhook (plain Node HTTP + one framework, e.g.
-  Express).
+- `examples/`: validate an address, create a shipment + buy a label,
+  track a shipment, and **receive + parse a webhook** — plain Node HTTP
+  plus one framework (e.g. Express), showing `parseEvent()` and
+  demonstrating the re-fetch-by-`object_id` mitigation for the lack of
+  signature verification (§2).
 - **Exit criteria**: a new user can go from `npm install` to a purchased
   test-mode label using only the README.
 
@@ -365,3 +427,10 @@ agents rather than one agent working through resources serially.
   validation becomes a maintenance burden, revisit adding a minimal schema
   library — flagged now so it's a conscious tradeoff, not scope creep
   later.
+- **No webhook signature verification exists to build against**: Shippo's
+  webhook spec has no HMAC/shared-secret mechanism, so `parseEvent()` can
+  type and structure a payload but can't prove it came from Shippo. Stage 6
+  docs must say this plainly and point at the re-fetch-by-`object_id`
+  mitigation, rather than let a user assume parity with Stripe-style
+  webhook security. If Shippo adds signing later, this is the first thing
+  to retrofit.
