@@ -10,6 +10,14 @@ Ship a framework-agnostic, fully-typed TypeScript client for the
 `@richardmcquiston01/shippo-api` — matching the package name declared in
 `README.md`.
 
+### Target user
+
+Individuals and businesses building an app to manage **their own**
+shipping — a store's checkout flow, an internal fulfillment tool, a
+side-project storefront. **Not** a platform/reseller building shipping
+infrastructure on behalf of other businesses. This distinction drives
+several scoping calls below (Platform API, `Shippo Accounts`).
+
 ### Why build this when Shippo already publishes an SDK?
 
 Shippo publishes an official JS/TS client (`shippo` on npm,
@@ -38,32 +46,72 @@ SDK's method signatures.
 
 `docs.goshippo.com` and `goshippo.com` are unreachable from this sandbox's
 network egress proxy (blocked domains), so the notes below come from the
-official SDK source/READMEs (Python, JS) and npm registry metadata, cross-
-checked against each other. **A future session with unblocked access (or
-the user manually attaching the OpenAPI YAML) should verify these against
-`https://docs.goshippo.com/spec/shippoapi/public-api.yaml` before Stage 1
-implementation locks in types.**
+official SDK source/READMEs (Python, JS), npm registry metadata, and a
+third-party OpenAPI mirror, cross-checked against each other. **A future
+session with unblocked access (or the user manually attaching the OpenAPI
+YAML) should still verify the extended resources against
+`https://docs.goshippo.com/spec/shippoapi/public-api.yaml` before Stage 3
+implementation locks in types — see the mirror caveat below.**
 
 - **Auth**: static, account-scoped bearer token, header
   `Authorization: ShippoToken <token>`. No OAuth2 for the core API (carrier
-  account linking does use OAuth2 as a sub-flow).
+  account linking does use OAuth2 as a sub-flow). **Confirmed** by the
+  OpenAPI mirror below (`security` scheme: HTTP bearer, `ShippoToken `
+  prefix).
 - **API versioning**: optional `shippo-api-version` header, dated format
-  (e.g. `2018-02-08`), separate from the package's own semver.
+  (e.g. `2018-02-08`), separate from the package's own semver. **Confirmed**
+  — the mirrored spec's `info.version` is `2018-02-08`.
+- **Base URL**: `https://api.goshippo.com`. **Confirmed** by the mirror
+  (previously unstated in the SDK READMEs).
 - **Two API surfaces exist**:
   - **Public API** (`docs.goshippo.com`, dated versioning) — the classic
     REST API most integrators use. This roadmap targets this one.
   - **Platform API** (`platform-api-docs.goshippo.com`, semver `1.0.0`) —
-    appears aimed at platforms/resellers managing sub-accounts. Treated as
-    out of scope / stretch goal (see Open Questions).
+    aimed at platforms/resellers managing sub-accounts on behalf of other
+    businesses. **Out of scope** — this package targets a single business
+    managing its own shipping, not a reseller platform (see Target User,
+    §1).
 - **Resources** (consistent across Python SDK, official JS SDK): Addresses,
   Parcels, Shipments, Rates, Transactions (labels), Tracking Status,
   Webhooks, Batches, Refunds, Customs Declarations, Customs Items,
   Manifests, Orders, Pickups, Carrier Accounts, Carrier Parcel Templates,
   User Parcel Templates, Service Groups, Rates at Checkout, Shippo
   Accounts. Full method inventory captured in Stage 2/3 tables below.
-- **Errors / pagination / retries**: not yet confirmed from primary docs
-  (blocked). Assume REST-conventional status codes and cursor/offset
-  pagination on list endpoints until verified — flagged as a Stage 1 spike.
+- **Pagination**: **confirmed** via the mirror (Addresses resource, and
+  consistent with Django REST Framework conventions Shippo appears to
+  follow) — list endpoints take `page` (default 1) and `results`
+  (default 5, max 100) query params, and return
+  `{ count, next, previous, results }`. Assume this shape across all list
+  endpoints until Stage 1 spot-checks confirm it holds for the extended
+  resources too.
+- **Error response schema / rate-limit headers**: still **not confirmed** —
+  absent from the OpenAPI mirror as well as the SDK READMEs. Remains a
+  Stage 1 spike (may require a real API key + a deliberately bad request to
+  observe the actual error body shape).
+
+### Additional source: `api-evangelist/shippo` OpenAPI mirror
+
+[`github.com/api-evangelist/shippo`](https://github.com/api-evangelist/shippo)
+is an independent, third-party API profile (Kin Lane's "API Evangelist"
+project) that assembles Shippo's public API surface into machine-readable
+artifacts — explicitly *not* an official Shippo resource, and the repo says
+so itself. It's useful anyway as ground truth for the resources it covers:
+
+- `openapi/_original/shippo-openapi.yml` — a combined OpenAPI 3 spec.
+- `openapi/shippo-{resource}-api-openapi.yml` — the same spec split per
+  resource, one file each for **Addresses, Carrier Accounts, Parcels,
+  Rates, Shipments, Tracking, Transactions, Refunds, Webhooks** — i.e. all
+  of Stage 2's MVP set plus three Stage 3 resources (Carrier Accounts,
+  Refunds, Webhooks).
+- **Coverage gap**: this mirror does **not** include Batches, Customs
+  Declarations/Items, Manifests, Orders, Pickups, Service Groups, User/
+  Carrier Parcel Templates, Shippo Accounts, or Rates at Checkout — those
+  nine still rely solely on the SDK-README-derived inventory and remain
+  the highest-uncertainty part of Stage 3.
+- Also present in the repo (not yet reviewed in depth, worth a look during
+  Stage 1/6): a Postman collection, an AsyncAPI spec for webhooks, JSON
+  Schema files for Shipment/Transaction, and a Spectral rules file —
+  potentially useful for contract-testing fixtures in Stage 5.
 
 ## 3. Architecture decisions
 
@@ -143,8 +191,12 @@ coherent:
 | A | Webhooks, Batches, Refunds |
 | B | Customs Declarations, Customs Items, Manifests, Orders |
 | C | Carrier Accounts, Carrier Parcel Templates, User Parcel Templates, Service Groups |
-| D | Pickups, Rates at Checkout, Shippo Accounts |
+| D | Pickups, Rates at Checkout |
 
+- **Out of scope**: `Shippo Accounts` (list/create/get/update) manages
+  *sub-accounts on behalf of other businesses* — a platform/reseller
+  concern, same as the Platform API (see Target User, §1). Not built
+  unless the target user changes.
 - **Exit criteria**: same bar as Stage 2 for every resource in every group.
 
 ### Stage 4 — Integration & consistency pass
@@ -185,8 +237,9 @@ coherent:
 ### Stage 8 — Maintenance (ongoing, post-v0.1.0)
 - Watch Shippo's API changelog for breaking changes.
 - Dependabot/renovate for the (minimal) dev dependency set.
-- Triage issues/PRs; expand toward the Platform API only if there's
-  demand (see Open Questions).
+- Triage issues/PRs. Platform API / `Shippo Accounts` support stays out of
+  scope unless the target user (§1) changes from "manage your own
+  shipping" to "manage shipping for other businesses."
 
 ## 5. Multi-agent execution model
 
@@ -222,8 +275,10 @@ agents rather than one agent working through resources serially.
 1. ~~**Package name**~~ — resolved: `@richardmcquiston01/shippo-api`, per
    `README.md` (the repo name `unofficial-shippo-api-ts` is just the GitHub
    repo slug, not the published package name).
-2. **Platform API**: in scope for v1, a later phase, or explicitly out of
-   scope? (Recommendation: out of scope until the Public API is solid.)
+2. ~~**Platform API**~~ — resolved: **out of scope**. Confirmed target
+   user is a business managing its own shipping, not a platform/reseller
+   managing shipping for others — so is the `Shippo Accounts` resource
+   within the Public API (see §1 Target User, Stage 3).
 3. ~~**Runtime support matrix**~~ — resolved: **Bun-first**. Bun is the
    dev runtime, package manager, test runner (`bun:test`), and default
    bundler; the published package still targets Node.js as a consumer
@@ -235,18 +290,30 @@ agents rather than one agent working through resources serially.
 4. **Live contract testing**: can you provide a Shippo test-mode API key
    for Stage 5, or should live tests stay a documented-but-unused
    scaffold?
-5. **OpenAPI spec access**: this sandbox can't reach `docs.goshippo.com`.
-   If you can attach `public-api.yaml` (or run a session with unblocked
-   egress) before Stage 1, we lock in exact field/type accuracy instead of
-   inferring from SDK READMEs.
+5. **OpenAPI spec access**: partially resolved. This sandbox still can't
+   reach `docs.goshippo.com` directly, but the third-party
+   `api-evangelist/shippo` GitHub mirror (§2) provides real OpenAPI YAML
+   for 9 of the in-scope resources (all of Stage 2, plus Carrier Accounts/
+   Refunds/Webhooks from Stage 3). The other 9 Stage-3 resources (Batches,
+   Customs Declarations/Items, Manifests, Orders, Pickups, Service Groups,
+   User/Carrier Parcel Templates, Rates at Checkout) still rely on
+   SDK-README inference only. If you can attach `public-api.yaml` directly
+   (or run a session with unblocked egress) before Stage 3, we can close
+   that remaining gap instead of inferring from SDK READMEs.
 
 ## 7. Risks
 
-- **Spec accuracy**: current resource/method inventory is inferred from
-  two third-party SDK READMEs and npm metadata, not the primary OpenAPI
-  spec (network-blocked in this environment). Field-level types (enums,
-  optional vs. required, nested object shapes) are not yet verified —
-  Stage 1's spike task exists specifically to close this gap.
+- **Spec accuracy**: for Stage 2's 6 MVP resources plus 3 Stage-3
+  resources (Carrier Accounts, Refunds, Webhooks), real OpenAPI YAML is
+  now available via the `api-evangelist/shippo` mirror (§2), so field-
+  level types are largely de-risked for that subset. The remaining 9
+  Stage-3 resources are still inferred from SDK READMEs and npm metadata
+  only, not any OpenAPI spec — field-level types there (enums, optional
+  vs. required, nested object shapes) remain unverified. Stage 1's spike
+  task should still spot-check the mirror's pagination/error assumptions
+  before Stage 2 starts, and Stage 3 should budget time to verify its
+  uncovered resources against the primary spec if access becomes
+  available.
 - **Official SDK is a moving target**: it's in beta and can introduce
   breaking changes; if this package aims for field-level parity, resource
   modules may need revisiting as Shippo's API evolves.
