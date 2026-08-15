@@ -395,16 +395,19 @@ agents rather than one agent working through resources serially.
 4. **Live contract testing**: can you provide a Shippo test-mode API key
    for Stage 5, or should live tests stay a documented-but-unused
    scaffold?
-5. **OpenAPI spec access**: partially resolved. This sandbox still can't
-   reach `docs.goshippo.com` directly, but the third-party
-   `api-evangelist/shippo` GitHub mirror (§2) provides real OpenAPI YAML
-   for 9 of the in-scope resources (all of Stage 2, plus Carrier Accounts/
-   Refunds/Webhooks from Stage 3). The other 9 Stage-3 resources (Batches,
-   Customs Declarations/Items, Manifests, Orders, Pickups, Service Groups,
-   User/Carrier Parcel Templates, Rates at Checkout) still rely on
-   SDK-README inference only. If you can attach `public-api.yaml` directly
-   (or run a session with unblocked egress) before Stage 3, we can close
-   that remaining gap instead of inferring from SDK READMEs.
+5. ~~**OpenAPI spec access**~~ — resolved. This sandbox still can't reach
+   `docs.goshippo.com` directly, but the third-party `api-evangelist/shippo`
+   GitHub mirror (§2) provides real OpenAPI YAML for 9 of the in-scope
+   resources (all of Stage 2, plus Carrier Accounts/Refunds/Webhooks from
+   Stage 3), its AsyncAPI spec covers inbound webhook events, and the
+   resource inventory itself is independently confirmed across four
+   official SDKs (Python, JS, C#, plus the API version cross-check). That's
+   accepted as good enough to proceed. The remaining 9 Stage-3 resources
+   (Batches, Customs Declarations/Items, Manifests, Orders, Pickups,
+   Service Groups, User/Carrier Parcel Templates, Rates at Checkout) still
+   rely on SDK-README inference only for field-level types — tracked as a
+   Stage 3 task (verify against the primary spec if access becomes
+   available then), not a blocking open question.
 
 ## 7. Risks
 
