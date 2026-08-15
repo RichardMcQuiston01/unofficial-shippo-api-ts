@@ -213,8 +213,8 @@ Given this, the plan is to add a **webhook event parsing module**
 |---|---|---|
 | Language/target | TypeScript, strict mode, compiled to ESM + CJS | Widest Node/Bun/bundler compatibility |
 | Dev runtime & package manager | **Bun** (`bun install`, `bun.lock` committed) | User preference — Bun-first tooling |
-| Published runtime support | Node.js (LTS+) *and* Bun as consumer runtimes, via standard `fetch` + dual ESM/CJS output | Keeps the README's "framework agnostic" promise while developing on Bun |
-| HTTP | Native `fetch` (present in both Bun and Node 18+), injectable fetch for testing/polyfills | Zero-dependency goal |
+| Published runtime support | Node.js **22+** (see minimum-version note below) *and* Bun as consumer runtimes, via standard `fetch` + dual ESM/CJS output | Keeps the README's "framework agnostic" promise while developing on Bun |
+| HTTP | Native `fetch` (present in both Bun and Node 18+ — floor is a support-lifecycle choice, not a technical one), injectable fetch for testing/polyfills | Zero-dependency goal |
 | Runtime deps | None targeted (re-evaluate only if hand-rolled validation gets unwieldy) | Differentiator vs. official SDK |
 | Module shape | Single `Shippo` client class (`new Shippo({ apiKey })`) exposing resource namespaces (`shippo.addresses.create(...)`), plus tree-shakeable standalone functions | Ergonomic default, advanced tree-shaking option |
 | Validation | Hand-written runtime guards at the boundary (request shape), trust response types otherwise | Avoid pulling in a schema library |
@@ -237,10 +237,11 @@ parallel (see §5).
   ESM/CJS output), ESLint + Prettier config, `bunfig.toml`/`bun:test`
   setup, `.gitignore`, `.npmignore`/`files` field.
 - GitHub Actions CI skeleton using `oven-sh/setup-bun` (install, lint,
-  typecheck, test, build) — no publish yet. Add a second CI job that
-  installs the *built* package under plain Node.js and runs a minimal
-  import/require smoke test, so Node consumer support is verified from
-  day one, not assumed.
+  typecheck, test, build) — no publish yet. Add a second CI job matrixed
+  across Node 22 and Node 24 that installs the *built* package under
+  plain Node.js and runs a minimal import/require smoke test, so Node
+  consumer support is verified from day one at the versions we actually
+  claim to support, not assumed.
 - `CONTRIBUTING.md`, issue/PR templates.
 - **Exit criteria**: `bun run build && bun test` succeed on a trivial
   placeholder module; both the Bun CI job and the Node smoke-test job are
@@ -314,9 +315,11 @@ coherent:
 
 ### Stage 5 — Testing & validation hardening
 - Coverage threshold (target ~90% on `src/`) across unit tests.
-- Optional live contract test suite, gated behind `SHIPPO_TEST_API_KEY`,
-  skipped in CI by default (requires a real Shippo test-mode key from the
-  user).
+- Live contract test suite gated behind a `SHIPPO_TEST_API_KEY` CI secret
+  (the user has a Shippo test-mode key to provide when this stage starts —
+  see §6). Runs in CI on the main repo; skips gracefully on forked-PR runs
+  that don't have access to the secret, per standard GitHub Actions
+  behavior.
 - **Exit criteria**: coverage threshold met; contract-test scaffold exists
   and is documented even if not run in CI.
 
@@ -389,12 +392,25 @@ agents rather than one agent working through resources serially.
    bundler; the published package still targets Node.js as a consumer
    runtime too (dual ESM/CJS, standard `fetch`), keeping the README's
    "framework agnostic" claim intact. Browser/edge/Deno support stays out
-   of scope unless you ask for it later. Still open: minimum Node LTS
-   version to guarantee in CI (default assumption: current Node LTS at
-   implementation time, revisit in Stage 0).
-4. **Live contract testing**: can you provide a Shippo test-mode API key
-   for Stage 5, or should live tests stay a documented-but-unused
-   scaffold?
+   of scope unless you ask for it later.
+
+   Minimum Node LTS version — also resolved, with a caveat worth reading:
+   you proposed 18+ (or 20+ "if that poses a problem"). As of this
+   writing (Aug 2026), **both are already past end-of-life** — Node 18
+   EOL'd April 2025, and Node 20 EOL'd April 2026. The only currently-
+   maintained lines are **22** (maintenance LTS, supported to Apr 2027),
+   24 (active LTS), and 26 (current). Setting the floor at **Node 22+**
+   — the oldest still-patched LTS — rather than an already-unsupported
+   version. Nothing about the design requires 22 specifically (`fetch` has
+   worked since 18); this is purely "don't advertise support for a Node
+   version that no longer gets security fixes." Say so if you'd rather
+   accept that risk and keep the floor at 18 or 20 anyway (e.g. for
+   compatibility with environments you know are stuck there) — easy to
+   change before Stage 0's CI matrix is written.
+4. ~~**Live contract testing**~~ — resolved: you can provide a Shippo
+   test-mode API key. Not needed until Stage 5 — when that stage starts,
+   the key gets added as a CI secret (`SHIPPO_TEST_API_KEY`) and never
+   committed to the repo.
 5. ~~**OpenAPI spec access**~~ — resolved. This sandbox still can't reach
    `docs.goshippo.com` directly, but the third-party `api-evangelist/shippo`
    GitHub mirror (§2) provides real OpenAPI YAML for 9 of the in-scope
