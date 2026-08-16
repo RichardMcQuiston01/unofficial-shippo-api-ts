@@ -1,10 +1,13 @@
 import assert from "node:assert/strict";
 
-import { SDK_VERSION, Shippo } from "../dist/index.js";
+import { SDK_VERSION, Shippo, ShippoApiError, ShippoClient } from "../dist/index.js";
 
-const client = new Shippo({ apiKey: "smoke-test" });
+const shippo = new Shippo({ apiKey: "smoke-test" });
 
-assert.equal(client.apiKey, "smoke-test");
+assert.ok(shippo.client instanceof ShippoClient);
+assert.equal(shippo.client.baseUrl, "https://api.goshippo.com");
+assert.equal(typeof shippo.client.request, "function");
+assert.equal(typeof ShippoApiError, "function");
 assert.match(SDK_VERSION, /^\d+\.\d+\.\d+$/);
 
 console.log(`ESM smoke test passed on Node ${process.version}`);

@@ -19,5 +19,21 @@ once it publishes its first release (see `ROADMAP.md`).
 - `CONTRIBUTING.md` and issue/PR templates.
 - A trivial placeholder `Shippo` client class (`src/index.ts`) establishing the package's
   entry-point shape ahead of Stage 1's real HTTP client.
+- Buy Me a Coffee section in `README.md`.
+- Core HTTP client (Stage 1 of `ROADMAP.md`): `ShippoClient` transport with `ShippoToken` auth
+  header injection, optional `shippo-api-version` header, JSON (de)serialization, per-request
+  timeout, and exponential-backoff retries (honoring `Retry-After` when present) for network
+  errors and 429/5xx responses.
+- Typed error hierarchy (`src/errors.ts`): `ShippoError` (base), `ShippoApiError` (non-2xx
+  responses — `status`, `body`, `requestId`, `retryAfterMs`), and `ShippoNetworkError`
+  (request never got a response).
+- `paginate()` async-generator helper (`src/pagination.ts`) for iterating every item across a
+  list endpoint's pages.
+- `Shippo` now exposes `shippo.client` as a public escape hatch for calling any endpoint
+  directly ahead of Stage 2/3 wrapping it in typed resource methods.
+- `docs/CONVENTIONS.md`: the internal contract for Stage 2/3's parallel resource-module work
+  (file layout, naming, error/pagination handling, test expectations).
 
-No public API surface yet — nothing in this release is meant for consumption.
+No resource methods (`addresses`, `shipments`, etc.) yet — those land in Stage 2/3. The HTTP
+client is usable directly (`shippo.client.request(...)`) but nothing here is a stable,
+documented public API yet.
