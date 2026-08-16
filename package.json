@@ -42,7 +42,8 @@
     "dist",
     "README.md",
     "LICENSE",
-    "CHANGELOG.md"
+    "CHANGELOG.md",
+    "donate.svg"
   ],
   "sideEffects": false,
   "scripts": {
