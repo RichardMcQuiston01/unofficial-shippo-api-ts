@@ -50,6 +50,7 @@
     "build": "bun run scripts/build.ts",
     "test": "bun test",
     "test:coverage": "bun test --coverage",
+    "test:live": "bun test src/live-contract.test.ts",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "format": "prettier --write .",

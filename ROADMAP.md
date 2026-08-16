@@ -1,9 +1,10 @@
 # Roadmap: `unofficial-shippo-api-ts`
 
 Status: **In progress.** Stages 0–4 are built: foundation/tooling, core HTTP client, all 19
-in-scope resources, and a full integration/consistency pass across them. See each stage's
-section below for what shipped and what's still open. Stage 5 (testing & validation
-hardening) is next.
+in-scope resources, and a full integration/consistency pass across them. Stage 5 (testing &
+validation hardening) is partially shipped — the live-contract scaffold exists and is
+documented, but hasn't been run against a real account yet (needs a test-mode API key). See
+each stage's section below for what shipped and what's still open.
 
 ## 1. Goal
 
@@ -404,6 +405,23 @@ coherent:
   name if the mock was written to match the wrong assumption.
 - **Exit criteria**: coverage threshold met; contract-test scaffold exists
   and is documented even if not run in CI.
+- **Partially shipped.** Coverage threshold: met (see above, since Stage
+  4). Scaffold: built — `src/live-contract.test.ts`, gated behind
+  `SHIPPO_TEST_API_KEY` (skips cleanly, doesn't fail, when unset; never
+  runs in CI), documented in `CONTRIBUTING.md`'s "Live contract tests"
+  section, `bun run test:live` shortcut added. Covers the core
+  create-shipment→buy-a-label→track happy path, deliberate 404/400
+  errors to observe real error bodies, `list()` smoke checks across 8
+  no-spec resources, and standalone creates for Customs Items, User
+  Parcel Templates, and Webhooks (with cleanup where reversible).
+  **Not yet run against a real account** — the user offered a test-mode
+  key back when this stage was scoped; asked again when this stage
+  actually started. If/when it runs, update this entry with what the
+  live spot-check confirmed or corrected. Known gaps in the scaffold
+  itself (documented in the file and in `CONTRIBUTING.md`): Batches,
+  Pickups, Carrier Accounts' three OAuth2 methods, Customs Declarations,
+  and Rates at Checkout aren't exercised — left as a template to extend
+  rather than a finished suite.
 
 ### Stage 6 — Documentation & examples
 - README: install, quickstart, auth, error handling.

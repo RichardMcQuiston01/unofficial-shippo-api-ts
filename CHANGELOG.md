@@ -94,3 +94,15 @@ unconfirmed field shapes) is still ahead.
     empty return, matching the other three `Promise<void>`-returning delete methods.
   - `docs/CONVENTIONS.md` gained explicit rules for ID parameter naming and the
     `Promise<void>`-return style, closing the gap that let these drift in the first place.
+- Live contract test suite (Stage 5 of `ROADMAP.md`): `src/live-contract.test.ts`, gated
+  entirely behind a `SHIPPO_TEST_API_KEY` environment variable (skipped, not failed, when
+  unset — never runs in CI). Where the rest of the suite mocks `fetch`, this hits the real
+  Shippo test-mode API to spot-check what Stages 1-3 flagged as unconfirmed: the error
+  response body shape, and field-level types for resources with no reachable OpenAPI spec.
+  Covers the core create-shipment-buy-a-label-track-it happy path, deliberate 404/400 errors
+  to observe real error bodies, `list()` smoke checks across 8 no-spec resources, and
+  standalone creates for Customs Items, User Parcel Templates, and Webhooks. Documented in
+  `CONTRIBUTING.md`'s new "Live contract tests" section, including its known gaps (Batches,
+  Pickups, Carrier Accounts' OAuth2 methods, Customs Declarations, Rates at Checkout aren't
+  exercised yet — left as a template to extend). `bun run test:live` added as a shortcut.
+  Coverage threshold itself was already met as of Stage 4 (100% line/function, mocked-HTTP).
