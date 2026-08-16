@@ -1,8 +1,8 @@
 # Roadmap: `unofficial-shippo-api-ts`
 
-Status: **In progress.** Stages 0–2 (foundation/tooling, core HTTP client, core resource
-modules) are built; see each stage's section below for what shipped and what's still open.
-Stage 3 (extended resource modules) is next.
+Status: **In progress.** Stages 0–3 are built: foundation/tooling, core HTTP client, and all
+19 in-scope resources (core + extended). See each stage's section below for what shipped and
+what's still open. Stage 4 (integration & consistency pass) is next.
 
 ## 1. Goal
 
@@ -330,6 +330,32 @@ coherent:
   group, plus for Group A specifically: `parseEvent()` correctly
   discriminates and types all 5 event payloads, with a test fixture per
   event derived from the AsyncAPI schema.
+- **Shipped.** Built with genuine multi-agent orchestration this time —
+  one subagent per group (4 total), each in an isolated git worktree, run
+  concurrently. Each agent got the researched OpenAPI schemas (where they
+  existed), `docs/CONVENTIONS.md`, and explicit instructions to flag
+  every unconfirmed field rather than fabricate confidently. Integration
+  (copying files, wiring `src/index.ts`, resolving the one cross-group
+  type dependency — `webhooks.ts`'s `parseEvent()` importing `Batch` from
+  `batches.ts`) was a single pass afterward, not per-group. All exit
+  criteria met: 133 unit tests across 23 files (was 62 after Stage 2),
+  every method typed and doc-commented, `parseEvent()` covers all 5
+  event types plus rejection of unrecognized ones.
+  - Spec-grounded (OpenAPI mirror): Addresses, Parcels, Shipments, Rates,
+    Transactions, Tracking (already confirmed in Stage 2), plus Carrier
+    Accounts, Refunds, and Webhooks' subscription CRUD.
+  - No reachable spec, best-effort with inline honest-uncertainty
+    comments (see `docs/CONVENTIONS.md`'s new section on the pattern):
+    Batches, Customs Declarations/Items, Manifests, Orders, Carrier/User
+    Parcel Templates, Service Groups, Pickups, Rates at Checkout, and
+    Carrier Accounts' three OAuth2-adjacent methods specifically
+    (`initiateOauth2Signin`/`register`/`getRegistrationStatus` aren't in
+    the OpenAPI mirror even though the rest of Carrier Accounts is).
+  - `Order` is explicitly the least-confirmed type in the package — kept
+    to a conservative core rather than a fabricated full schema; see its
+    file-level comment.
+  - None of this has been checked against a live Shippo account yet (no
+    API key available in this environment) — see Stage 5.
 
 ### Stage 4 — Integration & consistency pass
 - Wire all resource modules onto the `Shippo` client facade; verify the

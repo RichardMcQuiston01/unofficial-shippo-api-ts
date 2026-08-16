@@ -42,6 +42,35 @@ once it publishes its first release (see `ROADMAP.md`).
   - `shippo.transactions` — `create`, `list`, `get` (label purchase).
   - `shippo.tracking` — `create`, `get`.
 - Shared `ListQuery` type (`src/pagination.ts`) for every resource's `list()` query params.
+- Thirteen extended resource modules (Stage 3 of `ROADMAP.md`), completing the resource set:
+  - `shippo.webhooks` — subscription CRUD (`list`/`create`/`get`/`update`/`delete`) **and**
+    `parseEvent()`, a framework-agnostic parser/type-narrower for inbound webhook deliveries
+    (`transaction_created`/`updated`, `batch_created`/`purchased`, `track_updated`). Documents
+    explicitly that it performs no signature verification — Shippo's spec has no such
+    mechanism — and recommends re-fetching by `object_id` before trusting sensitive data.
+  - `shippo.batches` — `create`, `get`, `addShipments`, `purchase`, `removeShipments`.
+  - `shippo.refunds` — `create`, `list`, `get`.
+  - `shippo.customsDeclarations`, `shippo.customsItems` — `create`, `list`, `get`.
+  - `shippo.manifests` — `create`, `list`, `get`.
+  - `shippo.orders` — `create`, `list`, `get`.
+  - `shippo.carrierAccounts` — `list`/`create`/`get`/`update` plus `initiateOauth2Signin`,
+    `register`, `getRegistrationStatus`.
+  - `shippo.carrierParcelTemplates` — `list`, `get`.
+  - `shippo.userParcelTemplates` — `list`/`create`/`get`/`update`/`delete`.
+  - `shippo.serviceGroups` — `list`/`create`/`update`/`delete`.
+  - `shippo.pickups` — `create`.
+  - `shippo.ratesAtCheckout` — `create` plus default-parcel-template management
+    (`getDefaultParcelTemplate`/`updateDefaultParcelTemplate`/`deleteDefaultParcelTemplate`).
+  - Built by four parallel subagents (one per `ROADMAP.md` Stage 3 group, isolated git
+    worktrees), reviewed and integrated in one pass. Field-level types for
+    Addresses/Parcels/Shipments/Rates/Transactions/Tracking/Carrier Accounts/Refunds/Webhooks
+    (subscription CRUD) are grounded in Shippo's OpenAPI mirror; the other nine resources have
+    no reachable spec and are typed from official-SDK method signatures plus domain
+    conventions, with every uncertain field flagged inline via doc comments rather than
+    presented as confirmed — see each file's top-of-file comment and `ROADMAP.md`'s Stage 3
+    section for specifics.
 
-No extended resources (Webhooks, Batches, Customs, Orders, Pickups, Carrier Accounts, etc.)
-yet — those land in Stage 3. Nothing here is a stable, documented public API yet.
+`Shippo Accounts` and the Platform API remain permanently out of scope (see `ROADMAP.md`'s
+Target User section). All 19 resources exist now, but nothing here is a stable, documented
+public API yet — Stage 4 (integration/consistency pass) and Stage 5 (testing hardening,
+including a live-key spot-check of the unconfirmed field shapes) are still ahead.
