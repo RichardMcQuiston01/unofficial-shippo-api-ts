@@ -33,7 +33,15 @@ once it publishes its first release (see `ROADMAP.md`).
   directly ahead of Stage 2/3 wrapping it in typed resource methods.
 - `docs/CONVENTIONS.md`: the internal contract for Stage 2/3's parallel resource-module work
   (file layout, naming, error/pagination handling, test expectations).
+- Six core resource modules (Stage 2 of `ROADMAP.md`), each with types matching the wire
+  format (snake_case, no camelCase transformation layer) and full unit test coverage:
+  - `shippo.addresses` — `create`, `list`, `get`, `validate`.
+  - `shippo.parcels` — `create`, `list`, `get`.
+  - `shippo.shipments` — `create`, `list`, `get`.
+  - `shippo.rates` — `get`, `listForShipment`, `listForShipmentByCurrency`.
+  - `shippo.transactions` — `create`, `list`, `get` (label purchase).
+  - `shippo.tracking` — `create`, `get`.
+- Shared `ListQuery` type (`src/pagination.ts`) for every resource's `list()` query params.
 
-No resource methods (`addresses`, `shipments`, etc.) yet — those land in Stage 2/3. The HTTP
-client is usable directly (`shippo.client.request(...)`) but nothing here is a stable,
-documented public API yet.
+No extended resources (Webhooks, Batches, Customs, Orders, Pickups, Carrier Accounts, etc.)
+yet — those land in Stage 3. Nothing here is a stable, documented public API yet.

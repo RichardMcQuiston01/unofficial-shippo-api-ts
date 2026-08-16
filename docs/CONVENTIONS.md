@@ -20,7 +20,7 @@ established in `src/client.ts`:
 
 ```ts
 import type { ShippoClient } from "../client";
-import type { PaginatedList } from "../pagination";
+import type { ListQuery, PaginatedList } from "../pagination";
 
 export interface Address {
   object_id: string;
@@ -44,7 +44,7 @@ export class AddressesResource {
   }
 
   /** Retrieves a single page of addresses. Use `paginate()` to iterate all of them. */
-  async list(query?: { page?: number; results?: number }): Promise<PaginatedList<Address>> {
+  async list(query?: ListQuery): Promise<PaginatedList<Address>> {
     return this.client.request<PaginatedList<Address>>("GET", "/addresses", { query });
   }
 
@@ -54,6 +54,12 @@ export class AddressesResource {
   }
 }
 ```
+
+Use the shared `ListQuery` type (`src/pagination.ts`) for every `list()` method's query
+parameter rather than a bespoke per-resource type — it already has the index signature needed
+to satisfy `RequestOptions["query"]` structurally, which a plain `{ page?: number; results?:
+number }` interface doesn't (TypeScript won't structurally match an interface without an index
+signature against `Record<string, ...>` under this project's strictness settings).
 
 Wire it into `Shippo` in `src/index.ts`:
 
