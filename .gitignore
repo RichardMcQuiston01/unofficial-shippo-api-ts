@@ -59,3 +59,8 @@ Thumbs.db
 # ---- Bun ----
 # bun.lock is intentionally NOT ignored -- it's committed for reproducible installs.
 bun-debug.log*
+
+# ---- Claude Code local state ----
+# Worktrees/transcripts for background agent sessions -- local tooling state,
+# never project source.
+.claude/
