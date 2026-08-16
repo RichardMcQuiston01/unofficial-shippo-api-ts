@@ -1,7 +1,8 @@
 # Roadmap: `unofficial-shippo-api-ts`
 
-Status: **Draft for review** — no implementation has started. This document is the
-plan; nothing below has been built yet.
+Status: **In progress.** Stage 0 (foundation/tooling) and Stage 1 (core HTTP client) are
+built; see each stage's section below for what shipped and what's still open. Stage 2 (core
+resource modules) is next.
 
 ## 1. Goal
 
@@ -88,10 +89,14 @@ implementation locks in types — see the mirror caveat below.**
   `{ count, next, previous, results }`. Assume this shape across all list
   endpoints until Stage 1 spot-checks confirm it holds for the extended
   resources too.
-- **Error response schema / rate-limit headers**: still **not confirmed** —
-  absent from the OpenAPI mirror as well as the SDK READMEs. Remains a
-  Stage 1 spike (may require a real API key + a deliberately bad request to
-  observe the actual error body shape).
+- **Error response schema / rate-limit headers**: still **not empirically
+  confirmed** — absent from the OpenAPI mirror as well as the SDK READMEs,
+  and Stage 1 shipped without a live API key to spot-check against (see
+  Stage 1's section below for what was built instead: a defensive
+  `ShippoApiError` that doesn't assume a specific shape). `Retry-After` is
+  parsed if present, but its actual presence on Shippo's 429s is also
+  unconfirmed. First real API key used against this client should verify
+  both.
 - **Inbound webhook events**: confirmed via the `api-evangelist/shippo`
   mirror's AsyncAPI spec (`asyncapi/shippo-webhooks-asyncapi.yaml`) —
   see the dedicated subsection below. This is distinct from the `Webhooks`
@@ -245,6 +250,7 @@ parallel (see §5).
 - **Exit criteria**: `bun run build && bun test` succeed on a trivial
   placeholder module; both the Bun CI job and the Node smoke-test job are
   green on the branch.
+- **Shipped** (PR #3).
 
 ### Stage 1 — Core HTTP client & conventions
 - `ShippoClient`/transport: base URL, auth header injection, API-version
@@ -258,6 +264,18 @@ parallel (see §5).
 - **Exit criteria**: client can hit a hand-mocked endpoint, auth header and
   errors verified by unit tests; conventions doc merged so parallel agents
   in Stage 2 have a contract to follow.
+- **Shipped**, with one honest caveat on the spike task: pagination shape
+  was already confirmed in Stage 0 research (§2) and is implemented as
+  designed. The **error body shape is still not empirically confirmed** —
+  we have no live API key yet (the user's Stage 5 test-mode key isn't
+  needed until Stage 5), so nobody has actually triggered a real Shippo
+  error response to observe its shape. `ShippoApiError` is built
+  defensively instead: `body` is typed `unknown`, and `message` does
+  best-effort extraction across the shapes Django REST Framework (which
+  Shippo's pagination matches) commonly uses — `{ detail: string }` and
+  `{ field: string[] }` — falling back to a raw dump rather than assuming
+  either is correct. Worth a real spot-check the first time anyone in this
+  project has a working API key.
 
 ### Stage 2 — Core resource modules (MVP surface)
 One resource per unit of work, all depend only on Stage 1's client contract

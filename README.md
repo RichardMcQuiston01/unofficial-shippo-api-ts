@@ -12,8 +12,9 @@ Shippo. It targets individuals and businesses building an app to manage their ow
 behalf of other businesses. See [`ROADMAP.md`](./ROADMAP.md) for the full delivery plan,
 architecture decisions, and scope.
 
-**Status: pre-alpha.** No resource clients exist yet — only project scaffolding (Stage 0 of
-the roadmap). Not yet published to npm.
+**Status: pre-alpha.** The core HTTP client exists (auth, retries, pagination, typed errors),
+but no resource methods (`addresses`, `shipments`, etc.) yet — those land in Stage 2/3 of the
+roadmap. Not yet published to npm.
 
 ## Getting Started
 
@@ -36,8 +37,26 @@ npm install @richardmcquiston01/shippo-api
 
 ### Usage
 
-Not yet available — see [`ROADMAP.md`](./ROADMAP.md) for the planned API shape
-(`new Shippo({ apiKey })` plus per-resource methods).
+Resource methods (`shippo.addresses.create()`, etc.) aren't built yet — see
+[`ROADMAP.md`](./ROADMAP.md) for the planned shape. Until then, the underlying transport is
+usable directly for any endpoint:
+
+```ts
+import { Shippo } from "@richardmcquiston01/shippo-api";
+
+const shippo = new Shippo({ apiKey: "shippo_test_..." });
+
+const address = await shippo.client.request("POST", "/addresses", {
+  body: {
+    name: "Ada Lovelace",
+    street1: "123 Main St",
+    city: "Seattle",
+    state: "WA",
+    zip: "98101",
+    country: "US",
+  },
+});
+```
 
 ### Examples
 
