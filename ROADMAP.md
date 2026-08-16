@@ -1,8 +1,8 @@
 # Roadmap: `unofficial-shippo-api-ts`
 
-Status: **In progress.** Stage 0 (foundation/tooling) and Stage 1 (core HTTP client) are
-built; see each stage's section below for what shipped and what's still open. Stage 2 (core
-resource modules) is next.
+Status: **In progress.** Stages 0–2 (foundation/tooling, core HTTP client, core resource
+modules) are built; see each stage's section below for what shipped and what's still open.
+Stage 3 (extended resource modules) is next.
 
 ## 1. Goal
 
@@ -293,6 +293,17 @@ One resource per unit of work, all depend only on Stage 1's client contract
 - **Exit criteria**: every method has types, a unit test (success + at
   least one error path), and a doc comment; `shippo.addresses.create()`
   through `shippo.tracking.get()` all work end-to-end against mocked HTTP.
+- **Shipped.** Built as one pass rather than six parallel agents — this
+  session doesn't have multi-agent orchestration opted into (see
+  ROADMAP.md §5), and the resources share enough types (`Shipment`
+  references `Address`, `Parcel`, and `Rate`) that a single consistent
+  pass was the pragmatic choice here. All exit criteria met: 62 unit
+  tests across 10 files, every method typed and doc-commented. Field-
+  level types for Addresses, Parcels, Shipments, Rates, and Transactions
+  were pulled from the `api-evangelist/shippo` OpenAPI mirror (§2); two
+  fields with no confirmed shape (`Address.validation_results`,
+  `TrackingStatus`'s `location` sub-object) are flagged inline in the
+  source as best-effort/advisory rather than presented as verified.
 
 ### Stage 3 — Extended resource modules
 Second wave, same parallelizable shape, grouped to keep each agent's scope

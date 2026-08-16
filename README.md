@@ -12,9 +12,10 @@ Shippo. It targets individuals and businesses building an app to manage their ow
 behalf of other businesses. See [`ROADMAP.md`](./ROADMAP.md) for the full delivery plan,
 architecture decisions, and scope.
 
-**Status: pre-alpha.** The core HTTP client exists (auth, retries, pagination, typed errors),
-but no resource methods (`addresses`, `shipments`, etc.) yet — those land in Stage 2/3 of the
-roadmap. Not yet published to npm.
+**Status: pre-alpha.** The core HTTP client and six core resources (Addresses, Parcels,
+Shipments, Rates, Transactions, Tracking) are built — enough to validate an address, create a
+shipment, and buy a label. Extended resources (Webhooks, Batches, Customs, Orders, and more)
+land in Stage 3 of the roadmap. Not yet published to npm.
 
 ## Getting Started
 
@@ -37,17 +38,14 @@ npm install @richardmcquiston01/shippo-api
 
 ### Usage
 
-Resource methods (`shippo.addresses.create()`, etc.) aren't built yet — see
-[`ROADMAP.md`](./ROADMAP.md) for the planned shape. Until then, the underlying transport is
-usable directly for any endpoint:
-
 ```ts
 import { Shippo } from "@richardmcquiston01/shippo-api";
 
 const shippo = new Shippo({ apiKey: "shippo_test_..." });
 
-const address = await shippo.client.request("POST", "/addresses", {
-  body: {
+// Create a shipment from two addresses and a parcel, computing rates.
+const shipment = await shippo.shipments.create({
+  address_from: {
     name: "Ada Lovelace",
     street1: "123 Main St",
     city: "Seattle",
@@ -55,7 +53,36 @@ const address = await shippo.client.request("POST", "/addresses", {
     zip: "98101",
     country: "US",
   },
+  address_to: {
+    name: "Alan Turing",
+    street1: "456 Market St",
+    city: "San Francisco",
+    state: "CA",
+    zip: "94103",
+    country: "US",
+  },
+  parcels: [
+    { length: "10", width: "8", height: "4", distance_unit: "in", weight: "2", mass_unit: "lb" },
+  ],
 });
+
+// Buy a label for the cheapest rate.
+const [cheapest] = shipment.rates?.sort((a, b) => Number(a.amount) - Number(b.amount)) ?? [];
+if (cheapest) {
+  const transaction = await shippo.transactions.create({
+    rate: cheapest.object_id,
+    label_file_type: "PDF",
+  });
+  console.log(transaction.label_url);
+}
+```
+
+Available today: `shippo.addresses`, `shippo.parcels`, `shippo.shipments`, `shippo.rates`,
+`shippo.transactions`, `shippo.tracking`. Anything else (Webhooks, Batches, Customs, Orders,
+...) isn't wrapped yet — see [`ROADMAP.md`](./ROADMAP.md) — but is still reachable directly:
+
+```ts
+const result = await shippo.client.request("GET", "/some/not-yet-wrapped/endpoint");
 ```
 
 ### Examples

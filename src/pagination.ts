@@ -13,6 +13,17 @@ export interface PaginatedList<T> {
 }
 
 /**
+ * Standard query params accepted by every `list()` method. The index
+ * signature (rather than just `page`/`results`) is what lets this satisfy
+ * `RequestOptions["query"]` directly, structurally.
+ */
+export interface ListQuery {
+  page?: number;
+  results?: number;
+  [key: string]: string | number | boolean | undefined;
+}
+
+/**
  * Iterates every item across every page of a list endpoint, following
  * `next` until it's `null`. One HTTP request per page, made lazily as the
  * generator is consumed — safe to `for await` over an unbounded resource
