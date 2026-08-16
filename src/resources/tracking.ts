@@ -33,7 +33,7 @@ export interface TrackingStatus {
   tracking_history?: TrackingStatusDetail[];
 }
 
-export interface TrackingRegisterRequest {
+export interface TrackingCreateRequest {
   carrier: string;
   tracking_number: string;
   metadata?: string;
@@ -43,7 +43,7 @@ export class TrackingResource {
   constructor(private readonly client: ShippoClient) {}
 
   /** Registers a shipment for tracking, so Shippo starts polling the carrier for updates. */
-  async create(request: TrackingRegisterRequest): Promise<TrackingStatus> {
+  async create(request: TrackingCreateRequest): Promise<TrackingStatus> {
     return this.client.request<TrackingStatus>("POST", "/tracks", { body: request });
   }
 

@@ -52,10 +52,10 @@ export class CarrierParcelTemplatesResource {
    * **Unconfirmed / best effort**: endpoint path guessed, same caveats as
    * `list()`.
    */
-  async get(templateId: string): Promise<CarrierParcelTemplate> {
+  async get(carrierParcelTemplateId: string): Promise<CarrierParcelTemplate> {
     return this.client.request<CarrierParcelTemplate>(
       "GET",
-      `/carrier_parcel_templates/${templateId}`,
+      `/carrier_parcel_templates/${carrierParcelTemplateId}`,
     );
   }
 }

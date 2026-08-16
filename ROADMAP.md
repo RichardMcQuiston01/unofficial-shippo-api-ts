@@ -1,8 +1,9 @@
 # Roadmap: `unofficial-shippo-api-ts`
 
-Status: **In progress.** Stages 0–3 are built: foundation/tooling, core HTTP client, and all
-19 in-scope resources (core + extended). See each stage's section below for what shipped and
-what's still open. Stage 4 (integration & consistency pass) is next.
+Status: **In progress.** Stages 0–4 are built: foundation/tooling, core HTTP client, all 19
+in-scope resources, and a full integration/consistency pass across them. See each stage's
+section below for what shipped and what's still open. Stage 5 (testing & validation
+hardening) is next.
 
 ## 1. Goal
 
@@ -366,12 +367,41 @@ coherent:
   work gets reconciled.
 - **Exit criteria**: single client instance can call any resource; no
   naming/behavioral inconsistencies flagged by review remain open.
+- **Shipped.** Three parallel read-only audits (naming/API consistency,
+  test coverage completeness, export completeness) against all 19
+  resources and `docs/CONVENTIONS.md`, followed by a manual fix pass —
+  fitting, since audit-then-fix is exactly what "reconciling parallel
+  work" means. Test coverage and exports both came back fully clean (100%
+  line/function coverage repo-wide already, ahead of Stage 5's ~90%
+  target; every resource correctly re-exported and wired onto `Shippo`,
+  no name collisions). Naming turned up three real, now-fixed
+  inconsistencies: two resources used a generic `templateId` instead of
+  `<resourceSingular>Id` for their ID parameter; `tracking.ts`'s create
+  request type was named `TrackingRegisterRequest` instead of matching
+  the method's actual verb (`TrackingCreateRequest`); `webhooks.delete()`
+  used `await` + empty return instead of the `return this.client.
+  request(...)` pattern the other three delete methods used. Both
+  findings' root cause — an unwritten convention — is now written down in
+  `docs/CONVENTIONS.md` so future resource work doesn't have to
+  rediscover it. Full findings are in PR history; nothing else was
+  flagged as needing a fix.
 
 ### Stage 5 — Testing & validation hardening
-- Coverage threshold (target ~90% on `src/`) across unit tests.
+- Coverage threshold (target ~90% on `src/`) across unit tests. **Already
+  met as of Stage 4** — `bun test --coverage` reports 100% line/function
+  coverage repo-wide against mocked HTTP. This stage's coverage work is
+  really about the next two bullets, not backfilling unit tests.
 - Optional live contract test suite, gated behind `SHIPPO_TEST_API_KEY`,
   skipped in CI by default (requires a real Shippo test-mode key from the
   user).
+- The actual point of this stage given where things stand: use a live
+  key to spot-check everything flagged as unconfirmed across Stages 1–3
+  — the error response body shape (§2), and field-level types for the 9
+  Stage-3 resources with no reachable OpenAPI spec (Batches, Customs
+  Declarations/Items, Manifests, Orders, Carrier/User Parcel Templates,
+  Service Groups, Pickups, Rates at Checkout, plus Carrier Accounts'
+  three OAuth2 methods). Mocked-HTTP coverage can't catch a wrong field
+  name if the mock was written to match the wrong assumption.
 - **Exit criteria**: coverage threshold met; contract-test scaffold exists
   and is documented even if not run in CI.
 

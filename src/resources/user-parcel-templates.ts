@@ -63,22 +63,27 @@ export class UserParcelTemplatesResource {
   }
 
   /** Retrieves a single user parcel template by its object ID. */
-  async get(templateId: string): Promise<UserParcelTemplate> {
-    return this.client.request<UserParcelTemplate>("GET", `/user_parcel_templates/${templateId}`);
+  async get(userParcelTemplateId: string): Promise<UserParcelTemplate> {
+    return this.client.request<UserParcelTemplate>(
+      "GET",
+      `/user_parcel_templates/${userParcelTemplateId}`,
+    );
   }
 
   /** Updates an existing user parcel template. */
   async update(
-    templateId: string,
+    userParcelTemplateId: string,
     request: UserParcelTemplateUpdateRequest,
   ): Promise<UserParcelTemplate> {
-    return this.client.request<UserParcelTemplate>("PUT", `/user_parcel_templates/${templateId}`, {
-      body: request,
-    });
+    return this.client.request<UserParcelTemplate>(
+      "PUT",
+      `/user_parcel_templates/${userParcelTemplateId}`,
+      { body: request },
+    );
   }
 
   /** Deletes a user parcel template. */
-  async delete(templateId: string): Promise<void> {
-    return this.client.request<void>("DELETE", `/user_parcel_templates/${templateId}`);
+  async delete(userParcelTemplateId: string): Promise<void> {
+    return this.client.request<void>("DELETE", `/user_parcel_templates/${userParcelTemplateId}`);
   }
 }
