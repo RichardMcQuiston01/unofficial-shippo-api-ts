@@ -22,6 +22,7 @@ bun install
 | ---------------------- | ------------------------------------------------------------------- |
 | `bun run build`        | Bundles `dist/index.{js,cjs}` and emits `dist/index.d.ts`           |
 | `bun test`             | Runs the test suite (`bun:test`)                                    |
+| `bun run test:live`    | Runs the live contract suite — see "Live contract tests" below      |
 | `bun run lint`         | Lints with ESLint                                                   |
 | `bun run lint:fix`     | Lints and auto-fixes what it can                                    |
 | `bun run format`       | Formats the repo with Prettier                                      |
@@ -45,3 +46,39 @@ Run `bun run ci` before opening a PR — it's the same thing CI checks.
 
 Enforced by ESLint + Prettier in CI, not by convention — run `bun run format` and
 `bun run lint:fix` before committing if you're not running them via an editor integration.
+
+## Live contract tests
+
+Everything in `bun test` normally runs against a mocked `fetch` (`src/testing/mock-fetch.ts`)
+— fast and deterministic, but it can only confirm the code does what we _assumed_ the API
+does, not that the assumption itself is correct. `src/live-contract.test.ts` hits the real
+Shippo test-mode API instead, to spot-check the things flagged as unconfirmed throughout
+`ROADMAP.md` (the error response body shape, and field-level types for resources with no
+reachable OpenAPI spec).
+
+**It's skipped entirely — not run, not failed, just skipped — unless `SHIPPO_TEST_API_KEY` is
+set.** Never runs in CI; there's no key configured there by design.
+
+To run it locally:
+
+```bash
+SHIPPO_TEST_API_KEY=shippo_test_... bun run test:live
+```
+
+Use a **test-mode** key only (starts with `shippo_test_`, from your own Shippo account's API
+settings) — never a live/production key. The suite creates and, where reversible, deletes real
+objects in your test-mode account (addresses, parcels, shipments, a purchased test-mode label,
+a customs item, a user parcel template, a webhook it registers and then removes). It logs the
+real response shapes it observes (`console.log`) so you can compare them against this
+package's types by eye — it's a spot-check tool, not a fully automated shape-diff.
+
+**Known gaps**, intentionally not covered (see the comment at the bottom of the file for the
+full list): Batches and Pickups need a real connected carrier account most test accounts won't
+have; Carrier Accounts' three OAuth2-adjacent methods need an interactive redirect flow that
+can't be automated; Customs Declarations and Rates at Checkout aren't exercised yet. Expanding
+this file to cover more of that is a welcome follow-up — treat what's here as the template,
+not the finished suite.
+
+Never commit a real API key. If you paste one into a chat/terminal for a session, treat it as
+compromised afterward and rotate it in the Shippo dashboard once you're done — cheap insurance
+even for a test-mode key.

@@ -119,6 +119,11 @@ bun run format     # prettier --write
 bun run ci         # format:check + lint + typecheck + test + build, same as CI
 ```
 
+`bun test` runs entirely against a mocked API — deterministic, no credentials needed. A
+separate live contract suite (`bun run test:live`) exists to spot-check assumptions against
+the real Shippo test-mode API; it's skipped by default and requires your own test-mode API
+key — see [`CONTRIBUTING.md`](./CONTRIBUTING.md)'s "Live contract tests" section.
+
 See [`CONTRIBUTING.md`](./CONTRIBUTING.md) for the branch/PR workflow.
 
 ## Buy Me a Coffee
