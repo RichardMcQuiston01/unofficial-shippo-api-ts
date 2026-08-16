@@ -72,5 +72,25 @@ once it publishes its first release (see `ROADMAP.md`).
 
 `Shippo Accounts` and the Platform API remain permanently out of scope (see `ROADMAP.md`'s
 Target User section). All 19 resources exist now, but nothing here is a stable, documented
-public API yet — Stage 4 (integration/consistency pass) and Stage 5 (testing hardening,
-including a live-key spot-check of the unconfirmed field shapes) are still ahead.
+public API yet — Stage 5 (testing hardening, including a live-key spot-check of the
+unconfirmed field shapes) is still ahead.
+
+### Changed
+
+- Integration & consistency pass (Stage 4 of `ROADMAP.md`) across all 19 resources, built by
+  three parallel read-only audits (naming/API consistency, test coverage completeness, export
+  completeness) followed by a manual fix pass. Test coverage and exports came back clean
+  (100% line/function coverage repo-wide, all 19 resources correctly re-exported and wired
+  onto `Shippo`); naming turned up three real inconsistencies, now fixed:
+  - `carrierParcelTemplates.get()` and `userParcelTemplates.get()/update()/delete()` renamed
+    their ID parameter from the generic `templateId` to `carrierParcelTemplateId`/
+    `userParcelTemplateId`, matching every other resource's `<resourceSingular>Id` pattern.
+    Positional parameter, no caller impact.
+  - **Breaking (pre-release) type rename**: `TrackingRegisterRequest` → `TrackingCreateRequest`
+    (`tracking.create()`'s request type), matching the `<Resource>CreateRequest` naming every
+    other resource follows — the old name's verb ("Register") didn't match the method's actual
+    verb ("create").
+  - `webhooks.delete()` normalized to `return this.client.request(...)` instead of `await` +
+    empty return, matching the other three `Promise<void>`-returning delete methods.
+  - `docs/CONVENTIONS.md` gained explicit rules for ID parameter naming and the
+    `Promise<void>`-return style, closing the gap that let these drift in the first place.

@@ -94,8 +94,17 @@ Also re-export the resource class and its request/response types as named export
   `list`, `create`, `get`, `validate`, `listForShipment`, `listForShipmentByCurrency`, etc. —
   don't invent alternate names even if you'd phrase it differently.
 - Request/response type names: `<Resource><Verb>Request` for request bodies (e.g.
-  `AddressCreateRequest`), and the bare singular resource name for the response object (e.g.
-  `Address`, not `AddressResponse`).
+  `AddressCreateRequest`) — always matching the method's actual verb (`create()` takes an
+  `XCreateRequest`, not e.g. `XRegisterRequest` even if "register" reads more naturally for
+  that particular resource) — and the bare singular resource name for the response object
+  (e.g. `Address`, not `AddressResponse`).
+- ID parameters are named `<resourceSingular>Id` (e.g. `addressId`, `carrierAccountId`,
+  `userParcelTemplateId`) — not a generic `id` or `templateId`, even when the resource name is
+  long.
+- `Promise<void>`-returning methods (typically `delete()`) use `return this.client.request(...)`,
+  not `await this.client.request(...)` followed by an empty return — purely a style
+  normalization (both are behaviorally identical), picked in the Stage 4 consistency pass so
+  future resources don't have to pick again.
 
 ## Field naming — keep the wire shape
 

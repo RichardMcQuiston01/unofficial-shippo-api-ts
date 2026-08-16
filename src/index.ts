@@ -98,8 +98,8 @@ export type {
 } from "./resources/shipments";
 export { ShipmentsResource } from "./resources/shipments";
 export type {
+  TrackingCreateRequest,
   TrackingLocation,
-  TrackingRegisterRequest,
   TrackingStatus,
   TrackingStatusDetail,
   TrackingStatusValue,

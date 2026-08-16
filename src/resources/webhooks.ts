@@ -80,7 +80,7 @@ export class WebhooksResource {
 
   /** Deletes a webhook subscription so it no longer receives deliveries. */
   async delete(webhookId: string): Promise<void> {
-    await this.client.request<void>("DELETE", `/webhooks/${webhookId}`);
+    return this.client.request<void>("DELETE", `/webhooks/${webhookId}`);
   }
 }
 
