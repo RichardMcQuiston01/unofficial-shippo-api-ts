@@ -12,10 +12,11 @@ Shippo. It targets individuals and businesses building an app to manage their ow
 behalf of other businesses. See [`ROADMAP.md`](./ROADMAP.md) for the full delivery plan,
 architecture decisions, and scope.
 
-**Status: pre-alpha.** The core HTTP client and six core resources (Addresses, Parcels,
-Shipments, Rates, Transactions, Tracking) are built — enough to validate an address, create a
-shipment, and buy a label. Extended resources (Webhooks, Batches, Customs, Orders, and more)
-land in Stage 3 of the roadmap. Not yet published to npm.
+**Status: pre-alpha.** All 19 in-scope resources are built — everything from validating an
+address through buying a label to managing webhooks, batches, customs, and carrier accounts.
+(`Shippo Accounts` and the Platform API are permanently out of scope — see `ROADMAP.md`'s
+Target User section.) Not yet published to npm, and not yet hardened for production use — see
+the field-level caveats below before relying on the newer resources.
 
 ## Getting Started
 
@@ -78,11 +79,27 @@ if (cheapest) {
 ```
 
 Available today: `shippo.addresses`, `shippo.parcels`, `shippo.shipments`, `shippo.rates`,
-`shippo.transactions`, `shippo.tracking`. Anything else (Webhooks, Batches, Customs, Orders,
-...) isn't wrapped yet — see [`ROADMAP.md`](./ROADMAP.md) — but is still reachable directly:
+`shippo.transactions`, `shippo.tracking`, `shippo.webhooks` (+ `parseEvent()` for inbound
+webhook deliveries), `shippo.batches`, `shippo.refunds`, `shippo.customsDeclarations`,
+`shippo.customsItems`, `shippo.manifests`, `shippo.orders`, `shippo.carrierAccounts`,
+`shippo.carrierParcelTemplates`, `shippo.userParcelTemplates`, `shippo.serviceGroups`,
+`shippo.pickups`, `shippo.ratesAtCheckout`.
+
+**Field-level accuracy varies by resource.** The first six above (plus Carrier Accounts,
+Refunds, and Webhooks' subscription CRUD) were built against Shippo's actual OpenAPI schemas.
+The rest — Batches, Customs Declarations/Items, Manifests, Orders, Carrier/User Parcel
+Templates, Service Groups, Pickups, and Rates at Checkout — have no reachable spec (see
+`ROADMAP.md` §2) and are typed from official-SDK method signatures plus domain conventions;
+every field with a real uncertainty is flagged with a doc comment in the source (e.g.
+`Order`'s fields, `Batch`'s `batch_shipments`, Carrier Accounts' OAuth2 methods). Read those
+comments before depending on a field in production.
+
+Nothing outside this resource set (i.e. the Platform API) is reachable through this client at
+all — see `ROADMAP.md`'s Target User section for why. For anything else genuinely missing,
+the transport is still available directly:
 
 ```ts
-const result = await shippo.client.request("GET", "/some/not-yet-wrapped/endpoint");
+const result = await shippo.client.request("GET", "/some/endpoint");
 ```
 
 ### Examples

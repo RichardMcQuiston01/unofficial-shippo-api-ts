@@ -1,13 +1,19 @@
 # Conventions for resource modules
 
-Internal contributor doc for Stage 2/3 of `ROADMAP.md`: one resource (or resource group) per
-unit of work, built in parallel. This is the shared contract so independently-built modules
-don't diverge. Not user-facing — see `README.md` for that.
+Internal contributor doc, originally written for Stage 2/3 of `ROADMAP.md` (one resource or
+resource group per unit of work, built in parallel) and still the binding contract for any
+future resource work (e.g. if `Shippo Accounts` ever comes into scope). This is the shared
+contract so independently-built modules don't diverge. Not user-facing — see `README.md` for
+that. Stage 3 (all 19 resources) shipped following this doc, built by four parallel subagents
+in isolated git worktrees, one per Stage 3 group — the patterns below held up across all of
+them without needing a mid-stage revision.
 
 ## File layout
 
-- One file per resource: `src/resources/<resource>.ts` — kebab-free, lowercase, matching the
-  resource's plural name (e.g. `src/resources/addresses.ts`, `src/resources/rates.ts`).
+- One file per resource: `src/resources/<resource>.ts`, lowercase, matching the resource's
+  plural name — single-word resources are one word (`addresses.ts`, `rates.ts`); multi-word
+  resources are kebab-case (`carrier-accounts.ts`, `rates-at-checkout.ts`,
+  `user-parcel-templates.ts`). Don't run multi-word names together unseparated.
 - Colocate the test: `src/resources/<resource>.test.ts` next to it, same as `src/client.ts` /
   `src/client.test.ts` from Stage 1.
 - A resource **group** (Stage 3's Groups A–D) may span multiple files, one per resource, even
@@ -129,6 +135,38 @@ cover at minimum:
   — doesn't need to be per-method if the mapping is generic, but the resource needs at least
   one.
 
+## Honest-uncertainty comment pattern
+
+Most of Stage 3 had no reachable OpenAPI spec to build against (see "Spec cross-checking"
+below) — this is the pattern every Stage 3 resource used to handle that, and it's the
+pattern any future unconfirmed-field work should follow too:
+
+- A field whose _existence_ is reasonably certain but whose _shape_ isn't: type it loosely
+  (`Record<string, unknown>`, or a minimal type with extra keys allowed) with a doc comment
+  explaining what's confirmed (usually just the field name, from an AsyncAPI/SDK source) and
+  what isn't. See `TrackingLocation` (`./tracking.ts`), `BatchShipment`/`BatchObjectResult`
+  (`./batches.ts`).
+- A field you're inferring by analogy with a confirmed field elsewhere in the codebase (e.g.
+  reusing the `WAITING|QUEUED|SUCCESS|ERROR` status-enum pattern seen on `Shipment`/
+  `Transaction` for a resource where that enum isn't independently confirmed): say so
+  explicitly — "inferred by analogy," not "confirmed." See `ManifestStatus`, `BatchStatus`.
+- A whole resource with no spec coverage at all: put the caveat at the top of the file, once,
+  rather than repeating it on every field — see `orders.ts`'s file-level comment for the
+  template. Keep the type conservative (core fields only) over fabricating a large schema —
+  a smaller, honestly-scoped type is more useful than a big guessed one.
+- Never let an unconfirmed guess read as confirmed. This matters more than getting the guess
+  right — a consumer who trusts a fabricated-but-confident-looking field is worse off than one
+  who sees a `Record<string, unknown>` and knows to check.
+
+## Two concerns, one file
+
+Some resources genuinely bundle two distinct capabilities behind one endpoint family — say so
+explicitly in the file's top comment rather than letting it read as one thing. Established
+examples: `webhooks.ts` (subscription CRUD _and_ `parseEvent()` for inbound deliveries —
+different enough that `parseEvent()` isn't even a class method, it's a standalone function);
+`rates-at-checkout.ts` (live rate computation _and_ default-parcel-template singleton config,
+which share the `/rates_at_checkout` path prefix but aren't the same concern).
+
 ## Spec cross-checking
 
 For the 9 resources with real OpenAPI coverage via the `api-evangelist/shippo` mirror
@@ -137,5 +175,6 @@ Transactions, Refunds, Webhooks), cross-check field names and required/optional-
 those specs rather than guessing from SDK READMEs alone. For the other 9 (Batches, Customs
 Declarations/Items, Manifests, Orders, Pickups, Service Groups, User/Carrier Parcel Templates,
 Rates at Checkout), no OpenAPI spec was reachable while building this package — types are a
-best effort from SDK method signatures, and should be flagged for follow-up verification in
-the PR description rather than presented as confirmed.
+best effort from SDK method signatures, flagged inline per the honest-uncertainty pattern
+above rather than presented as confirmed. Revisit these nine if a live API key or spec access
+ever becomes available (see `ROADMAP.md`'s Stage 5 note on this).
