@@ -1,7 +1,10 @@
 # Roadmap: `unofficial-shippo-api-ts`
 
-Status: **Draft for review** — no implementation has started. This document is the
-plan; nothing below has been built yet.
+Status: **In progress.** Stages 0–4 are built: foundation/tooling, core HTTP client, all 19
+in-scope resources, and a full integration/consistency pass across them. Stage 5 (testing &
+validation hardening) is partially shipped — the live-contract scaffold exists and is
+documented, but hasn't been run against a real account yet (needs a test-mode API key). See
+each stage's section below for what shipped and what's still open.
 
 ## 1. Goal
 
@@ -88,10 +91,14 @@ implementation locks in types — see the mirror caveat below.**
   `{ count, next, previous, results }`. Assume this shape across all list
   endpoints until Stage 1 spot-checks confirm it holds for the extended
   resources too.
-- **Error response schema / rate-limit headers**: still **not confirmed** —
-  absent from the OpenAPI mirror as well as the SDK READMEs. Remains a
-  Stage 1 spike (may require a real API key + a deliberately bad request to
-  observe the actual error body shape).
+- **Error response schema / rate-limit headers**: still **not empirically
+  confirmed** — absent from the OpenAPI mirror as well as the SDK READMEs,
+  and Stage 1 shipped without a live API key to spot-check against (see
+  Stage 1's section below for what was built instead: a defensive
+  `ShippoApiError` that doesn't assume a specific shape). `Retry-After` is
+  parsed if present, but its actual presence on Shippo's 429s is also
+  unconfirmed. First real API key used against this client should verify
+  both.
 - **Inbound webhook events**: confirmed via the `api-evangelist/shippo`
   mirror's AsyncAPI spec (`asyncapi/shippo-webhooks-asyncapi.yaml`) —
   see the dedicated subsection below. This is distinct from the `Webhooks`
@@ -246,6 +253,7 @@ parallel (see §5).
 - **Exit criteria**: `bun run build && bun test` succeed on a trivial
   placeholder module; both the Bun CI job and the Node smoke-test job are
   green on the branch.
+- **Shipped** (PR #3).
 
 ### Stage 1 — Core HTTP client & conventions
 - `ShippoClient`/transport: base URL, auth header injection, API-version
@@ -259,6 +267,18 @@ parallel (see §5).
 - **Exit criteria**: client can hit a hand-mocked endpoint, auth header and
   errors verified by unit tests; conventions doc merged so parallel agents
   in Stage 2 have a contract to follow.
+- **Shipped**, with one honest caveat on the spike task: pagination shape
+  was already confirmed in Stage 0 research (§2) and is implemented as
+  designed. The **error body shape is still not empirically confirmed** —
+  we have no live API key yet (the user's Stage 5 test-mode key isn't
+  needed until Stage 5), so nobody has actually triggered a real Shippo
+  error response to observe its shape. `ShippoApiError` is built
+  defensively instead: `body` is typed `unknown`, and `message` does
+  best-effort extraction across the shapes Django REST Framework (which
+  Shippo's pagination matches) commonly uses — `{ detail: string }` and
+  `{ field: string[] }` — falling back to a raw dump rather than assuming
+  either is correct. Worth a real spot-check the first time anyone in this
+  project has a working API key.
 
 ### Stage 2 — Core resource modules (MVP surface)
 One resource per unit of work, all depend only on Stage 1's client contract
@@ -276,6 +296,17 @@ One resource per unit of work, all depend only on Stage 1's client contract
 - **Exit criteria**: every method has types, a unit test (success + at
   least one error path), and a doc comment; `shippo.addresses.create()`
   through `shippo.tracking.get()` all work end-to-end against mocked HTTP.
+- **Shipped.** Built as one pass rather than six parallel agents — this
+  session doesn't have multi-agent orchestration opted into (see
+  ROADMAP.md §5), and the resources share enough types (`Shipment`
+  references `Address`, `Parcel`, and `Rate`) that a single consistent
+  pass was the pragmatic choice here. All exit criteria met: 62 unit
+  tests across 10 files, every method typed and doc-commented. Field-
+  level types for Addresses, Parcels, Shipments, Rates, and Transactions
+  were pulled from the `api-evangelist/shippo` OpenAPI mirror (§2); two
+  fields with no confirmed shape (`Address.validation_results`,
+  `TrackingStatus`'s `location` sub-object) are flagged inline in the
+  source as best-effort/advisory rather than presented as verified.
 
 ### Stage 3 — Extended resource modules
 Second wave, same parallelizable shape, grouped to keep each agent's scope
@@ -302,6 +333,32 @@ coherent:
   group, plus for Group A specifically: `parseEvent()` correctly
   discriminates and types all 5 event payloads, with a test fixture per
   event derived from the AsyncAPI schema.
+- **Shipped.** Built with genuine multi-agent orchestration this time —
+  one subagent per group (4 total), each in an isolated git worktree, run
+  concurrently. Each agent got the researched OpenAPI schemas (where they
+  existed), `docs/CONVENTIONS.md`, and explicit instructions to flag
+  every unconfirmed field rather than fabricate confidently. Integration
+  (copying files, wiring `src/index.ts`, resolving the one cross-group
+  type dependency — `webhooks.ts`'s `parseEvent()` importing `Batch` from
+  `batches.ts`) was a single pass afterward, not per-group. All exit
+  criteria met: 133 unit tests across 23 files (was 62 after Stage 2),
+  every method typed and doc-commented, `parseEvent()` covers all 5
+  event types plus rejection of unrecognized ones.
+  - Spec-grounded (OpenAPI mirror): Addresses, Parcels, Shipments, Rates,
+    Transactions, Tracking (already confirmed in Stage 2), plus Carrier
+    Accounts, Refunds, and Webhooks' subscription CRUD.
+  - No reachable spec, best-effort with inline honest-uncertainty
+    comments (see `docs/CONVENTIONS.md`'s new section on the pattern):
+    Batches, Customs Declarations/Items, Manifests, Orders, Carrier/User
+    Parcel Templates, Service Groups, Pickups, Rates at Checkout, and
+    Carrier Accounts' three OAuth2-adjacent methods specifically
+    (`initiateOauth2Signin`/`register`/`getRegistrationStatus` aren't in
+    the OpenAPI mirror even though the rest of Carrier Accounts is).
+  - `Order` is explicitly the least-confirmed type in the package — kept
+    to a conservative core rather than a fabricated full schema; see its
+    file-level comment.
+  - None of this has been checked against a live Shippo account yet (no
+    API key available in this environment) — see Stage 5.
 
 ### Stage 4 — Integration & consistency pass
 - Wire all resource modules onto the `Shippo` client facade; verify the
@@ -312,16 +369,60 @@ coherent:
   work gets reconciled.
 - **Exit criteria**: single client instance can call any resource; no
   naming/behavioral inconsistencies flagged by review remain open.
+- **Shipped.** Three parallel read-only audits (naming/API consistency,
+  test coverage completeness, export completeness) against all 19
+  resources and `docs/CONVENTIONS.md`, followed by a manual fix pass —
+  fitting, since audit-then-fix is exactly what "reconciling parallel
+  work" means. Test coverage and exports both came back fully clean (100%
+  line/function coverage repo-wide already, ahead of Stage 5's ~90%
+  target; every resource correctly re-exported and wired onto `Shippo`,
+  no name collisions). Naming turned up three real, now-fixed
+  inconsistencies: two resources used a generic `templateId` instead of
+  `<resourceSingular>Id` for their ID parameter; `tracking.ts`'s create
+  request type was named `TrackingRegisterRequest` instead of matching
+  the method's actual verb (`TrackingCreateRequest`); `webhooks.delete()`
+  used `await` + empty return instead of the `return this.client.
+  request(...)` pattern the other three delete methods used. Both
+  findings' root cause — an unwritten convention — is now written down in
+  `docs/CONVENTIONS.md` so future resource work doesn't have to
+  rediscover it. Full findings are in PR history; nothing else was
+  flagged as needing a fix.
 
 ### Stage 5 — Testing & validation hardening
-- Coverage threshold (target ~90% on `src/`) across unit tests.
-- Live contract test suite gated behind a `SHIPPO_TEST_API_KEY` CI secret
-  (the user has a Shippo test-mode key to provide when this stage starts —
-  see §6). Runs in CI on the main repo; skips gracefully on forked-PR runs
-  that don't have access to the secret, per standard GitHub Actions
-  behavior.
+- Coverage threshold (target ~90% on `src/`) across unit tests. **Already
+  met as of Stage 4** — `bun test --coverage` reports 100% line/function
+  coverage repo-wide against mocked HTTP. This stage's coverage work is
+  really about the next two bullets, not backfilling unit tests.
+- Optional live contract test suite, gated behind `SHIPPO_TEST_API_KEY`,
+  skipped in CI by default (requires a real Shippo test-mode key from the
+  user).
+- The actual point of this stage given where things stand: use a live
+  key to spot-check everything flagged as unconfirmed across Stages 1–3
+  — the error response body shape (§2), and field-level types for the 9
+  Stage-3 resources with no reachable OpenAPI spec (Batches, Customs
+  Declarations/Items, Manifests, Orders, Carrier/User Parcel Templates,
+  Service Groups, Pickups, Rates at Checkout, plus Carrier Accounts'
+  three OAuth2 methods). Mocked-HTTP coverage can't catch a wrong field
+  name if the mock was written to match the wrong assumption.
 - **Exit criteria**: coverage threshold met; contract-test scaffold exists
   and is documented even if not run in CI.
+- **Partially shipped.** Coverage threshold: met (see above, since Stage
+  4). Scaffold: built — `src/live-contract.test.ts`, gated behind
+  `SHIPPO_TEST_API_KEY` (skips cleanly, doesn't fail, when unset; never
+  runs in CI), documented in `CONTRIBUTING.md`'s "Live contract tests"
+  section, `bun run test:live` shortcut added. Covers the core
+  create-shipment→buy-a-label→track happy path, deliberate 404/400
+  errors to observe real error bodies, `list()` smoke checks across 8
+  no-spec resources, and standalone creates for Customs Items, User
+  Parcel Templates, and Webhooks (with cleanup where reversible).
+  **Not yet run against a real account** — the user offered a test-mode
+  key back when this stage was scoped; asked again when this stage
+  actually started. If/when it runs, update this entry with what the
+  live spot-check confirmed or corrected. Known gaps in the scaffold
+  itself (documented in the file and in `CONTRIBUTING.md`): Batches,
+  Pickups, Carrier Accounts' three OAuth2 methods, Customs Declarations,
+  and Rates at Checkout aren't exercised — left as a template to extend
+  rather than a finished suite.
 
 ### Stage 6 — Documentation & examples
 - README: install, quickstart, auth, error handling.
@@ -405,25 +506,30 @@ agents rather than one agent working through resources serially.
    worked since 18); this is purely "don't advertise support for a Node
    version that no longer gets security fixes." Say so if you'd rather
    accept that risk and keep the floor at 18 or 20 anyway (e.g. for
-   compatibility with environments you know are stuck there) — easy to
-   change before Stage 0's CI matrix is written.
-4. ~~**Live contract testing**~~ — resolved: you can provide a Shippo
-   test-mode API key. Not needed until Stage 5 — when that stage starts,
-   the key gets added as a CI secret (`SHIPPO_TEST_API_KEY`) and never
-   committed to the repo.
+   compatibility with environments you know are stuck there) — this is
+   what Stage 0 actually shipped: the Node smoke-test CI job matrixes
+   across Node 22 and 24.
+4. ~~**Live contract testing**~~ — resolved: you offered to provide a
+   Shippo test-mode API key when Stage 5 started. What actually shipped
+   in Stage 5 is a suite gated behind a local `SHIPPO_TEST_API_KEY`
+   environment variable (`bun run test:live`), not a CI secret — it's
+   never run in CI, by design, since it hits the real Shippo API rather
+   than a mock. The key itself hasn't been provided yet; see Stage 5's
+   section above for current status.
 5. ~~**OpenAPI spec access**~~ — resolved. This sandbox still can't reach
    `docs.goshippo.com` directly, but the third-party `api-evangelist/shippo`
    GitHub mirror (§2) provides real OpenAPI YAML for 9 of the in-scope
    resources (all of Stage 2, plus Carrier Accounts/Refunds/Webhooks from
    Stage 3), its AsyncAPI spec covers inbound webhook events, and the
    resource inventory itself is independently confirmed across four
-   official SDKs (Python, JS, C#, plus the API version cross-check). That's
-   accepted as good enough to proceed. The remaining 9 Stage-3 resources
-   (Batches, Customs Declarations/Items, Manifests, Orders, Pickups,
-   Service Groups, User/Carrier Parcel Templates, Rates at Checkout) still
-   rely on SDK-README inference only for field-level types — tracked as a
-   Stage 3 task (verify against the primary spec if access becomes
-   available then), not a blocking open question.
+   official SDKs (Python, JS, C#, plus the API version cross-check). That
+   was accepted as good enough to proceed, and Stage 3 shipped on that
+   basis: the remaining 9 Stage-3 resources (Batches, Customs
+   Declarations/Items, Manifests, Orders, Pickups, Service Groups, User/
+   Carrier Parcel Templates, Rates at Checkout) were typed from
+   SDK-README inference plus domain conventions, with every
+   real uncertainty flagged inline in the source (see Stage 3's section
+   above) rather than presented as verified.
 
 ## 7. Risks
 
