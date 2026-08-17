@@ -46,6 +46,10 @@
     "donate.svg"
   ],
   "sideEffects": false,
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
   "scripts": {
     "build": "bun run scripts/build.ts",
     "test": "bun test",
@@ -57,9 +61,14 @@
     "format:check": "prettier --check .",
     "typecheck": "tsc --noEmit",
     "docs": "typedoc",
-    "ci": "bun run format:check && bun run lint && bun run typecheck && bun run test && bun run build"
+    "ci": "bun run format:check && bun run lint && bun run typecheck && bun run test && bun run build",
+    "changeset": "changeset",
+    "version": "changeset version",
+    "release": "bun run build && changeset publish"
   },
   "devDependencies": {
+    "@changesets/changelog-github": "^1.0.0",
+    "@changesets/cli": "^3.0.0",
     "@eslint/js": "^9.19.0",
     "@types/bun": "^1.2.0",
     "@types/express": "^5.0.6",
