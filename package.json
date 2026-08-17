@@ -1,0 +1,84 @@
+{
+  "name": "@richardmcquiston01/shippo-api",
+  "version": "0.0.0",
+  "description": "Framework agnostic TypeScript client for Shippo's shipping API.",
+  "license": "Apache-2.0",
+  "author": "Richard McQuiston",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts.git"
+  },
+  "homepage": "https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts#readme",
+  "bugs": {
+    "url": "https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/issues"
+  },
+  "keywords": [
+    "shippo",
+    "shipping",
+    "shipping-api",
+    "typescript",
+    "usps",
+    "ups",
+    "fedex",
+    "dhl"
+  ],
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE",
+    "CHANGELOG.md",
+    "donate.svg"
+  ],
+  "sideEffects": false,
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
+  "scripts": {
+    "build": "bun run scripts/build.ts",
+    "test": "bun test",
+    "test:coverage": "bun test --coverage",
+    "test:live": "bun test src/live-contract.test.ts",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "typecheck": "tsc --noEmit",
+    "docs": "typedoc",
+    "ci": "bun run format:check && bun run lint && bun run typecheck && bun run test && bun run build",
+    "changeset": "changeset",
+    "version": "changeset version",
+    "release": "bun run build && changeset publish"
+  },
+  "devDependencies": {
+    "@changesets/changelog-github": "^1.0.0",
+    "@changesets/cli": "^3.0.0",
+    "@eslint/js": "^9.19.0",
+    "@types/bun": "^1.2.0",
+    "@types/express": "^5.0.6",
+    "eslint": "^9.19.0",
+    "eslint-config-prettier": "^9.1.0",
+    "express": "^5.2.1",
+    "globals": "^17.11.0",
+    "prettier": "^3.4.2",
+    "typedoc": "^0.28.20",
+    "typedoc-plugin-markdown": "^4.12.0",
+    "typescript": "~5.8.3",
+    "typescript-eslint": "^8.26.0"
+  }
+}
