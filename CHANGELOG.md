@@ -106,3 +106,24 @@ unconfirmed field shapes) is still ahead.
   Pickups, Carrier Accounts' OAuth2 methods, Customs Declarations, Rates at Checkout aren't
   exercised yet — left as a template to extend). `bun run test:live` added as a shortcut.
   Coverage threshold itself was already met as of Stage 4 (100% line/function, mocked-HTTP).
+
+### Added
+
+- Documentation & examples (Stage 6 of `ROADMAP.md`):
+  - `README.md` gained "Authentication" (API key flow, the `apiVersion` option, and a note
+    that the key is a true private class field that never leaks via
+    `JSON.stringify`/`console.log`) and "Error handling" (`ShippoApiError`/
+    `ShippoNetworkError`, what each carries, and the built-in retry/backoff behavior)
+    sections, plus real "Examples" and "Reference" sections replacing the old placeholders.
+  - Generated per-resource API reference in `docs/reference/` via TypeDoc +
+    `typedoc-plugin-markdown` (`bun run docs`), built straight from existing JSDoc comments
+    rather than hand-written, so it can't drift from the source. Excluded from Prettier
+    reformatting (`.prettierignore`) since it's regenerated, not hand-edited.
+  - `examples/`: five runnable scripts covering every flow the stage required —
+    `validate-address.ts`, `create-shipment-and-buy-label.ts` (the shipment → rates →
+    purchased label happy path), `track-shipment.ts`, and two webhook receivers
+    (`webhook-server-node.ts` with plain Node `http`, `webhook-server-express.ts` with
+    Express) demonstrating `parseEvent()` and the re-fetch-by-`object_id` mitigation for the
+    lack of webhook signature verification. `examples/README.md` indexes all five with run
+    instructions; `tsconfig.json`'s `include` extended to cover `examples/` for
+    typecheck/lint.

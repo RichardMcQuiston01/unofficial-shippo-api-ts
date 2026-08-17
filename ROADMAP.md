@@ -3,8 +3,10 @@
 Status: **In progress.** Stages 0–4 are built: foundation/tooling, core HTTP client, all 19
 in-scope resources, and a full integration/consistency pass across them. Stage 5 (testing &
 validation hardening) is partially shipped — the live-contract scaffold exists and is
-documented, but hasn't been run against a real account yet (needs a test-mode API key). See
-each stage's section below for what shipped and what's still open.
+documented, but hasn't been run against a real account yet (needs a test-mode API key). Stage
+6 (documentation & examples) is shipped — README, generated per-resource reference, and a
+runnable `examples/` directory now exist. See each stage's section below for what shipped and
+what's still open.
 
 ## 1. Goal
 
@@ -433,6 +435,30 @@ coherent:
   signature verification (§2).
 - **Exit criteria**: a new user can go from `npm install` to a purchased
   test-mode label using only the README.
+- **Shipped.** README gained an "Authentication" section (how the API key
+  flows into the client, the `apiVersion` option, and the fact that the
+  key is a true private class field that never leaks via
+  `JSON.stringify`/`console.log`) and an "Error handling" section
+  (`ShippoApiError`/`ShippoNetworkError`, what each carries, and the
+  built-in retry behavior), placed around the existing quickstart so a
+  new reader hits auth → usage → errors in order. Per-resource reference
+  docs are generated rather than hand-written — TypeDoc +
+  `typedoc-plugin-markdown` (`bun run docs`) renders every class, method,
+  and type straight from the existing JSDoc into `docs/reference/`,
+  avoiding a second, driftable copy of the same documentation; the output
+  is gitignored from Prettier reformatting (generated content) but
+  committed so it's browsable directly on GitHub. `examples/` covers all
+  four required flows — `validate-address.ts`,
+  `create-shipment-and-buy-label.ts`, `track-shipment.ts`, and **two**
+  webhook receivers (`webhook-server-node.ts` with plain Node `http`,
+  `webhook-server-express.ts` with Express) — each typechecked, linted,
+  and actually run (the webhook servers were started and hit with a real
+  `curl` payload to confirm the parse → re-fetch-by-`object_id` path
+  works end to end). `examples/README.md` indexes all five with run
+  instructions. Exit criteria met: a new reader can go from `npm install`
+  through the README's Authentication/Usage/Error-handling sections to a
+  purchased test-mode label without leaving the README, with `examples/`
+  as the runnable backup if they'd rather execute it than read it.
 
 ### Stage 7 — Release engineering & v0.1.0 publish
 - Changesets workflow, npm provenance publish action, tag/release notes.

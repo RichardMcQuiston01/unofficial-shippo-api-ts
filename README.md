@@ -38,6 +38,31 @@ bun add @richardmcquiston01/shippo-api
 npm install @richardmcquiston01/shippo-api
 ```
 
+### Authentication
+
+Get an API key from your Shippo account's API settings (see
+[Shippo's docs](https://docs.goshippo.com/) if you don't have an account yet) — use a
+**test-mode** key (starts with `shippo_test_`) while developing; switch to a live key only
+when you're ready to buy real labels. Pass it to the `Shippo` constructor:
+
+```ts
+const shippo = new Shippo({ apiKey: "shippo_test_..." });
+```
+
+It's sent as `Authorization: ShippoToken <apiKey>` on every request. The key itself is a true
+private field inside the client — it never shows up via `JSON.stringify(shippo)` or
+`console.log(shippo)`, so accidentally logging the client object won't leak it. Keep the key
+out of source control regardless (an environment variable, e.g. `process.env.SHIPPO_API_KEY`,
+is the usual approach) — this package doesn't read any environment variable for you, so how
+you supply the key is up to you.
+
+An optional `apiVersion` (a dated string like `2018-02-08`) pins the Shippo API version you're
+built against, instead of drifting with your account's default:
+
+```ts
+const shippo = new Shippo({ apiKey: "shippo_test_...", apiVersion: "2018-02-08" });
+```
+
 ### Usage
 
 ```ts
@@ -103,9 +128,58 @@ the transport is still available directly:
 const result = await shippo.client.request("GET", "/some/endpoint");
 ```
 
+### Error handling
+
+Every method throws one of three typed errors — `catch` and narrow with `instanceof`:
+
+```ts
+import { Shippo, ShippoApiError, ShippoNetworkError } from "@richardmcquiston01/shippo-api";
+
+try {
+  await shippo.addresses.create({
+    name: "",
+    street1: "",
+    city: "",
+    state: "",
+    zip: "",
+    country: "",
+  });
+} catch (error) {
+  if (error instanceof ShippoApiError) {
+    // Shippo responded with a non-2xx status.
+    console.error(error.status, error.body, error.message);
+  } else if (error instanceof ShippoNetworkError) {
+    // The request never got a response — timeout, DNS failure, etc.
+    console.error(error.message);
+  } else {
+    throw error; // something else entirely
+  }
+}
+```
+
+`ShippoApiError` carries `status`, `body` (the raw response body — typed `unknown`, since
+Shippo's error body shape isn't confirmed by any reachable spec; see `ROADMAP.md` §2),
+`requestId` (from an `x-request-id` response header, if present), and `retryAfterMs` (parsed
+from a `Retry-After` header on 429s, if present). `.message` does best-effort extraction from
+`body` for a readable string, but `body` itself is what to inspect for anything precise.
+
+You don't need to handle retries yourself: network errors and 429/5xx responses are retried
+automatically with exponential backoff (honoring `Retry-After` when present) before either
+error type reaches your code — see `ShippoClientOptions.maxRetries`/`retryDelayMs` to tune
+this, or set `maxRetries: 0` to disable it.
+
 ### Examples
 
-Planned for Stage 6 of the roadmap; none exist yet.
+Runnable scripts in [`examples/`](./examples): validating an address, the core
+shipment-to-purchased-label flow, tracking a shipment, and receiving + parsing an inbound
+webhook (plain Node `http`, and Express) — including the re-fetch-by-`object_id` mitigation
+for the lack of webhook signature verification. See
+[`examples/README.md`](./examples/README.md) for how to run them.
+
+### Reference
+
+Generated per-resource API reference (every class, method, and type, with the same doc
+comments as the source) lives in [`docs/reference/`](./docs/reference/README.md).
 
 ## Development
 
