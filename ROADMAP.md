@@ -224,8 +224,8 @@ Given this, the plan is to add a **webhook event parsing module**
 |---|---|---|
 | Language/target | TypeScript, strict mode, compiled to ESM + CJS | Widest Node/Bun/bundler compatibility |
 | Dev runtime & package manager | **Bun** (`bun install`, `bun.lock` committed) | User preference — Bun-first tooling |
-| Published runtime support | Node.js (LTS+) *and* Bun as consumer runtimes, via standard `fetch` + dual ESM/CJS output | Keeps the README's "framework agnostic" promise while developing on Bun |
-| HTTP | Native `fetch` (present in both Bun and Node 18+), injectable fetch for testing/polyfills | Zero-dependency goal |
+| Published runtime support | Node.js **22+** (see minimum-version note below) *and* Bun as consumer runtimes, via standard `fetch` + dual ESM/CJS output | Keeps the README's "framework agnostic" promise while developing on Bun |
+| HTTP | Native `fetch` (present in both Bun and Node 18+ — floor is a support-lifecycle choice, not a technical one), injectable fetch for testing/polyfills | Zero-dependency goal |
 | Runtime deps | None targeted (re-evaluate only if hand-rolled validation gets unwieldy) | Differentiator vs. official SDK |
 | Module shape | Single `Shippo` client class (`new Shippo({ apiKey })`) exposing resource namespaces (`shippo.addresses.create(...)`), plus tree-shakeable standalone functions | Ergonomic default, advanced tree-shaking option |
 | Validation | Hand-written runtime guards at the boundary (request shape), trust response types otherwise | Avoid pulling in a schema library |
@@ -248,10 +248,11 @@ parallel (see §5).
   ESM/CJS output), ESLint + Prettier config, `bunfig.toml`/`bun:test`
   setup, `.gitignore`, `.npmignore`/`files` field.
 - GitHub Actions CI skeleton using `oven-sh/setup-bun` (install, lint,
-  typecheck, test, build) — no publish yet. Add a second CI job that
-  installs the *built* package under plain Node.js and runs a minimal
-  import/require smoke test, so Node consumer support is verified from
-  day one, not assumed.
+  typecheck, test, build) — no publish yet. Add a second CI job matrixed
+  across Node 22 and Node 24 that installs the *built* package under
+  plain Node.js and runs a minimal import/require smoke test, so Node
+  consumer support is verified from day one at the versions we actually
+  claim to support, not assumed.
 - `CONTRIBUTING.md`, issue/PR templates.
 - **Exit criteria**: `bun run build && bun test` succeed on a trivial
   placeholder module; both the Bun CI job and the Node smoke-test job are
@@ -547,22 +548,43 @@ agents rather than one agent working through resources serially.
    bundler; the published package still targets Node.js as a consumer
    runtime too (dual ESM/CJS, standard `fetch`), keeping the README's
    "framework agnostic" claim intact. Browser/edge/Deno support stays out
-   of scope unless you ask for it later. Still open: minimum Node LTS
-   version to guarantee in CI (default assumption: current Node LTS at
-   implementation time, revisit in Stage 0).
-4. **Live contract testing**: can you provide a Shippo test-mode API key
-   for Stage 5, or should live tests stay a documented-but-unused
-   scaffold?
-5. **OpenAPI spec access**: partially resolved. This sandbox still can't
-   reach `docs.goshippo.com` directly, but the third-party
-   `api-evangelist/shippo` GitHub mirror (§2) provides real OpenAPI YAML
-   for 9 of the in-scope resources (all of Stage 2, plus Carrier Accounts/
-   Refunds/Webhooks from Stage 3). The other 9 Stage-3 resources (Batches,
-   Customs Declarations/Items, Manifests, Orders, Pickups, Service Groups,
-   User/Carrier Parcel Templates, Rates at Checkout) still rely on
-   SDK-README inference only. If you can attach `public-api.yaml` directly
-   (or run a session with unblocked egress) before Stage 3, we can close
-   that remaining gap instead of inferring from SDK READMEs.
+   of scope unless you ask for it later.
+
+   Minimum Node LTS version — also resolved, with a caveat worth reading:
+   you proposed 18+ (or 20+ "if that poses a problem"). As of this
+   writing (Aug 2026), **both are already past end-of-life** — Node 18
+   EOL'd April 2025, and Node 20 EOL'd April 2026. The only currently-
+   maintained lines are **22** (maintenance LTS, supported to Apr 2027),
+   24 (active LTS), and 26 (current). Setting the floor at **Node 22+**
+   — the oldest still-patched LTS — rather than an already-unsupported
+   version. Nothing about the design requires 22 specifically (`fetch` has
+   worked since 18); this is purely "don't advertise support for a Node
+   version that no longer gets security fixes." Say so if you'd rather
+   accept that risk and keep the floor at 18 or 20 anyway (e.g. for
+   compatibility with environments you know are stuck there) — this is
+   what Stage 0 actually shipped: the Node smoke-test CI job matrixes
+   across Node 22 and 24.
+4. ~~**Live contract testing**~~ — resolved: you offered to provide a
+   Shippo test-mode API key when Stage 5 started. What actually shipped
+   in Stage 5 is a suite gated behind a local `SHIPPO_TEST_API_KEY`
+   environment variable (`bun run test:live`), not a CI secret — it's
+   never run in CI, by design, since it hits the real Shippo API rather
+   than a mock. The key itself hasn't been provided yet; see Stage 5's
+   section above for current status.
+5. ~~**OpenAPI spec access**~~ — resolved. This sandbox still can't reach
+   `docs.goshippo.com` directly, but the third-party `api-evangelist/shippo`
+   GitHub mirror (§2) provides real OpenAPI YAML for 9 of the in-scope
+   resources (all of Stage 2, plus Carrier Accounts/Refunds/Webhooks from
+   Stage 3), its AsyncAPI spec covers inbound webhook events, and the
+   resource inventory itself is independently confirmed across four
+   official SDKs (Python, JS, C#, plus the API version cross-check). That
+   was accepted as good enough to proceed, and Stage 3 shipped on that
+   basis: the remaining 9 Stage-3 resources (Batches, Customs
+   Declarations/Items, Manifests, Orders, Pickups, Service Groups, User/
+   Carrier Parcel Templates, Rates at Checkout) were typed from
+   SDK-README inference plus domain conventions, with every
+   real uncertainty flagged inline in the source (see Stage 3's section
+   above) rather than presented as verified.
 
 ## 7. Risks
 
