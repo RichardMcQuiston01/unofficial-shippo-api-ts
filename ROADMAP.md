@@ -1,14 +1,14 @@
 # Roadmap: `unofficial-shippo-api-ts`
 
-Status: **In progress.** Stages 0–4 are built: foundation/tooling, core HTTP client, all 19
-in-scope resources, and a full integration/consistency pass across them. Stage 5 (testing &
-validation hardening) is partially shipped — the live-contract scaffold exists and is
-documented, but hasn't been run against a real account yet (needs a test-mode API key). Stage
-6 (documentation & examples) is shipped — README, generated per-resource reference, and a
-runnable `examples/` directory now exist. Stage 7 (release engineering) is tooling-complete but
-**not yet live** — publishing is deliberately gated behind three manual steps a human has to
-take (see Stage 7's section). See each stage's section below for what shipped and what's still
-open.
+Status: **`v0.1.0` published to npm.** Stages 0–4 are built: foundation/tooling, core HTTP
+client, all 19 in-scope resources, and a full integration/consistency pass across them. Stage 5
+(testing & validation hardening) is partially shipped — the live-contract scaffold exists and
+is documented, but hasn't been run against a real account yet (needs a test-mode API key).
+Stage 6 (documentation & examples) is shipped — README, generated per-resource reference, and a
+runnable `examples/` directory now exist. Stage 7 (release engineering) is **fully shipped and
+live** — `@richardmcquiston01/shippo-api@0.1.0` is on the npm registry with provenance attached;
+see Stage 7's section for how the first release actually went (one manual workaround needed,
+now documented). See each stage's section below for what shipped and what's still open.
 
 ## 1. Goal
 
@@ -469,33 +469,39 @@ coherent:
 - Decide and document the semver policy (when 1.0.0 is warranted).
 - **Exit criteria**: `npm install <package>` works from the real registry;
   CI publishes on merge-to-main via changesets.
-- **Tooling-complete, deliberately not live yet.** `@richardmcquiston01/shippo-api` confirmed
-  unclaimed on the npm registry (a plain `GET` against `registry.npmjs.org` 404s). Changesets
+- **Shipped and live.** `@richardmcquiston01/shippo-api` confirmed unclaimed on the npm
+  registry ahead of time, then actually published: **`0.1.0` is live on npm**, with
+  [provenance](https://docs.npmjs.com/generating-provenance-statements) attached (visible on
+  the registry as an `attestations`/SLSA-provenance block on the published version). Changesets
   wired up (`.changeset/config.json`, `bun run changeset`/`version`/`release`), plus
   `.github/workflows/release.yml`: on push to `main`, runs the full `bun run ci` gate, then
   `changesets/action` either opens/updates a "Version Packages" PR or — once that PR is merged —
-  publishes to npm with provenance attached (OIDC `id-token: write`, `publishConfig.access`/
-  `provenance` in `package.json`) and pushes the release tag. Semver policy is documented in
-  `CONTRIBUTING.md`'s new "Releases" section (patch/minor while pre-1.0, per standard semver
-  below `1.0.0`; `1.0.0` itself gated on the live-contract suite actually having run against a
-  real account and any corrections it finds having shipped — not merely on these stages being
-  complete). An initial changeset queues the `0.0.0` → `0.1.0` bump.
+  publishes to npm and pushes the release tag. Semver policy is documented in
+  `CONTRIBUTING.md`'s "Releases" section (patch/minor while pre-1.0, per standard semver below
+  `1.0.0`; `1.0.0` itself gated on the live-contract suite actually having run against a real
+  account and any corrections it finds having shipped — not merely on these stages being
+  complete).
 
-  Exit criteria are **not** met yet, on purpose: `package.json` still has `"private": true`,
-  which makes Changesets refuse to version or publish the package even if the release workflow
-  ran right now — a deliberate safety gate, not an oversight. Three things remain, all
-  requiring a human, none of them things this session can or should do unprompted:
-  1. Add an `NPM_TOKEN` repository secret (an npm automation token scoped to publish under
-     `@richardmcquiston01`) — no tool available here can create GitHub repo secrets.
-  2. Merge `dev` into `main` (the two have never been merged; `main` is still the initial
-     scaffold commit) — the release workflow only triggers on pushes to `main`, by design, so
-     nothing publishes just because `dev` moves.
-  3. Remove `"private": true` from `package.json`, and confirm you're ready for the first
-     `npm install @richardmcquiston01/shippo-api` to actually work — this is the one genuinely
-     irreversible step in the list (an npm publish can be unpublished only within 72 hours and
-     with restrictions).
-  Once those three happen, pushing to `main` opens the "Version Packages" PR automatically;
-  merging *that* PR is what actually publishes 0.1.0.
+  Getting from "tooling built" to "actually live" needed three deliberate, explicitly
+  user-approved steps — an `NPM_TOKEN` repo secret, merging `dev` into `main` for the first
+  time (they'd never been merged), and removing `"private": true` — plus **one workaround for a
+  gap the tooling didn't anticipate**: the default `GITHUB_TOKEN` a workflow gets isn't
+  permitted to open pull requests unless *Settings → Actions → General → Workflow permissions →
+  "Allow GitHub Actions to create and approve pull requests"* is enabled on the repo, which it
+  wasn't. `release.yml`'s first run pushed the correct version-bump commit to a
+  `changeset-release/main` branch but then failed trying to open the PR from it; that PR
+  (`#13`) was opened by hand from the branch the workflow had already prepared, no code changes
+  needed. **Enable that repo setting to make future releases fully hands-off** — until then,
+  the same manual PR-open step will recur every release. Merging PR #13 triggered the actual
+  `changeset publish` on the following `release.yml` run, which succeeded.
+
+  One more one-time cleanup happened alongside this: `changeset version`'s auto-generated
+  `## 0.1.0` `CHANGELOG.md` section landed *above* the hand-written `## [Unreleased]` content
+  instead of folding into it — exactly the gap flagged in `CONTRIBUTING.md`'s "Releases"
+  section ahead of time. Reconciled by hand (renamed `[Unreleased]` to `0.1.0`, dropped the
+  thin auto-generated summary in favor of the existing detailed entries) before merging PR #13.
+  Every release after this one won't hit that specific issue, since `[Unreleased]` is now empty
+  and changesets owns each new version section from scratch.
 
 ### Stage 8 — Maintenance (ongoing, post-v0.1.0)
 - Watch Shippo's API changelog for breaking changes.
