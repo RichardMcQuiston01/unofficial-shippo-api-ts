@@ -1,5 +1,20 @@
 # CHANGELOG
 
+## 0.1.0
+
+### Minor Changes
+
+- [#10](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/pull/10) [`0187ee8`](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/commit/0187ee862263c6c890bfafeb0f5d1ffcd8a124f5) Thanks [@RichardMcQuiston01](https://github.com/RichardMcQuiston01)! - Initial release: a framework-agnostic TypeScript client for Shippo's shipping API.
+
+  Covers all 19 in-scope resources (Addresses, Parcels, Shipments, Rates, Transactions,
+  Tracking, Webhooks + inbound event parsing, Batches, Refunds, Customs Declarations, Customs
+  Items, Manifests, Orders, Carrier Accounts, Carrier/User Parcel Templates, Service Groups,
+  Pickups, Rates at Checkout) behind a single `Shippo` client, with dual ESM/CJS output, a typed
+  error hierarchy (`ShippoApiError` / `ShippoNetworkError`), automatic retry/backoff, pagination
+  helpers, generated per-resource API reference (`docs/reference/`), and runnable examples
+  covering address validation, the shipment-to-label happy path, tracking, and inbound webhook
+  handling. See `README.md` and `ROADMAP.md` for full details and known field-level caveats.
+
 All notable changes to this project are documented in this file.
 
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
