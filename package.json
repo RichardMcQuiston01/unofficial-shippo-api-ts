@@ -1,7 +1,6 @@
 {
   "name": "@richardmcquiston01/shippo-api",
   "version": "0.0.0",
-  "private": true,
   "description": "Framework agnostic TypeScript client for Shippo's shipping API.",
   "license": "Apache-2.0",
   "author": "Richard McQuiston",
