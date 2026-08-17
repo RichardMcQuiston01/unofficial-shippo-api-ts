@@ -127,3 +127,25 @@ unconfirmed field shapes) is still ahead.
     lack of webhook signature verification. `examples/README.md` indexes all five with run
     instructions; `tsconfig.json`'s `include` extended to cover `examples/` for
     typecheck/lint.
+- Release engineering (Stage 7 of `ROADMAP.md`):
+  - [Changesets](https://github.com/changesets/changesets) wired up for versioning and
+    publishing (`.changeset/config.json`, `bun run changeset`/`version`/`release` scripts),
+    configured for the `@richardmcquiston01` scope's public access and GitHub-linked changelog
+    entries going forward.
+  - `.github/workflows/release.yml`: on push to `main`, runs the full `bun run ci` suite, then
+    hands off to `changesets/action` to either open/update a "Version Packages" PR or publish
+    to npm with [provenance](https://docs.npmjs.com/generating-provenance-statements) attached
+    (`publishConfig.access`/`provenance` in `package.json`, an OIDC `id-token: write`
+    permission, no long-lived publish token beyond the `NPM_TOKEN` secret used for npm
+    authentication itself).
+  - Confirmed `@richardmcquiston01/shippo-api` is unclaimed on the npm registry.
+  - Semver policy documented in `CONTRIBUTING.md`'s new "Releases" section: patch for
+    fixes/internal changes, minor for both new features and breaking changes while pre-1.0
+    (standard semver behavior below `1.0.0`), major reserved until `1.0.0` — which itself is
+    reserved for once the live-contract suite has actually run against a real account and any
+    corrections it surfaces have shipped, not merely once the roadmap's stages are complete.
+  - An initial changeset (`.changeset/initial-release.md`) queued for the `0.1.0` bump.
+    `package.json` still has `"private": true` by design — Changesets refuses to version or
+    publish a private package, so nothing above can actually publish until that's deliberately
+    removed as an explicit, separate step (see `ROADMAP.md`'s Stage 7 section for what's still
+    manual: adding the `NPM_TOKEN` secret, merging `dev` into `main`, and flipping `private`).

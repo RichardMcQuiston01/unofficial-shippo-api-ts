@@ -5,8 +5,10 @@ in-scope resources, and a full integration/consistency pass across them. Stage 5
 validation hardening) is partially shipped — the live-contract scaffold exists and is
 documented, but hasn't been run against a real account yet (needs a test-mode API key). Stage
 6 (documentation & examples) is shipped — README, generated per-resource reference, and a
-runnable `examples/` directory now exist. See each stage's section below for what shipped and
-what's still open.
+runnable `examples/` directory now exist. Stage 7 (release engineering) is tooling-complete but
+**not yet live** — publishing is deliberately gated behind three manual steps a human has to
+take (see Stage 7's section). See each stage's section below for what shipped and what's still
+open.
 
 ## 1. Goal
 
@@ -467,6 +469,33 @@ coherent:
 - Decide and document the semver policy (when 1.0.0 is warranted).
 - **Exit criteria**: `npm install <package>` works from the real registry;
   CI publishes on merge-to-main via changesets.
+- **Tooling-complete, deliberately not live yet.** `@richardmcquiston01/shippo-api` confirmed
+  unclaimed on the npm registry (a plain `GET` against `registry.npmjs.org` 404s). Changesets
+  wired up (`.changeset/config.json`, `bun run changeset`/`version`/`release`), plus
+  `.github/workflows/release.yml`: on push to `main`, runs the full `bun run ci` gate, then
+  `changesets/action` either opens/updates a "Version Packages" PR or — once that PR is merged —
+  publishes to npm with provenance attached (OIDC `id-token: write`, `publishConfig.access`/
+  `provenance` in `package.json`) and pushes the release tag. Semver policy is documented in
+  `CONTRIBUTING.md`'s new "Releases" section (patch/minor while pre-1.0, per standard semver
+  below `1.0.0`; `1.0.0` itself gated on the live-contract suite actually having run against a
+  real account and any corrections it finds having shipped — not merely on these stages being
+  complete). An initial changeset queues the `0.0.0` → `0.1.0` bump.
+
+  Exit criteria are **not** met yet, on purpose: `package.json` still has `"private": true`,
+  which makes Changesets refuse to version or publish the package even if the release workflow
+  ran right now — a deliberate safety gate, not an oversight. Three things remain, all
+  requiring a human, none of them things this session can or should do unprompted:
+  1. Add an `NPM_TOKEN` repository secret (an npm automation token scoped to publish under
+     `@richardmcquiston01`) — no tool available here can create GitHub repo secrets.
+  2. Merge `dev` into `main` (the two have never been merged; `main` is still the initial
+     scaffold commit) — the release workflow only triggers on pushes to `main`, by design, so
+     nothing publishes just because `dev` moves.
+  3. Remove `"private": true` from `package.json`, and confirm you're ready for the first
+     `npm install @richardmcquiston01/shippo-api` to actually work — this is the one genuinely
+     irreversible step in the list (an npm publish can be unpublished only within 72 hours and
+     with restrictions).
+  Once those three happen, pushing to `main` opens the "Version Packages" PR automatically;
+  merging *that* PR is what actually publishes 0.1.0.
 
 ### Stage 8 — Maintenance (ongoing, post-v0.1.0)
 - Watch Shippo's API changelog for breaking changes.
