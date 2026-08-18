@@ -6,7 +6,7 @@
 
 # Interface: ListQuery
 
-Defined in: [pagination.ts:20](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/pagination.ts#L20)
+Defined in: [pagination.ts:20](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/pagination.ts#L20)
 
 Standard query params accepted by every `list()` method. The index
 signature (rather than just `page`/`results`) is what lets this satisfy
@@ -22,7 +22,7 @@ signature (rather than just `page`/`results`) is what lets this satisfy
 
 > `optional` **page?**: `number`
 
-Defined in: [pagination.ts:21](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/pagination.ts#L21)
+Defined in: [pagination.ts:21](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/pagination.ts#L21)
 
 ***
 
@@ -30,4 +30,4 @@ Defined in: [pagination.ts:21](https://github.com/RichardMcQuiston01/unofficial-
 
 > `optional` **results?**: `number`
 
-Defined in: [pagination.ts:22](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/pagination.ts#L22)
+Defined in: [pagination.ts:22](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/pagination.ts#L22)

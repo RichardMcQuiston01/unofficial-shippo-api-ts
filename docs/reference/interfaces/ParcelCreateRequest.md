@@ -6,7 +6,7 @@
 
 # Interface: ParcelCreateRequest
 
-Defined in: [resources/parcels.ts:21](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/parcels.ts#L21)
+Defined in: [resources/parcels.ts:21](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/parcels.ts#L21)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [resources/parcels.ts:21](https://github.com/RichardMcQuiston01/unof
 
 > **distance\_unit**: [`DistanceUnit`](../type-aliases/DistanceUnit.md)
 
-Defined in: [resources/parcels.ts:25](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/parcels.ts#L25)
+Defined in: [resources/parcels.ts:25](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/parcels.ts#L25)
 
 ***
 
@@ -22,7 +22,7 @@ Defined in: [resources/parcels.ts:25](https://github.com/RichardMcQuiston01/unof
 
 > **height**: `string`
 
-Defined in: [resources/parcels.ts:24](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/parcels.ts#L24)
+Defined in: [resources/parcels.ts:24](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/parcels.ts#L24)
 
 ***
 
@@ -30,7 +30,7 @@ Defined in: [resources/parcels.ts:24](https://github.com/RichardMcQuiston01/unof
 
 > **length**: `string`
 
-Defined in: [resources/parcels.ts:22](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/parcels.ts#L22)
+Defined in: [resources/parcels.ts:22](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/parcels.ts#L22)
 
 ***
 
@@ -38,7 +38,7 @@ Defined in: [resources/parcels.ts:22](https://github.com/RichardMcQuiston01/unof
 
 > **mass\_unit**: [`MassUnit`](../type-aliases/MassUnit.md)
 
-Defined in: [resources/parcels.ts:27](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/parcels.ts#L27)
+Defined in: [resources/parcels.ts:27](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/parcels.ts#L27)
 
 ***
 
@@ -46,7 +46,7 @@ Defined in: [resources/parcels.ts:27](https://github.com/RichardMcQuiston01/unof
 
 > `optional` **template?**: `string`
 
-Defined in: [resources/parcels.ts:28](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/parcels.ts#L28)
+Defined in: [resources/parcels.ts:28](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/parcels.ts#L28)
 
 ***
 
@@ -54,7 +54,7 @@ Defined in: [resources/parcels.ts:28](https://github.com/RichardMcQuiston01/unof
 
 > **weight**: `string`
 
-Defined in: [resources/parcels.ts:26](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/parcels.ts#L26)
+Defined in: [resources/parcels.ts:26](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/parcels.ts#L26)
 
 ***
 
@@ -62,4 +62,4 @@ Defined in: [resources/parcels.ts:26](https://github.com/RichardMcQuiston01/unof
 
 > **width**: `string`
 
-Defined in: [resources/parcels.ts:23](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/parcels.ts#L23)
+Defined in: [resources/parcels.ts:23](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/parcels.ts#L23)

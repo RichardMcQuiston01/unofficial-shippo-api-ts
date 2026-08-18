@@ -6,7 +6,7 @@
 
 # Class: CarrierParcelTemplatesResource
 
-Defined in: [resources/carrier-parcel-templates.ts:30](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/carrier-parcel-templates.ts#L30)
+Defined in: [resources/carrier-parcel-templates.ts:30](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/carrier-parcel-templates.ts#L30)
 
 ## Constructors
 
@@ -14,7 +14,7 @@ Defined in: [resources/carrier-parcel-templates.ts:30](https://github.com/Richar
 
 > **new CarrierParcelTemplatesResource**(`client`): `CarrierParcelTemplatesResource`
 
-Defined in: [resources/carrier-parcel-templates.ts:31](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/carrier-parcel-templates.ts#L31)
+Defined in: [resources/carrier-parcel-templates.ts:31](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/carrier-parcel-templates.ts#L31)
 
 #### Parameters
 
@@ -32,7 +32,7 @@ Defined in: [resources/carrier-parcel-templates.ts:31](https://github.com/Richar
 
 > **get**(`carrierParcelTemplateId`): `Promise`\<[`CarrierParcelTemplate`](../interfaces/CarrierParcelTemplate.md)\>
 
-Defined in: [resources/carrier-parcel-templates.ts:55](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/carrier-parcel-templates.ts#L55)
+Defined in: [resources/carrier-parcel-templates.ts:55](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/carrier-parcel-templates.ts#L55)
 
 Retrieves a single carrier parcel template by its ID.
 
@@ -55,7 +55,7 @@ Retrieves a single carrier parcel template by its ID.
 
 > **list**(`query?`): `Promise`\<[`PaginatedList`](../interfaces/PaginatedList.md)\<[`CarrierParcelTemplate`](../interfaces/CarrierParcelTemplate.md)\>\>
 
-Defined in: [resources/carrier-parcel-templates.ts:41](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/carrier-parcel-templates.ts#L41)
+Defined in: [resources/carrier-parcel-templates.ts:41](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/carrier-parcel-templates.ts#L41)
 
 Retrieves a single page of carrier-predefined parcel templates.
 

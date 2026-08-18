@@ -6,7 +6,7 @@
 
 # Interface: CarrierAccountCreateRequest
 
-Defined in: [resources/carrier-accounts.ts:26](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/carrier-accounts.ts#L26)
+Defined in: [resources/carrier-accounts.ts:26](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/carrier-accounts.ts#L26)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [resources/carrier-accounts.ts:26](https://github.com/RichardMcQuist
 
 > **account\_id**: `string`
 
-Defined in: [resources/carrier-accounts.ts:28](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/carrier-accounts.ts#L28)
+Defined in: [resources/carrier-accounts.ts:28](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/carrier-accounts.ts#L28)
 
 ***
 
@@ -22,7 +22,7 @@ Defined in: [resources/carrier-accounts.ts:28](https://github.com/RichardMcQuist
 
 > `optional` **active?**: `boolean`
 
-Defined in: [resources/carrier-accounts.ts:30](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/carrier-accounts.ts#L30)
+Defined in: [resources/carrier-accounts.ts:30](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/carrier-accounts.ts#L30)
 
 ***
 
@@ -30,7 +30,7 @@ Defined in: [resources/carrier-accounts.ts:30](https://github.com/RichardMcQuist
 
 > **carrier**: `string`
 
-Defined in: [resources/carrier-accounts.ts:27](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/carrier-accounts.ts#L27)
+Defined in: [resources/carrier-accounts.ts:27](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/carrier-accounts.ts#L27)
 
 ***
 
@@ -38,4 +38,4 @@ Defined in: [resources/carrier-accounts.ts:27](https://github.com/RichardMcQuist
 
 > `optional` **parameters?**: [`CarrierAccountParameters`](../type-aliases/CarrierAccountParameters.md)
 
-Defined in: [resources/carrier-accounts.ts:29](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/carrier-accounts.ts#L29)
+Defined in: [resources/carrier-accounts.ts:29](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/carrier-accounts.ts#L29)

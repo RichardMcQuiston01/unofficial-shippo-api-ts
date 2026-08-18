@@ -6,7 +6,7 @@
 
 # Class: AddressesResource
 
-Defined in: [resources/addresses.ts:57](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/addresses.ts#L57)
+Defined in: [resources/addresses.ts:57](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/addresses.ts#L57)
 
 ## Constructors
 
@@ -14,7 +14,7 @@ Defined in: [resources/addresses.ts:57](https://github.com/RichardMcQuiston01/un
 
 > **new AddressesResource**(`client`): `AddressesResource`
 
-Defined in: [resources/addresses.ts:58](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/addresses.ts#L58)
+Defined in: [resources/addresses.ts:58](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/addresses.ts#L58)
 
 #### Parameters
 
@@ -32,7 +32,7 @@ Defined in: [resources/addresses.ts:58](https://github.com/RichardMcQuiston01/un
 
 > **create**(`request`): `Promise`\<[`Address`](../interfaces/Address.md)\>
 
-Defined in: [resources/addresses.ts:61](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/addresses.ts#L61)
+Defined in: [resources/addresses.ts:61](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/addresses.ts#L61)
 
 Creates a new address for use in shipments, rates, and orders.
 
@@ -52,7 +52,7 @@ Creates a new address for use in shipments, rates, and orders.
 
 > **get**(`addressId`): `Promise`\<[`Address`](../interfaces/Address.md)\>
 
-Defined in: [resources/addresses.ts:71](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/addresses.ts#L71)
+Defined in: [resources/addresses.ts:71](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/addresses.ts#L71)
 
 Retrieves a single address by its object ID.
 
@@ -72,7 +72,7 @@ Retrieves a single address by its object ID.
 
 > **list**(`query?`): `Promise`\<[`PaginatedList`](../interfaces/PaginatedList.md)\<[`Address`](../interfaces/Address.md)\>\>
 
-Defined in: [resources/addresses.ts:66](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/addresses.ts#L66)
+Defined in: [resources/addresses.ts:66](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/addresses.ts#L66)
 
 Retrieves a single page of previously created addresses.
 
@@ -92,7 +92,7 @@ Retrieves a single page of previously created addresses.
 
 > **validate**(`addressId`): `Promise`\<[`Address`](../interfaces/Address.md)\>
 
-Defined in: [resources/addresses.ts:76](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/addresses.ts#L76)
+Defined in: [resources/addresses.ts:76](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/addresses.ts#L76)
 
 Validates an existing address and returns it with `validation_results` populated.
 

@@ -6,7 +6,7 @@
 
 # Interface: CarrierParcelTemplate
 
-Defined in: [resources/carrier-parcel-templates.ts:18](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/carrier-parcel-templates.ts#L18)
+Defined in: [resources/carrier-parcel-templates.ts:18](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/carrier-parcel-templates.ts#L18)
 
 A Shippo/carrier-predefined parcel template (e.g. "USPS Small Flat Rate
 Box") — read-only presets, distinct from `UserParcelTemplate`
@@ -26,7 +26,7 @@ optional, until confirmed.
 
 > `optional` **carrier?**: `string`
 
-Defined in: [resources/carrier-parcel-templates.ts:23](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/carrier-parcel-templates.ts#L23)
+Defined in: [resources/carrier-parcel-templates.ts:23](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/carrier-parcel-templates.ts#L23)
 
 ***
 
@@ -34,7 +34,7 @@ Defined in: [resources/carrier-parcel-templates.ts:23](https://github.com/Richar
 
 > `optional` **distance\_unit?**: [`DistanceUnit`](../type-aliases/DistanceUnit.md)
 
-Defined in: [resources/carrier-parcel-templates.ts:27](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/carrier-parcel-templates.ts#L27)
+Defined in: [resources/carrier-parcel-templates.ts:27](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/carrier-parcel-templates.ts#L27)
 
 ***
 
@@ -42,7 +42,7 @@ Defined in: [resources/carrier-parcel-templates.ts:27](https://github.com/Richar
 
 > `optional` **height?**: `string`
 
-Defined in: [resources/carrier-parcel-templates.ts:26](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/carrier-parcel-templates.ts#L26)
+Defined in: [resources/carrier-parcel-templates.ts:26](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/carrier-parcel-templates.ts#L26)
 
 ***
 
@@ -50,7 +50,7 @@ Defined in: [resources/carrier-parcel-templates.ts:26](https://github.com/Richar
 
 > `optional` **length?**: `string`
 
-Defined in: [resources/carrier-parcel-templates.ts:24](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/carrier-parcel-templates.ts#L24)
+Defined in: [resources/carrier-parcel-templates.ts:24](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/carrier-parcel-templates.ts#L24)
 
 ***
 
@@ -58,7 +58,7 @@ Defined in: [resources/carrier-parcel-templates.ts:24](https://github.com/Richar
 
 > `optional` **name?**: `string`
 
-Defined in: [resources/carrier-parcel-templates.ts:22](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/carrier-parcel-templates.ts#L22)
+Defined in: [resources/carrier-parcel-templates.ts:22](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/carrier-parcel-templates.ts#L22)
 
 ***
 
@@ -66,7 +66,7 @@ Defined in: [resources/carrier-parcel-templates.ts:22](https://github.com/Richar
 
 > `optional` **object\_id?**: `string`
 
-Defined in: [resources/carrier-parcel-templates.ts:19](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/carrier-parcel-templates.ts#L19)
+Defined in: [resources/carrier-parcel-templates.ts:19](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/carrier-parcel-templates.ts#L19)
 
 ***
 
@@ -74,7 +74,7 @@ Defined in: [resources/carrier-parcel-templates.ts:19](https://github.com/Richar
 
 > `optional` **token?**: `string`
 
-Defined in: [resources/carrier-parcel-templates.ts:21](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/carrier-parcel-templates.ts#L21)
+Defined in: [resources/carrier-parcel-templates.ts:21](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/carrier-parcel-templates.ts#L21)
 
 Alternate identifier some Shippo template objects use instead of `object_id`. Unconfirmed which applies here.
 
@@ -84,4 +84,4 @@ Alternate identifier some Shippo template objects use instead of `object_id`. Un
 
 > `optional` **width?**: `string`
 
-Defined in: [resources/carrier-parcel-templates.ts:25](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/carrier-parcel-templates.ts#L25)
+Defined in: [resources/carrier-parcel-templates.ts:25](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/carrier-parcel-templates.ts#L25)

@@ -8,7 +8,7 @@
 
 > **BatchShipmentIds** = `string`[]
 
-Defined in: [resources/batches.ts:86](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/batches.ts#L86)
+Defined in: [resources/batches.ts:86](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/batches.ts#L86)
 
 Best-effort request/response path for `add_shipments`/`remove_shipments`
 — endpoint existence is cross-referenced across three official SDKs

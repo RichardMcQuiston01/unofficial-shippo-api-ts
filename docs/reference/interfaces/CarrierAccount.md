@@ -6,7 +6,7 @@
 
 # Interface: CarrierAccount
 
-Defined in: [resources/carrier-accounts.ts:13](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/carrier-accounts.ts#L13)
+Defined in: [resources/carrier-accounts.ts:13](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/carrier-accounts.ts#L13)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [resources/carrier-accounts.ts:13](https://github.com/RichardMcQuist
 
 > `optional` **account\_id?**: `string`
 
-Defined in: [resources/carrier-accounts.ts:18](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/carrier-accounts.ts#L18)
+Defined in: [resources/carrier-accounts.ts:18](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/carrier-accounts.ts#L18)
 
 The account ID/number with that carrier.
 
@@ -24,7 +24,7 @@ The account ID/number with that carrier.
 
 > `optional` **active?**: `boolean`
 
-Defined in: [resources/carrier-accounts.ts:19](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/carrier-accounts.ts#L19)
+Defined in: [resources/carrier-accounts.ts:19](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/carrier-accounts.ts#L19)
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: [resources/carrier-accounts.ts:19](https://github.com/RichardMcQuist
 
 > `optional` **carrier?**: `string`
 
-Defined in: [resources/carrier-accounts.ts:16](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/carrier-accounts.ts#L16)
+Defined in: [resources/carrier-accounts.ts:16](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/carrier-accounts.ts#L16)
 
 Carrier token, e.g. `"usps"`, `"ups"`, `"fedex"`. Not a fixed enum — the full carrier list isn't confirmed.
 
@@ -42,7 +42,7 @@ Carrier token, e.g. `"usps"`, `"ups"`, `"fedex"`. Not a fixed enum — the full 
 
 > `optional` **object\_created?**: `string`
 
-Defined in: [resources/carrier-accounts.ts:22](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/carrier-accounts.ts#L22)
+Defined in: [resources/carrier-accounts.ts:22](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/carrier-accounts.ts#L22)
 
 ***
 
@@ -50,7 +50,7 @@ Defined in: [resources/carrier-accounts.ts:22](https://github.com/RichardMcQuist
 
 > `optional` **object\_id?**: `string`
 
-Defined in: [resources/carrier-accounts.ts:14](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/carrier-accounts.ts#L14)
+Defined in: [resources/carrier-accounts.ts:14](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/carrier-accounts.ts#L14)
 
 ***
 
@@ -58,7 +58,7 @@ Defined in: [resources/carrier-accounts.ts:14](https://github.com/RichardMcQuist
 
 > `optional` **object\_updated?**: `string`
 
-Defined in: [resources/carrier-accounts.ts:23](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/carrier-accounts.ts#L23)
+Defined in: [resources/carrier-accounts.ts:23](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/carrier-accounts.ts#L23)
 
 ***
 
@@ -66,7 +66,7 @@ Defined in: [resources/carrier-accounts.ts:23](https://github.com/RichardMcQuist
 
 > `optional` **parameters?**: [`CarrierAccountParameters`](../type-aliases/CarrierAccountParameters.md)
 
-Defined in: [resources/carrier-accounts.ts:21](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/carrier-accounts.ts#L21)
+Defined in: [resources/carrier-accounts.ts:21](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/carrier-accounts.ts#L21)
 
 ***
 
@@ -74,4 +74,4 @@ Defined in: [resources/carrier-accounts.ts:21](https://github.com/RichardMcQuist
 
 > `optional` **test?**: `boolean`
 
-Defined in: [resources/carrier-accounts.ts:20](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/carrier-accounts.ts#L20)
+Defined in: [resources/carrier-accounts.ts:20](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/carrier-accounts.ts#L20)

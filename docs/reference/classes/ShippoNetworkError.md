@@ -6,7 +6,7 @@
 
 # Class: ShippoNetworkError
 
-Defined in: [errors.ts:58](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/errors.ts#L58)
+Defined in: [errors.ts:58](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/errors.ts#L58)
 
 Thrown for failures that never got an HTTP response at all — the
 request timed out, the network dropped, DNS failed, etc. Distinct from
@@ -23,7 +23,7 @@ request timed out, the network dropped, DNS failed, etc. Distinct from
 
 > **new ShippoNetworkError**(`message`, `options?`): `ShippoNetworkError`
 
-Defined in: [errors.ts:59](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/errors.ts#L59)
+Defined in: [errors.ts:59](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/errors.ts#L59)
 
 #### Parameters
 

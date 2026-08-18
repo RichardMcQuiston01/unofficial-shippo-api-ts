@@ -5,6 +5,8 @@
  * (Platform API, Shippo Accounts).
  */
 
+import { version as packageVersion } from "../package.json";
+
 import { ShippoClient, type ShippoClientOptions } from "./client";
 import { AddressesResource } from "./resources/addresses";
 import { BatchesResource } from "./resources/batches";
@@ -26,7 +28,8 @@ import { TransactionsResource } from "./resources/transactions";
 import { UserParcelTemplatesResource } from "./resources/user-parcel-templates";
 import { WebhooksResource } from "./resources/webhooks";
 
-export const SDK_VERSION = "0.0.0";
+/** This package's own version, read from `package.json` so it can't drift out of sync. */
+export const SDK_VERSION: string = packageVersion;
 
 export type { HttpMethod, RequestOptions, ShippoClientOptions } from "./client";
 export { ShippoClient } from "./client";

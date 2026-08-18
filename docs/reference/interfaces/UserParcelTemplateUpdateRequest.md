@@ -6,7 +6,7 @@
 
 # Interface: UserParcelTemplateUpdateRequest
 
-Defined in: [resources/user-parcel-templates.ts:38](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/user-parcel-templates.ts#L38)
+Defined in: [resources/user-parcel-templates.ts:38](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/user-parcel-templates.ts#L38)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [resources/user-parcel-templates.ts:38](https://github.com/RichardMc
 
 > `optional` **distance\_unit?**: [`DistanceUnit`](../type-aliases/DistanceUnit.md)
 
-Defined in: [resources/user-parcel-templates.ts:43](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/user-parcel-templates.ts#L43)
+Defined in: [resources/user-parcel-templates.ts:43](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/user-parcel-templates.ts#L43)
 
 ***
 
@@ -22,7 +22,7 @@ Defined in: [resources/user-parcel-templates.ts:43](https://github.com/RichardMc
 
 > `optional` **height?**: `string`
 
-Defined in: [resources/user-parcel-templates.ts:42](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/user-parcel-templates.ts#L42)
+Defined in: [resources/user-parcel-templates.ts:42](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/user-parcel-templates.ts#L42)
 
 ***
 
@@ -30,7 +30,7 @@ Defined in: [resources/user-parcel-templates.ts:42](https://github.com/RichardMc
 
 > `optional` **length?**: `string`
 
-Defined in: [resources/user-parcel-templates.ts:40](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/user-parcel-templates.ts#L40)
+Defined in: [resources/user-parcel-templates.ts:40](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/user-parcel-templates.ts#L40)
 
 ***
 
@@ -38,7 +38,7 @@ Defined in: [resources/user-parcel-templates.ts:40](https://github.com/RichardMc
 
 > `optional` **mass\_unit?**: [`MassUnit`](../type-aliases/MassUnit.md)
 
-Defined in: [resources/user-parcel-templates.ts:45](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/user-parcel-templates.ts#L45)
+Defined in: [resources/user-parcel-templates.ts:45](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/user-parcel-templates.ts#L45)
 
 ***
 
@@ -46,7 +46,7 @@ Defined in: [resources/user-parcel-templates.ts:45](https://github.com/RichardMc
 
 > `optional` **name?**: `string`
 
-Defined in: [resources/user-parcel-templates.ts:39](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/user-parcel-templates.ts#L39)
+Defined in: [resources/user-parcel-templates.ts:39](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/user-parcel-templates.ts#L39)
 
 ***
 
@@ -54,7 +54,7 @@ Defined in: [resources/user-parcel-templates.ts:39](https://github.com/RichardMc
 
 > `optional` **weight?**: `string`
 
-Defined in: [resources/user-parcel-templates.ts:44](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/user-parcel-templates.ts#L44)
+Defined in: [resources/user-parcel-templates.ts:44](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/user-parcel-templates.ts#L44)
 
 ***
 
@@ -62,4 +62,4 @@ Defined in: [resources/user-parcel-templates.ts:44](https://github.com/RichardMc
 
 > `optional` **width?**: `string`
 
-Defined in: [resources/user-parcel-templates.ts:41](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/user-parcel-templates.ts#L41)
+Defined in: [resources/user-parcel-templates.ts:41](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/user-parcel-templates.ts#L41)
