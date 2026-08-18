@@ -6,6 +6,8 @@
 
 # Variable: SDK\_VERSION
 
-> `const` **SDK\_VERSION**: `"0.0.0"` = `"0.0.0"`
+> `const` **SDK\_VERSION**: `string` = `packageVersion`
 
-Defined in: [index.ts:29](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/index.ts#L29)
+Defined in: [index.ts:32](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/index.ts#L32)
+
+This package's own version, read from `package.json` so it can't drift out of sync.

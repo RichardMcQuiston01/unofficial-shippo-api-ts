@@ -8,7 +8,7 @@
 
 > **ServiceGroupRateService** = `Record`\<`string`, `unknown`\> & `object`
 
-Defined in: [resources/service-groups.ts:11](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/service-groups.ts#L11)
+Defined in: [resources/service-groups.ts:11](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/service-groups.ts#L11)
 
 A single carrier service level entry within a service group's selection.
 **Unconfirmed / best effort**: this is the least-confirmed part of this

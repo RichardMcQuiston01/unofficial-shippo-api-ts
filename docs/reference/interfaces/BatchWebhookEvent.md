@@ -6,7 +6,7 @@
 
 # Interface: BatchWebhookEvent
 
-Defined in: [resources/webhooks.ts:111](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/webhooks.ts#L111)
+Defined in: [resources/webhooks.ts:111](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/webhooks.ts#L111)
 
 Envelope Shippo POSTs to a registered webhook URL for a `batch_created` or
 `batch_purchased` event. `data`'s shape (`Batch`) carries the same
@@ -19,7 +19,7 @@ from the AsyncAPI spec, but not independently confirmed field-by-field.
 
 > **data**: [`Batch`](Batch.md)
 
-Defined in: [resources/webhooks.ts:114](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/webhooks.ts#L114)
+Defined in: [resources/webhooks.ts:114](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/webhooks.ts#L114)
 
 ***
 
@@ -27,7 +27,7 @@ Defined in: [resources/webhooks.ts:114](https://github.com/RichardMcQuiston01/un
 
 > **event**: `"batch_created"` \| `"batch_purchased"`
 
-Defined in: [resources/webhooks.ts:112](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/webhooks.ts#L112)
+Defined in: [resources/webhooks.ts:112](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/webhooks.ts#L112)
 
 ***
 
@@ -35,4 +35,4 @@ Defined in: [resources/webhooks.ts:112](https://github.com/RichardMcQuiston01/un
 
 > **test**: `boolean`
 
-Defined in: [resources/webhooks.ts:113](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/webhooks.ts#L113)
+Defined in: [resources/webhooks.ts:113](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/webhooks.ts#L113)

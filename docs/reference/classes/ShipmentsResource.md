@@ -6,7 +6,7 @@
 
 # Class: ShipmentsResource
 
-Defined in: [resources/shipments.ts:48](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/shipments.ts#L48)
+Defined in: [resources/shipments.ts:48](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/shipments.ts#L48)
 
 ## Constructors
 
@@ -14,7 +14,7 @@ Defined in: [resources/shipments.ts:48](https://github.com/RichardMcQuiston01/un
 
 > **new ShipmentsResource**(`client`): `ShipmentsResource`
 
-Defined in: [resources/shipments.ts:49](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/shipments.ts#L49)
+Defined in: [resources/shipments.ts:49](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/shipments.ts#L49)
 
 #### Parameters
 
@@ -32,7 +32,7 @@ Defined in: [resources/shipments.ts:49](https://github.com/RichardMcQuiston01/un
 
 > **create**(`request`): `Promise`\<[`Shipment`](../interfaces/Shipment.md)\>
 
-Defined in: [resources/shipments.ts:52](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/shipments.ts#L52)
+Defined in: [resources/shipments.ts:52](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/shipments.ts#L52)
 
 Creates a shipment from a from/to address and one or more parcels, computing rates.
 
@@ -52,7 +52,7 @@ Creates a shipment from a from/to address and one or more parcels, computing rat
 
 > **get**(`shipmentId`): `Promise`\<[`Shipment`](../interfaces/Shipment.md)\>
 
-Defined in: [resources/shipments.ts:62](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/shipments.ts#L62)
+Defined in: [resources/shipments.ts:62](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/shipments.ts#L62)
 
 Retrieves a single shipment by its object ID.
 
@@ -72,7 +72,7 @@ Retrieves a single shipment by its object ID.
 
 > **list**(`query?`): `Promise`\<[`PaginatedList`](../interfaces/PaginatedList.md)\<[`Shipment`](../interfaces/Shipment.md)\>\>
 
-Defined in: [resources/shipments.ts:57](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/shipments.ts#L57)
+Defined in: [resources/shipments.ts:57](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/shipments.ts#L57)
 
 Retrieves a single page of previously created shipments.
 

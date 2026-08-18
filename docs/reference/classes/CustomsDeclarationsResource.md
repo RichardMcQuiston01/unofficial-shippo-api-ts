@@ -6,7 +6,7 @@
 
 # Class: CustomsDeclarationsResource
 
-Defined in: [resources/customs-declarations.ts:50](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/customs-declarations.ts#L50)
+Defined in: [resources/customs-declarations.ts:50](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/customs-declarations.ts#L50)
 
 ## Constructors
 
@@ -14,7 +14,7 @@ Defined in: [resources/customs-declarations.ts:50](https://github.com/RichardMcQ
 
 > **new CustomsDeclarationsResource**(`client`): `CustomsDeclarationsResource`
 
-Defined in: [resources/customs-declarations.ts:51](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/customs-declarations.ts#L51)
+Defined in: [resources/customs-declarations.ts:51](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/customs-declarations.ts#L51)
 
 #### Parameters
 
@@ -32,7 +32,7 @@ Defined in: [resources/customs-declarations.ts:51](https://github.com/RichardMcQ
 
 > **create**(`request`): `Promise`\<[`CustomsDeclaration`](../interfaces/CustomsDeclaration.md)\>
 
-Defined in: [resources/customs-declarations.ts:54](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/customs-declarations.ts#L54)
+Defined in: [resources/customs-declarations.ts:54](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/customs-declarations.ts#L54)
 
 Creates a new customs declaration from one or more customs items.
 
@@ -52,7 +52,7 @@ Creates a new customs declaration from one or more customs items.
 
 > **get**(`customsDeclarationId`): `Promise`\<[`CustomsDeclaration`](../interfaces/CustomsDeclaration.md)\>
 
-Defined in: [resources/customs-declarations.ts:68](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/customs-declarations.ts#L68)
+Defined in: [resources/customs-declarations.ts:68](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/customs-declarations.ts#L68)
 
 Retrieves a single customs declaration by its object ID.
 
@@ -72,7 +72,7 @@ Retrieves a single customs declaration by its object ID.
 
 > **list**(`query?`): `Promise`\<[`PaginatedList`](../interfaces/PaginatedList.md)\<[`CustomsDeclaration`](../interfaces/CustomsDeclaration.md)\>\>
 
-Defined in: [resources/customs-declarations.ts:61](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/customs-declarations.ts#L61)
+Defined in: [resources/customs-declarations.ts:61](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/customs-declarations.ts#L61)
 
 Retrieves a single page of previously created customs declarations.
 

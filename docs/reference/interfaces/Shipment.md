@@ -6,7 +6,7 @@
 
 # Interface: Shipment
 
-Defined in: [resources/shipments.ts:18](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/shipments.ts#L18)
+Defined in: [resources/shipments.ts:18](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/shipments.ts#L18)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [resources/shipments.ts:18](https://github.com/RichardMcQuiston01/un
 
 > **address\_from**: [`Address`](Address.md)
 
-Defined in: [resources/shipments.ts:21](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/shipments.ts#L21)
+Defined in: [resources/shipments.ts:21](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/shipments.ts#L21)
 
 ***
 
@@ -22,7 +22,7 @@ Defined in: [resources/shipments.ts:21](https://github.com/RichardMcQuiston01/un
 
 > `optional` **address\_return?**: [`Address`](Address.md)
 
-Defined in: [resources/shipments.ts:23](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/shipments.ts#L23)
+Defined in: [resources/shipments.ts:23](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/shipments.ts#L23)
 
 ***
 
@@ -30,7 +30,7 @@ Defined in: [resources/shipments.ts:23](https://github.com/RichardMcQuiston01/un
 
 > **address\_to**: [`Address`](Address.md)
 
-Defined in: [resources/shipments.ts:22](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/shipments.ts#L22)
+Defined in: [resources/shipments.ts:22](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/shipments.ts#L22)
 
 ***
 
@@ -38,7 +38,7 @@ Defined in: [resources/shipments.ts:22](https://github.com/RichardMcQuiston01/un
 
 > `optional` **extra?**: [`ShipmentExtra`](../type-aliases/ShipmentExtra.md)
 
-Defined in: [resources/shipments.ts:27](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/shipments.ts#L27)
+Defined in: [resources/shipments.ts:27](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/shipments.ts#L27)
 
 ***
 
@@ -46,7 +46,7 @@ Defined in: [resources/shipments.ts:27](https://github.com/RichardMcQuiston01/un
 
 > `optional` **metadata?**: `string`
 
-Defined in: [resources/shipments.ts:28](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/shipments.ts#L28)
+Defined in: [resources/shipments.ts:28](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/shipments.ts#L28)
 
 ***
 
@@ -54,7 +54,7 @@ Defined in: [resources/shipments.ts:28](https://github.com/RichardMcQuiston01/un
 
 > **object\_created**: `string`
 
-Defined in: [resources/shipments.ts:29](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/shipments.ts#L29)
+Defined in: [resources/shipments.ts:29](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/shipments.ts#L29)
 
 ***
 
@@ -62,7 +62,7 @@ Defined in: [resources/shipments.ts:29](https://github.com/RichardMcQuiston01/un
 
 > **object\_id**: `string`
 
-Defined in: [resources/shipments.ts:19](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/shipments.ts#L19)
+Defined in: [resources/shipments.ts:19](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/shipments.ts#L19)
 
 ***
 
@@ -70,7 +70,7 @@ Defined in: [resources/shipments.ts:19](https://github.com/RichardMcQuiston01/un
 
 > **object\_updated**: `string`
 
-Defined in: [resources/shipments.ts:30](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/shipments.ts#L30)
+Defined in: [resources/shipments.ts:30](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/shipments.ts#L30)
 
 ***
 
@@ -78,7 +78,7 @@ Defined in: [resources/shipments.ts:30](https://github.com/RichardMcQuiston01/un
 
 > **parcels**: [`Parcel`](Parcel.md)[]
 
-Defined in: [resources/shipments.ts:24](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/shipments.ts#L24)
+Defined in: [resources/shipments.ts:24](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/shipments.ts#L24)
 
 ***
 
@@ -86,7 +86,7 @@ Defined in: [resources/shipments.ts:24](https://github.com/RichardMcQuiston01/un
 
 > `optional` **rates?**: [`Rate`](Rate.md)[]
 
-Defined in: [resources/shipments.ts:26](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/shipments.ts#L26)
+Defined in: [resources/shipments.ts:26](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/shipments.ts#L26)
 
 Populated once rates have been computed (synchronously, unless `async` was set).
 
@@ -96,4 +96,4 @@ Populated once rates have been computed (synchronously, unless `async` was set).
 
 > **status**: [`ShipmentStatus`](../type-aliases/ShipmentStatus.md)
 
-Defined in: [resources/shipments.ts:20](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/shipments.ts#L20)
+Defined in: [resources/shipments.ts:20](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/shipments.ts#L20)

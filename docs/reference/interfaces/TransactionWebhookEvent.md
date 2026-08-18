@@ -6,7 +6,7 @@
 
 # Interface: TransactionWebhookEvent
 
-Defined in: [resources/webhooks.ts:91](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/webhooks.ts#L91)
+Defined in: [resources/webhooks.ts:91](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/webhooks.ts#L91)
 
 Envelope Shippo POSTs to a registered webhook URL for a `transaction_created`
 or `transaction_updated` event.
@@ -17,7 +17,7 @@ or `transaction_updated` event.
 
 > **data**: [`Transaction`](Transaction.md)
 
-Defined in: [resources/webhooks.ts:95](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/webhooks.ts#L95)
+Defined in: [resources/webhooks.ts:95](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/webhooks.ts#L95)
 
 ***
 
@@ -25,7 +25,7 @@ Defined in: [resources/webhooks.ts:95](https://github.com/RichardMcQuiston01/uno
 
 > **event**: `"transaction_created"` \| `"transaction_updated"`
 
-Defined in: [resources/webhooks.ts:92](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/webhooks.ts#L92)
+Defined in: [resources/webhooks.ts:92](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/webhooks.ts#L92)
 
 ***
 
@@ -33,6 +33,6 @@ Defined in: [resources/webhooks.ts:92](https://github.com/RichardMcQuiston01/uno
 
 > **test**: `boolean`
 
-Defined in: [resources/webhooks.ts:94](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/webhooks.ts#L94)
+Defined in: [resources/webhooks.ts:94](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/webhooks.ts#L94)
 
 Distinguishes sandbox/test-mode deliveries from real ones.

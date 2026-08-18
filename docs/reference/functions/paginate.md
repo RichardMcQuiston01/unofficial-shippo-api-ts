@@ -8,7 +8,7 @@
 
 > **paginate**\<`T`\>(`client`, `path`, `query?`): `AsyncGenerator`\<`T`, `void`, `void`\>
 
-Defined in: [pagination.ts:36](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/pagination.ts#L36)
+Defined in: [pagination.ts:36](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/pagination.ts#L36)
 
 Iterates every item across every page of a list endpoint, following
 `next` until it's `null`. One HTTP request per page, made lazily as the

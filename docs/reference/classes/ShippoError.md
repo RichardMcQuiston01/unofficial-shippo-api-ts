@@ -6,7 +6,7 @@
 
 # Class: ShippoError
 
-Defined in: [errors.ts:6](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/errors.ts#L6)
+Defined in: [errors.ts:6](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/errors.ts#L6)
 
 Base class for every error this package throws. Lets consumers write a
 single `catch (err) { if (err instanceof ShippoError) ... }` guard rather
@@ -27,7 +27,7 @@ than checking multiple unrelated error types.
 
 > **new ShippoError**(`message`, `options?`): `ShippoError`
 
-Defined in: [errors.ts:7](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/errors.ts#L7)
+Defined in: [errors.ts:7](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/errors.ts#L7)
 
 #### Parameters
 

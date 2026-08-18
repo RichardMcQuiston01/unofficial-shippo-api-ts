@@ -6,7 +6,7 @@
 
 # Interface: Webhook
 
-Defined in: [resources/webhooks.ts:28](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/webhooks.ts#L28)
+Defined in: [resources/webhooks.ts:28](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/webhooks.ts#L28)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [resources/webhooks.ts:28](https://github.com/RichardMcQuiston01/uno
 
 > `optional` **active?**: `boolean`
 
-Defined in: [resources/webhooks.ts:33](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/webhooks.ts#L33)
+Defined in: [resources/webhooks.ts:33](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/webhooks.ts#L33)
 
 ***
 
@@ -22,7 +22,7 @@ Defined in: [resources/webhooks.ts:33](https://github.com/RichardMcQuiston01/uno
 
 > `optional` **event?**: [`WebhookEventType`](../type-aliases/WebhookEventType.md)
 
-Defined in: [resources/webhooks.ts:32](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/webhooks.ts#L32)
+Defined in: [resources/webhooks.ts:32](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/webhooks.ts#L32)
 
 Each webhook subscribes to exactly one event, not an array.
 
@@ -32,7 +32,7 @@ Each webhook subscribes to exactly one event, not an array.
 
 > `optional` **is\_test?**: `boolean`
 
-Defined in: [resources/webhooks.ts:34](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/webhooks.ts#L34)
+Defined in: [resources/webhooks.ts:34](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/webhooks.ts#L34)
 
 ***
 
@@ -40,7 +40,7 @@ Defined in: [resources/webhooks.ts:34](https://github.com/RichardMcQuiston01/uno
 
 > `optional` **object\_created?**: `string`
 
-Defined in: [resources/webhooks.ts:35](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/webhooks.ts#L35)
+Defined in: [resources/webhooks.ts:35](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/webhooks.ts#L35)
 
 ***
 
@@ -48,7 +48,7 @@ Defined in: [resources/webhooks.ts:35](https://github.com/RichardMcQuiston01/uno
 
 > `optional` **object\_id?**: `string`
 
-Defined in: [resources/webhooks.ts:29](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/webhooks.ts#L29)
+Defined in: [resources/webhooks.ts:29](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/webhooks.ts#L29)
 
 ***
 
@@ -56,7 +56,7 @@ Defined in: [resources/webhooks.ts:29](https://github.com/RichardMcQuiston01/uno
 
 > `optional` **object\_updated?**: `string`
 
-Defined in: [resources/webhooks.ts:36](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/webhooks.ts#L36)
+Defined in: [resources/webhooks.ts:36](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/webhooks.ts#L36)
 
 ***
 
@@ -64,4 +64,4 @@ Defined in: [resources/webhooks.ts:36](https://github.com/RichardMcQuiston01/uno
 
 > `optional` **url?**: `string`
 
-Defined in: [resources/webhooks.ts:30](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/webhooks.ts#L30)
+Defined in: [resources/webhooks.ts:30](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/webhooks.ts#L30)

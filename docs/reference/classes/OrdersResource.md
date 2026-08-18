@@ -6,7 +6,7 @@
 
 # Class: OrdersResource
 
-Defined in: [resources/orders.ts:75](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/orders.ts#L75)
+Defined in: [resources/orders.ts:75](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/orders.ts#L75)
 
 ## Constructors
 
@@ -14,7 +14,7 @@ Defined in: [resources/orders.ts:75](https://github.com/RichardMcQuiston01/unoff
 
 > **new OrdersResource**(`client`): `OrdersResource`
 
-Defined in: [resources/orders.ts:76](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/orders.ts#L76)
+Defined in: [resources/orders.ts:76](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/orders.ts#L76)
 
 #### Parameters
 
@@ -32,7 +32,7 @@ Defined in: [resources/orders.ts:76](https://github.com/RichardMcQuiston01/unoff
 
 > **create**(`request`): `Promise`\<[`Order`](../interfaces/Order.md)\>
 
-Defined in: [resources/orders.ts:79](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/orders.ts#L79)
+Defined in: [resources/orders.ts:79](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/orders.ts#L79)
 
 Creates a new order representing an e-commerce order to be fulfilled.
 
@@ -52,7 +52,7 @@ Creates a new order representing an e-commerce order to be fulfilled.
 
 > **get**(`orderId`): `Promise`\<[`Order`](../interfaces/Order.md)\>
 
-Defined in: [resources/orders.ts:89](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/orders.ts#L89)
+Defined in: [resources/orders.ts:89](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/orders.ts#L89)
 
 Retrieves a single order by its object ID.
 
@@ -72,7 +72,7 @@ Retrieves a single order by its object ID.
 
 > **list**(`query?`): `Promise`\<[`PaginatedList`](../interfaces/PaginatedList.md)\<[`Order`](../interfaces/Order.md)\>\>
 
-Defined in: [resources/orders.ts:84](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/orders.ts#L84)
+Defined in: [resources/orders.ts:84](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/orders.ts#L84)
 
 Retrieves a single page of previously created orders.
 

@@ -6,7 +6,7 @@
 
 # Class: ManifestsResource
 
-Defined in: [resources/manifests.ts:50](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/manifests.ts#L50)
+Defined in: [resources/manifests.ts:50](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/manifests.ts#L50)
 
 ## Constructors
 
@@ -14,7 +14,7 @@ Defined in: [resources/manifests.ts:50](https://github.com/RichardMcQuiston01/un
 
 > **new ManifestsResource**(`client`): `ManifestsResource`
 
-Defined in: [resources/manifests.ts:51](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/manifests.ts#L51)
+Defined in: [resources/manifests.ts:51](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/manifests.ts#L51)
 
 #### Parameters
 
@@ -32,7 +32,7 @@ Defined in: [resources/manifests.ts:51](https://github.com/RichardMcQuiston01/un
 
 > **create**(`request`): `Promise`\<[`Manifest`](../interfaces/Manifest.md)\>
 
-Defined in: [resources/manifests.ts:54](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/manifests.ts#L54)
+Defined in: [resources/manifests.ts:54](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/manifests.ts#L54)
 
 Creates a new manifest consolidating transactions for carrier pickup.
 
@@ -52,7 +52,7 @@ Creates a new manifest consolidating transactions for carrier pickup.
 
 > **get**(`manifestId`): `Promise`\<[`Manifest`](../interfaces/Manifest.md)\>
 
-Defined in: [resources/manifests.ts:64](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/manifests.ts#L64)
+Defined in: [resources/manifests.ts:64](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/manifests.ts#L64)
 
 Retrieves a single manifest by its object ID.
 
@@ -72,7 +72,7 @@ Retrieves a single manifest by its object ID.
 
 > **list**(`query?`): `Promise`\<[`PaginatedList`](../interfaces/PaginatedList.md)\<[`Manifest`](../interfaces/Manifest.md)\>\>
 
-Defined in: [resources/manifests.ts:59](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/manifests.ts#L59)
+Defined in: [resources/manifests.ts:59](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/manifests.ts#L59)
 
 Retrieves a single page of previously created manifests.
 
