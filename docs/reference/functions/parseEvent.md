@@ -8,7 +8,7 @@
 
 > **parseEvent**(`rawBody`): [`ShippoWebhookEvent`](../type-aliases/ShippoWebhookEvent.md)
 
-Defined in: [resources/webhooks.ts:144](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/webhooks.ts#L144)
+Defined in: [resources/webhooks.ts:144](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/webhooks.ts#L144)
 
 Parses a raw webhook delivery body into a correctly-typed
 `ShippoWebhookEvent`. Accepts either a raw JSON string or an

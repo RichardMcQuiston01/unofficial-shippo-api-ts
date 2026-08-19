@@ -6,7 +6,7 @@
 
 # Interface: WebhookUpdateRequest
 
-Defined in: [resources/webhooks.ts:52](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/webhooks.ts#L52)
+Defined in: [resources/webhooks.ts:52](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/webhooks.ts#L52)
 
 `PUT /webhooks/{WebhookId}` request body. Same shape as
 `WebhookCreateRequest` with every field optional, since none of the
@@ -20,7 +20,7 @@ inventing a bespoke pattern.
 
 > `optional` **active?**: `boolean`
 
-Defined in: [resources/webhooks.ts:55](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/webhooks.ts#L55)
+Defined in: [resources/webhooks.ts:55](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/webhooks.ts#L55)
 
 ***
 
@@ -28,7 +28,7 @@ Defined in: [resources/webhooks.ts:55](https://github.com/RichardMcQuiston01/uno
 
 > `optional` **event?**: [`WebhookEventType`](../type-aliases/WebhookEventType.md)
 
-Defined in: [resources/webhooks.ts:54](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/webhooks.ts#L54)
+Defined in: [resources/webhooks.ts:54](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/webhooks.ts#L54)
 
 ***
 
@@ -36,4 +36,4 @@ Defined in: [resources/webhooks.ts:54](https://github.com/RichardMcQuiston01/uno
 
 > `optional` **url?**: `string`
 
-Defined in: [resources/webhooks.ts:53](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/webhooks.ts#L53)
+Defined in: [resources/webhooks.ts:53](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/webhooks.ts#L53)

@@ -6,7 +6,7 @@
 
 # Class: RatesResource
 
-Defined in: [resources/rates.ts:37](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/rates.ts#L37)
+Defined in: [resources/rates.ts:37](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/rates.ts#L37)
 
 ## Constructors
 
@@ -14,7 +14,7 @@ Defined in: [resources/rates.ts:37](https://github.com/RichardMcQuiston01/unoffi
 
 > **new RatesResource**(`client`): `RatesResource`
 
-Defined in: [resources/rates.ts:38](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/rates.ts#L38)
+Defined in: [resources/rates.ts:38](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/rates.ts#L38)
 
 #### Parameters
 
@@ -32,7 +32,7 @@ Defined in: [resources/rates.ts:38](https://github.com/RichardMcQuiston01/unoffi
 
 > **get**(`rateId`): `Promise`\<[`Rate`](../interfaces/Rate.md)\>
 
-Defined in: [resources/rates.ts:41](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/rates.ts#L41)
+Defined in: [resources/rates.ts:41](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/rates.ts#L41)
 
 Retrieves a single previously-computed rate by its object ID.
 
@@ -52,7 +52,7 @@ Retrieves a single previously-computed rate by its object ID.
 
 > **listForShipment**(`shipmentId`): `Promise`\<[`RateList`](../interfaces/RateList.md)\>
 
-Defined in: [resources/rates.ts:46](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/rates.ts#L46)
+Defined in: [resources/rates.ts:46](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/rates.ts#L46)
 
 Retrieves all rates computed for a shipment.
 
@@ -72,7 +72,7 @@ Retrieves all rates computed for a shipment.
 
 > **listForShipmentByCurrency**(`shipmentId`, `currencyCode`): `Promise`\<[`RateList`](../interfaces/RateList.md)\>
 
-Defined in: [resources/rates.ts:51](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/rates.ts#L51)
+Defined in: [resources/rates.ts:51](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/rates.ts#L51)
 
 Retrieves a shipment's rates converted to the given ISO 4217 currency code.
 

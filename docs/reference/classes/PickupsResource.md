@@ -6,7 +6,7 @@
 
 # Class: PickupsResource
 
-Defined in: [resources/pickups.ts:67](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/pickups.ts#L67)
+Defined in: [resources/pickups.ts:67](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/pickups.ts#L67)
 
 ## Constructors
 
@@ -14,7 +14,7 @@ Defined in: [resources/pickups.ts:67](https://github.com/RichardMcQuiston01/unof
 
 > **new PickupsResource**(`client`): `PickupsResource`
 
-Defined in: [resources/pickups.ts:68](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/pickups.ts#L68)
+Defined in: [resources/pickups.ts:68](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/pickups.ts#L68)
 
 #### Parameters
 
@@ -32,7 +32,7 @@ Defined in: [resources/pickups.ts:68](https://github.com/RichardMcQuiston01/unof
 
 > **create**(`request`): `Promise`\<[`Pickup`](../interfaces/Pickup.md)\>
 
-Defined in: [resources/pickups.ts:71](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/pickups.ts#L71)
+Defined in: [resources/pickups.ts:71](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/pickups.ts#L71)
 
 Requests a carrier pickup for one or more previously purchased transactions.
 

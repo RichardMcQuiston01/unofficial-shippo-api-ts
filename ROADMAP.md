@@ -419,14 +419,38 @@ coherent:
   errors to observe real error bodies, `list()` smoke checks across 8
   no-spec resources, and standalone creates for Customs Items, User
   Parcel Templates, and Webhooks (with cleanup where reversible).
-  **Not yet run against a real account** — the user offered a test-mode
-  key back when this stage was scoped; asked again when this stage
-  actually started. If/when it runs, update this entry with what the
-  live spot-check confirmed or corrected. Known gaps in the scaffold
-  itself (documented in the file and in `CONTRIBUTING.md`): Batches,
-  Pickups, Carrier Accounts' three OAuth2 methods, Customs Declarations,
-  and Rates at Checkout aren't exercised — left as a template to extend
-  rather than a finished suite.
+  **Run against a real test-mode account** (hotfix/live-contract-fixes
+  branch) — 3 of 9 tests failed on the first run; the failures were real
+  contract mismatches, since fixed:
+  - `UserParcelTemplatesResource` and `CarrierParcelTemplatesResource`
+    guessed underscored paths (`/user_parcel_templates`,
+    `/carrier_parcel_templates`) that both 404 live; the real paths are
+    `/user-parcel-templates` (hyphenated) and `/parcel-templates`
+    (not `carrier`-prefixed at all).
+  - `ServiceGroupsResource` had the same underscore-vs-hyphen bug
+    (`/service_groups` → `/service-groups`), plus a second, unrelated
+    mismatch: its `list()` response is a bare JSON array, not any kind of
+    `{results: [...]}` envelope — `list()` no longer takes a `ListQuery`
+    (there's nothing to paginate).
+  - `UserParcelTemplate`'s weight-unit field is `weight_unit`, not
+    `mass_unit` as guessed by analogy to `Parcel` — `create()` 400s live
+    otherwise.
+  - `AddressesResource#validate()` returns an `Address` with a
+    *different* `object_id` than the one passed in (Shippo returns a
+    separate validated record rather than mutating in place) — doc
+    comment and test assertion corrected.
+  - The no-spec resources' `list()` envelopes are inconsistent about
+    `count`/`next`/`previous` (`customsDeclarations` omits `count`
+    entirely) and `results` can be `null` instead of `[]` when empty
+    (`userParcelTemplates`) — added `UnconfirmedPaginatedList<T>`
+    (`src/pagination.ts`, exported from the package root) for the 7
+    no-spec resources with a `list()` method, in place of the
+    spec-backed `PaginatedList<T>`.
+  All 9 live-contract tests pass after these fixes. Known gaps in the
+  scaffold itself (documented in the file and in `CONTRIBUTING.md`):
+  Batches, Pickups, Carrier Accounts' three OAuth2 methods, and Rates at
+  Checkout aren't exercised — left as a template to extend rather than a
+  finished suite.
 
 ### Stage 6 — Documentation & examples
 - README: install, quickstart, auth, error handling.

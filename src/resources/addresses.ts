@@ -72,7 +72,16 @@ export class AddressesResource {
     return this.client.request<Address>("GET", `/addresses/${addressId}`);
   }
 
-  /** Validates an existing address and returns it with `validation_results` populated. */
+  /**
+   * Validates an existing address and returns the validated result with
+   * `validation_results` populated.
+   *
+   * **Confirmed** by live-contract testing (ROADMAP.md Stage 5): the
+   * returned `Address` can have a *different* `object_id` than the one
+   * passed in — Shippo appears to return a separate validated record
+   * rather than mutating the original in place. Don't assume the returned
+   * `object_id` matches `addressId`.
+   */
   async validate(addressId: string): Promise<Address> {
     return this.client.request<Address>("GET", `/addresses/${addressId}/validate`);
   }

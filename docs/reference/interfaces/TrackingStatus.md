@@ -6,7 +6,7 @@
 
 # Interface: TrackingStatus
 
-Defined in: [resources/tracking.ts:22](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/tracking.ts#L22)
+Defined in: [resources/tracking.ts:22](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/tracking.ts#L22)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [resources/tracking.ts:22](https://github.com/RichardMcQuiston01/uno
 
 > `optional` **address\_from?**: [`Address`](Address.md)
 
-Defined in: [resources/tracking.ts:25](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/tracking.ts#L25)
+Defined in: [resources/tracking.ts:25](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/tracking.ts#L25)
 
 ***
 
@@ -22,7 +22,7 @@ Defined in: [resources/tracking.ts:25](https://github.com/RichardMcQuiston01/uno
 
 > `optional` **address\_to?**: [`Address`](Address.md)
 
-Defined in: [resources/tracking.ts:26](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/tracking.ts#L26)
+Defined in: [resources/tracking.ts:26](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/tracking.ts#L26)
 
 ***
 
@@ -30,7 +30,7 @@ Defined in: [resources/tracking.ts:26](https://github.com/RichardMcQuiston01/uno
 
 > `optional` **carrier?**: `string`
 
-Defined in: [resources/tracking.ts:23](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/tracking.ts#L23)
+Defined in: [resources/tracking.ts:23](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/tracking.ts#L23)
 
 ***
 
@@ -38,7 +38,7 @@ Defined in: [resources/tracking.ts:23](https://github.com/RichardMcQuiston01/uno
 
 > `optional` **eta?**: `string`
 
-Defined in: [resources/tracking.ts:30](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/tracking.ts#L30)
+Defined in: [resources/tracking.ts:30](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/tracking.ts#L30)
 
 ***
 
@@ -46,7 +46,7 @@ Defined in: [resources/tracking.ts:30](https://github.com/RichardMcQuiston01/uno
 
 > `optional` **original\_eta?**: `string`
 
-Defined in: [resources/tracking.ts:29](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/tracking.ts#L29)
+Defined in: [resources/tracking.ts:29](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/tracking.ts#L29)
 
 ***
 
@@ -54,7 +54,7 @@ Defined in: [resources/tracking.ts:29](https://github.com/RichardMcQuiston01/uno
 
 > `optional` **servicelevel?**: [`ServiceLevel`](ServiceLevel.md)
 
-Defined in: [resources/tracking.ts:31](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/tracking.ts#L31)
+Defined in: [resources/tracking.ts:31](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/tracking.ts#L31)
 
 ***
 
@@ -62,7 +62,7 @@ Defined in: [resources/tracking.ts:31](https://github.com/RichardMcQuiston01/uno
 
 > `optional` **tracking\_history?**: [`TrackingStatusDetail`](TrackingStatusDetail.md)[]
 
-Defined in: [resources/tracking.ts:33](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/tracking.ts#L33)
+Defined in: [resources/tracking.ts:33](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/tracking.ts#L33)
 
 ***
 
@@ -70,7 +70,7 @@ Defined in: [resources/tracking.ts:33](https://github.com/RichardMcQuiston01/uno
 
 > `optional` **tracking\_number?**: `string`
 
-Defined in: [resources/tracking.ts:24](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/tracking.ts#L24)
+Defined in: [resources/tracking.ts:24](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/tracking.ts#L24)
 
 ***
 
@@ -78,7 +78,7 @@ Defined in: [resources/tracking.ts:24](https://github.com/RichardMcQuiston01/uno
 
 > `optional` **tracking\_status?**: [`TrackingStatusDetail`](TrackingStatusDetail.md)
 
-Defined in: [resources/tracking.ts:32](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/tracking.ts#L32)
+Defined in: [resources/tracking.ts:32](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/tracking.ts#L32)
 
 ***
 
@@ -86,6 +86,6 @@ Defined in: [resources/tracking.ts:32](https://github.com/RichardMcQuiston01/uno
 
 > `optional` **transaction?**: `string`
 
-Defined in: [resources/tracking.ts:28](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/tracking.ts#L28)
+Defined in: [resources/tracking.ts:28](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/tracking.ts#L28)
 
 Object ID of the transaction (label purchase) this tracking status is for, if any.

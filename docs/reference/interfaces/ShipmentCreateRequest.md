@@ -6,7 +6,7 @@
 
 # Interface: ShipmentCreateRequest
 
-Defined in: [resources/shipments.ts:33](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/shipments.ts#L33)
+Defined in: [resources/shipments.ts:33](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/shipments.ts#L33)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [resources/shipments.ts:33](https://github.com/RichardMcQuiston01/un
 
 > **address\_from**: `string` \| [`AddressCreateRequest`](AddressCreateRequest.md)
 
-Defined in: [resources/shipments.ts:35](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/shipments.ts#L35)
+Defined in: [resources/shipments.ts:35](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/shipments.ts#L35)
 
 An existing address object ID, or inline data to create one.
 
@@ -24,7 +24,7 @@ An existing address object ID, or inline data to create one.
 
 > `optional` **address\_return?**: `string` \| [`AddressCreateRequest`](AddressCreateRequest.md)
 
-Defined in: [resources/shipments.ts:39](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/shipments.ts#L39)
+Defined in: [resources/shipments.ts:39](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/shipments.ts#L39)
 
 An existing address object ID, or inline data to create one.
 
@@ -34,7 +34,7 @@ An existing address object ID, or inline data to create one.
 
 > **address\_to**: `string` \| [`AddressCreateRequest`](AddressCreateRequest.md)
 
-Defined in: [resources/shipments.ts:37](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/shipments.ts#L37)
+Defined in: [resources/shipments.ts:37](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/shipments.ts#L37)
 
 An existing address object ID, or inline data to create one.
 
@@ -44,7 +44,7 @@ An existing address object ID, or inline data to create one.
 
 > `optional` **async?**: `boolean`
 
-Defined in: [resources/shipments.ts:45](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/shipments.ts#L45)
+Defined in: [resources/shipments.ts:45](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/shipments.ts#L45)
 
 If true, rates are computed asynchronously rather than in the response.
 
@@ -54,7 +54,7 @@ If true, rates are computed asynchronously rather than in the response.
 
 > `optional` **extra?**: [`ShipmentExtra`](../type-aliases/ShipmentExtra.md)
 
-Defined in: [resources/shipments.ts:42](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/shipments.ts#L42)
+Defined in: [resources/shipments.ts:42](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/shipments.ts#L42)
 
 ***
 
@@ -62,7 +62,7 @@ Defined in: [resources/shipments.ts:42](https://github.com/RichardMcQuiston01/un
 
 > `optional` **metadata?**: `string`
 
-Defined in: [resources/shipments.ts:43](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/shipments.ts#L43)
+Defined in: [resources/shipments.ts:43](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/shipments.ts#L43)
 
 ***
 
@@ -70,6 +70,6 @@ Defined in: [resources/shipments.ts:43](https://github.com/RichardMcQuiston01/un
 
 > **parcels**: (`string` \| [`ParcelCreateRequest`](ParcelCreateRequest.md))[]
 
-Defined in: [resources/shipments.ts:41](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/shipments.ts#L41)
+Defined in: [resources/shipments.ts:41](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/shipments.ts#L41)
 
 Existing parcel object IDs, or inline data to create them.

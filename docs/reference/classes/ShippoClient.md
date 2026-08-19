@@ -6,7 +6,7 @@
 
 # Class: ShippoClient
 
-Defined in: [client.ts:38](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/client.ts#L38)
+Defined in: [client.ts:38](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/client.ts#L38)
 
 ## Constructors
 
@@ -14,7 +14,7 @@ Defined in: [client.ts:38](https://github.com/RichardMcQuiston01/unofficial-ship
 
 > **new ShippoClient**(`options`): `ShippoClient`
 
-Defined in: [client.ts:48](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/client.ts#L48)
+Defined in: [client.ts:48](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/client.ts#L48)
 
 #### Parameters
 
@@ -32,7 +32,7 @@ Defined in: [client.ts:48](https://github.com/RichardMcQuiston01/unofficial-ship
 
 > `readonly` **baseUrl**: `string`
 
-Defined in: [client.ts:39](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/client.ts#L39)
+Defined in: [client.ts:39](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/client.ts#L39)
 
 ## Methods
 
@@ -40,7 +40,7 @@ Defined in: [client.ts:39](https://github.com/RichardMcQuiston01/unofficial-ship
 
 > **request**\<`T`\>(`method`, `path`, `options?`): `Promise`\<`T`\>
 
-Defined in: [client.ts:62](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/client.ts#L62)
+Defined in: [client.ts:62](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/client.ts#L62)
 
 #### Type Parameters
 

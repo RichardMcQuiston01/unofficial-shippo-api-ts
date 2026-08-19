@@ -34,7 +34,7 @@ export const SDK_VERSION: string = packageVersion;
 export type { HttpMethod, RequestOptions, ShippoClientOptions } from "./client";
 export { ShippoClient } from "./client";
 export { ShippoApiError, ShippoError, ShippoNetworkError } from "./errors";
-export type { ListQuery, PaginatedList } from "./pagination";
+export type { ListQuery, PaginatedList, UnconfirmedPaginatedList } from "./pagination";
 export { paginate } from "./pagination";
 
 export type {

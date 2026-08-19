@@ -6,7 +6,7 @@
 
 # Class: CarrierAccountsResource
 
-Defined in: [resources/carrier-accounts.ts:59](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/carrier-accounts.ts#L59)
+Defined in: [resources/carrier-accounts.ts:59](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/carrier-accounts.ts#L59)
 
 ## Constructors
 
@@ -14,7 +14,7 @@ Defined in: [resources/carrier-accounts.ts:59](https://github.com/RichardMcQuist
 
 > **new CarrierAccountsResource**(`client`): `CarrierAccountsResource`
 
-Defined in: [resources/carrier-accounts.ts:60](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/carrier-accounts.ts#L60)
+Defined in: [resources/carrier-accounts.ts:60](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/carrier-accounts.ts#L60)
 
 #### Parameters
 
@@ -32,7 +32,7 @@ Defined in: [resources/carrier-accounts.ts:60](https://github.com/RichardMcQuist
 
 > **create**(`request`): `Promise`\<[`CarrierAccount`](../interfaces/CarrierAccount.md)\>
 
-Defined in: [resources/carrier-accounts.ts:70](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/carrier-accounts.ts#L70)
+Defined in: [resources/carrier-accounts.ts:70](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/carrier-accounts.ts#L70)
 
 Connects a carrier account to this Shippo account using explicit credentials.
 
@@ -52,7 +52,7 @@ Connects a carrier account to this Shippo account using explicit credentials.
 
 > **get**(`carrierAccountId`): `Promise`\<[`CarrierAccount`](../interfaces/CarrierAccount.md)\>
 
-Defined in: [resources/carrier-accounts.ts:75](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/carrier-accounts.ts#L75)
+Defined in: [resources/carrier-accounts.ts:75](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/carrier-accounts.ts#L75)
 
 Retrieves a single carrier account by its object ID.
 
@@ -72,7 +72,7 @@ Retrieves a single carrier account by its object ID.
 
 > **getRegistrationStatus**(`carrierAccountId`): `Promise`\<[`CarrierAccountRegistrationStatus`](../interfaces/CarrierAccountRegistrationStatus.md)\>
 
-Defined in: [resources/carrier-accounts.ts:134](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/carrier-accounts.ts#L134)
+Defined in: [resources/carrier-accounts.ts:134](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/carrier-accounts.ts#L134)
 
 Checks the registration/verification status of a carrier account
 connected via `register` or `initiateOauth2Signin`.
@@ -97,7 +97,7 @@ method inventory alone.
 
 > **initiateOauth2Signin**(`carrier`, `request?`): `Promise`\<[`CarrierAccountOauth2SigninResult`](../interfaces/CarrierAccountOauth2SigninResult.md)\>
 
-Defined in: [resources/carrier-accounts.ts:101](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/carrier-accounts.ts#L101)
+Defined in: [resources/carrier-accounts.ts:101](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/carrier-accounts.ts#L101)
 
 Starts the OAuth2 Authorization Code flow for connecting a carrier
 account (e.g. UPS) without handling raw credentials directly, returning
@@ -130,7 +130,7 @@ advisory pending confirmation against a real account.
 
 > **list**(`query?`): `Promise`\<[`PaginatedList`](../interfaces/PaginatedList.md)\<[`CarrierAccount`](../interfaces/CarrierAccount.md)\>\>
 
-Defined in: [resources/carrier-accounts.ts:63](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/carrier-accounts.ts#L63)
+Defined in: [resources/carrier-accounts.ts:63](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/carrier-accounts.ts#L63)
 
 Retrieves a single page of carrier accounts connected to this Shippo account.
 
@@ -150,7 +150,7 @@ Retrieves a single page of carrier accounts connected to this Shippo account.
 
 > **register**(`carrier`, `request?`): `Promise`\<[`CarrierAccount`](../interfaces/CarrierAccount.md)\>
 
-Defined in: [resources/carrier-accounts.ts:120](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/carrier-accounts.ts#L120)
+Defined in: [resources/carrier-accounts.ts:120](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/carrier-accounts.ts#L120)
 
 Registers a carrier account outside the OAuth2 flow (e.g. submitting
 carrier credentials directly for registration/verification).
@@ -179,7 +179,7 @@ method inventory alone.
 
 > **update**(`carrierAccountId`, `request`): `Promise`\<[`CarrierAccount`](../interfaces/CarrierAccount.md)\>
 
-Defined in: [resources/carrier-accounts.ts:80](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/carrier-accounts.ts#L80)
+Defined in: [resources/carrier-accounts.ts:80](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/carrier-accounts.ts#L80)
 
 Updates an existing carrier account, e.g. to toggle `active` or rotate credentials.
 

@@ -12,22 +12,18 @@ const SAMPLE_SERVICE_GROUP = {
 };
 
 describe("ServiceGroupsResource", () => {
-  test("list() gets /service_groups with query params and returns a page", async () => {
-    const { fetch, calls } = createMockFetch(() => ({
-      body: { count: 1, next: null, previous: null, results: [SAMPLE_SERVICE_GROUP] },
-    }));
+  test("list() gets /service-groups and returns the bare array of groups", async () => {
+    const { fetch, calls } = createMockFetch(() => ({ body: [SAMPLE_SERVICE_GROUP] }));
     const serviceGroups = new ServiceGroupsResource(new ShippoClient({ apiKey: "key", fetch }));
 
-    const page = await serviceGroups.list({ page: 1, results: 5 });
+    const groups = await serviceGroups.list();
 
-    expect(page.results).toEqual([SAMPLE_SERVICE_GROUP]);
+    expect(groups).toEqual([SAMPLE_SERVICE_GROUP]);
     const url = new URL(calls[0]?.url ?? "");
-    expect(url.pathname).toBe("/service_groups");
-    expect(url.searchParams.get("page")).toBe("1");
-    expect(url.searchParams.get("results")).toBe("5");
+    expect(url.pathname).toBe("/service-groups");
   });
 
-  test("create() posts to /service_groups and returns the created group", async () => {
+  test("create() posts to /service-groups and returns the created group", async () => {
     const { fetch, calls } = createMockFetch(() => ({
       status: 201,
       body: SAMPLE_SERVICE_GROUP,
@@ -40,11 +36,11 @@ describe("ServiceGroupsResource", () => {
     });
 
     expect(result).toEqual(SAMPLE_SERVICE_GROUP);
-    expect(calls[0]?.url).toBe("https://api.goshippo.com/service_groups");
+    expect(calls[0]?.url).toBe("https://api.goshippo.com/service-groups");
     expect(calls[0]?.method).toBe("POST");
   });
 
-  test("update() puts to /service_groups/{id} and returns the updated group", async () => {
+  test("update() puts to /service-groups/{id} and returns the updated group", async () => {
     const updated = { ...SAMPLE_SERVICE_GROUP, name: "Renamed favorites" };
     const { fetch, calls } = createMockFetch(() => ({ body: updated }));
     const serviceGroups = new ServiceGroupsResource(new ShippoClient({ apiKey: "key", fetch }));
@@ -52,18 +48,18 @@ describe("ServiceGroupsResource", () => {
     const result = await serviceGroups.update("sg_123", { name: "Renamed favorites" });
 
     expect(result.name).toBe("Renamed favorites");
-    expect(calls[0]?.url).toBe("https://api.goshippo.com/service_groups/sg_123");
+    expect(calls[0]?.url).toBe("https://api.goshippo.com/service-groups/sg_123");
     expect(calls[0]?.method).toBe("PUT");
   });
 
-  test("delete() sends DELETE to /service_groups/{id} and resolves with no value", async () => {
+  test("delete() sends DELETE to /service-groups/{id} and resolves with no value", async () => {
     const { fetch, calls } = createMockFetch(() => ({ status: 204 }));
     const serviceGroups = new ServiceGroupsResource(new ShippoClient({ apiKey: "key", fetch }));
 
     const result = await serviceGroups.delete("sg_123");
 
     expect(result).toBeUndefined();
-    expect(calls[0]?.url).toBe("https://api.goshippo.com/service_groups/sg_123");
+    expect(calls[0]?.url).toBe("https://api.goshippo.com/service-groups/sg_123");
     expect(calls[0]?.method).toBe("DELETE");
   });
 
