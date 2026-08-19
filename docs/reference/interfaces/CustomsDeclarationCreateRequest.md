@@ -6,7 +6,7 @@
 
 # Interface: CustomsDeclarationCreateRequest
 
-Defined in: [resources/customs-declarations.ts:39](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/customs-declarations.ts#L39)
+Defined in: [resources/customs-declarations.ts:39](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/customs-declarations.ts#L39)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [resources/customs-declarations.ts:39](https://github.com/RichardMcQ
 
 > **certify**: `boolean`
 
-Defined in: [resources/customs-declarations.ts:44](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/customs-declarations.ts#L44)
+Defined in: [resources/customs-declarations.ts:44](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/customs-declarations.ts#L44)
 
 ***
 
@@ -22,7 +22,7 @@ Defined in: [resources/customs-declarations.ts:44](https://github.com/RichardMcQ
 
 > **certify\_signer**: `string`
 
-Defined in: [resources/customs-declarations.ts:45](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/customs-declarations.ts#L45)
+Defined in: [resources/customs-declarations.ts:45](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/customs-declarations.ts#L45)
 
 ***
 
@@ -30,7 +30,7 @@ Defined in: [resources/customs-declarations.ts:45](https://github.com/RichardMcQ
 
 > `optional` **contents\_explanation?**: `string`
 
-Defined in: [resources/customs-declarations.ts:41](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/customs-declarations.ts#L41)
+Defined in: [resources/customs-declarations.ts:41](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/customs-declarations.ts#L41)
 
 ***
 
@@ -38,7 +38,7 @@ Defined in: [resources/customs-declarations.ts:41](https://github.com/RichardMcQ
 
 > **contents\_type**: [`CustomsDeclarationContentsType`](../type-aliases/CustomsDeclarationContentsType.md)
 
-Defined in: [resources/customs-declarations.ts:40](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/customs-declarations.ts#L40)
+Defined in: [resources/customs-declarations.ts:40](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/customs-declarations.ts#L40)
 
 ***
 
@@ -46,7 +46,7 @@ Defined in: [resources/customs-declarations.ts:40](https://github.com/RichardMcQ
 
 > `optional` **exporter\_reference?**: `string`
 
-Defined in: [resources/customs-declarations.ts:47](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/customs-declarations.ts#L47)
+Defined in: [resources/customs-declarations.ts:47](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/customs-declarations.ts#L47)
 
 ***
 
@@ -54,7 +54,7 @@ Defined in: [resources/customs-declarations.ts:47](https://github.com/RichardMcQ
 
 > **items**: (`string` \| [`CustomsItemCreateRequest`](CustomsItemCreateRequest.md))[]
 
-Defined in: [resources/customs-declarations.ts:43](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/customs-declarations.ts#L43)
+Defined in: [resources/customs-declarations.ts:43](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/customs-declarations.ts#L43)
 
 Existing customs item object IDs, or inline data to create them.
 
@@ -64,4 +64,4 @@ Existing customs item object IDs, or inline data to create them.
 
 > **non\_delivery\_option**: [`CustomsDeclarationNonDeliveryOption`](../type-aliases/CustomsDeclarationNonDeliveryOption.md)
 
-Defined in: [resources/customs-declarations.ts:46](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/customs-declarations.ts#L46)
+Defined in: [resources/customs-declarations.ts:46](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/customs-declarations.ts#L46)

@@ -9,9 +9,10 @@ import {
 } from "./carrier-parcel-templates";
 
 const SAMPLE_TEMPLATE: CarrierParcelTemplate = {
-  object_id: "cpt_123",
+  token: "USPS_SmallFlatRateBox",
   name: "USPS Small Flat Rate Box",
   carrier: "usps",
+  is_variable_dimensions: false,
   length: "8.69",
   width: "5.44",
   height: "1.75",
@@ -19,10 +20,8 @@ const SAMPLE_TEMPLATE: CarrierParcelTemplate = {
 };
 
 describe("CarrierParcelTemplatesResource", () => {
-  test("list() gets /carrier_parcel_templates and returns a page", async () => {
-    const { fetch, calls } = createMockFetch(() => ({
-      body: { count: 1, next: null, previous: null, results: [SAMPLE_TEMPLATE] },
-    }));
+  test("list() gets /parcel-templates and returns a page", async () => {
+    const { fetch, calls } = createMockFetch(() => ({ body: { results: [SAMPLE_TEMPLATE] } }));
     const templates = new CarrierParcelTemplatesResource(
       new ShippoClient({ apiKey: "key", fetch }),
     );
@@ -31,21 +30,21 @@ describe("CarrierParcelTemplatesResource", () => {
 
     expect(page.results).toEqual([SAMPLE_TEMPLATE]);
     const url = new URL(calls[0]?.url ?? "");
-    expect(url.pathname).toBe("/carrier_parcel_templates");
+    expect(url.pathname).toBe("/parcel-templates");
     expect(url.searchParams.get("page")).toBe("1");
     expect(url.searchParams.get("results")).toBe("5");
   });
 
-  test("get() fetches a single carrier parcel template by ID", async () => {
+  test("get() fetches a single carrier parcel template by token", async () => {
     const { fetch, calls } = createMockFetch(() => ({ body: SAMPLE_TEMPLATE }));
     const templates = new CarrierParcelTemplatesResource(
       new ShippoClient({ apiKey: "key", fetch }),
     );
 
-    const result = await templates.get("cpt_123");
+    const result = await templates.get("USPS_SmallFlatRateBox");
 
     expect(result).toEqual(SAMPLE_TEMPLATE);
-    expect(calls[0]?.url).toBe("https://api.goshippo.com/carrier_parcel_templates/cpt_123");
+    expect(calls[0]?.url).toBe("https://api.goshippo.com/parcel-templates/USPS_SmallFlatRateBox");
   });
 
   test("propagates ShippoApiError on a non-2xx response", async () => {

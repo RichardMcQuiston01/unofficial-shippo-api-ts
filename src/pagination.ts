@@ -13,6 +13,21 @@ export interface PaginatedList<T> {
 }
 
 /**
+ * The list-endpoint response shape for resources with no reachable OpenAPI
+ * spec (ROADMAP.md §2 "Coverage gap"). Live-contract testing against a real
+ * Shippo test-mode account (ROADMAP.md Stage 5) found these endpoints don't
+ * reliably include `count`/`next`/`previous`, and `results` can be `null`
+ * instead of `[]` when empty — unlike `PaginatedList`, nothing here beyond
+ * the field's presence is guaranteed.
+ */
+export interface UnconfirmedPaginatedList<T> {
+  count?: number;
+  next?: string | null;
+  previous?: string | null;
+  results: T[] | null;
+}
+
+/**
  * Standard query params accepted by every `list()` method. The index
  * signature (rather than just `page`/`results`) is what lets this satisfy
  * `RequestOptions["query"]` directly, structurally.

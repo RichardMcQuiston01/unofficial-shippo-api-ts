@@ -6,7 +6,7 @@
 
 # Interface: TrackingStatusDetail
 
-Defined in: [resources/tracking.ts:15](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/tracking.ts#L15)
+Defined in: [resources/tracking.ts:15](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/tracking.ts#L15)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [resources/tracking.ts:15](https://github.com/RichardMcQuiston01/uno
 
 > `optional` **location?**: [`TrackingLocation`](../type-aliases/TrackingLocation.md)
 
-Defined in: [resources/tracking.ts:19](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/tracking.ts#L19)
+Defined in: [resources/tracking.ts:19](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/tracking.ts#L19)
 
 ***
 
@@ -22,7 +22,7 @@ Defined in: [resources/tracking.ts:19](https://github.com/RichardMcQuiston01/uno
 
 > `optional` **status?**: [`TrackingStatusValue`](../type-aliases/TrackingStatusValue.md)
 
-Defined in: [resources/tracking.ts:16](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/tracking.ts#L16)
+Defined in: [resources/tracking.ts:16](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/tracking.ts#L16)
 
 ***
 
@@ -30,7 +30,7 @@ Defined in: [resources/tracking.ts:16](https://github.com/RichardMcQuiston01/uno
 
 > `optional` **status\_date?**: `string`
 
-Defined in: [resources/tracking.ts:18](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/tracking.ts#L18)
+Defined in: [resources/tracking.ts:18](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/tracking.ts#L18)
 
 ***
 
@@ -38,4 +38,4 @@ Defined in: [resources/tracking.ts:18](https://github.com/RichardMcQuiston01/uno
 
 > `optional` **status\_details?**: `string`
 
-Defined in: [resources/tracking.ts:17](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/tracking.ts#L17)
+Defined in: [resources/tracking.ts:17](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/tracking.ts#L17)

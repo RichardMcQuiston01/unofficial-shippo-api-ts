@@ -6,7 +6,7 @@
 
 # Interface: BatchCreateRequest
 
-Defined in: [resources/batches.ts:63](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/batches.ts#L63)
+Defined in: [resources/batches.ts:63](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/batches.ts#L63)
 
 Best-effort request shape for `POST /batches` — no reachable OpenAPI spec
 covers Batches (see `docs/CONVENTIONS.md` "Spec cross-checking"). Field
@@ -22,7 +22,7 @@ this shape.
 
 > `optional` **default\_carrier\_account?**: `string`
 
-Defined in: [resources/batches.ts:64](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/batches.ts#L64)
+Defined in: [resources/batches.ts:64](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/batches.ts#L64)
 
 ***
 
@@ -30,7 +30,7 @@ Defined in: [resources/batches.ts:64](https://github.com/RichardMcQuiston01/unof
 
 > `optional` **default\_servicelevel\_token?**: `string`
 
-Defined in: [resources/batches.ts:65](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/batches.ts#L65)
+Defined in: [resources/batches.ts:65](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/batches.ts#L65)
 
 ***
 
@@ -38,7 +38,7 @@ Defined in: [resources/batches.ts:65](https://github.com/RichardMcQuiston01/unof
 
 > `optional` **default\_shipment?**: `Record`\<`string`, `unknown`\>
 
-Defined in: [resources/batches.ts:74](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/batches.ts#L74)
+Defined in: [resources/batches.ts:74](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/batches.ts#L74)
 
 Shipments to seed the batch with. Item shape not confirmed — the three
 SDKs cross-referenced accept either a shipment object ID or an inline
@@ -51,7 +51,7 @@ guessing a specific shape.
 
 > `optional` **label\_filetype?**: `string`
 
-Defined in: [resources/batches.ts:66](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/batches.ts#L66)
+Defined in: [resources/batches.ts:66](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/batches.ts#L66)
 
 ***
 
@@ -59,7 +59,7 @@ Defined in: [resources/batches.ts:66](https://github.com/RichardMcQuiston01/unof
 
 > `optional` **metadata?**: `string`
 
-Defined in: [resources/batches.ts:67](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/batches.ts#L67)
+Defined in: [resources/batches.ts:67](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/batches.ts#L67)
 
 ***
 
@@ -67,4 +67,4 @@ Defined in: [resources/batches.ts:67](https://github.com/RichardMcQuiston01/unof
 
 > `optional` **shipments?**: (`string` \| `Record`\<`string`, `unknown`\>)[]
 
-Defined in: [resources/batches.ts:75](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/batches.ts#L75)
+Defined in: [resources/batches.ts:75](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/batches.ts#L75)

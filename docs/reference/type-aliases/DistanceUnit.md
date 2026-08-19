@@ -8,4 +8,4 @@
 
 > **DistanceUnit** = `"cm"` \| `"in"` \| `"ft"` \| `"mm"` \| `"m"` \| `"yd"`
 
-Defined in: [resources/parcels.ts:4](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/parcels.ts#L4)
+Defined in: [resources/parcels.ts:4](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/parcels.ts#L4)

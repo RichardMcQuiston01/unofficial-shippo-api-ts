@@ -6,7 +6,7 @@
 
 # Interface: ServiceGroupCreateRequest
 
-Defined in: [resources/service-groups.ts:32](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/service-groups.ts#L32)
+Defined in: [resources/service-groups.ts:31](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/service-groups.ts#L31)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [resources/service-groups.ts:32](https://github.com/RichardMcQuiston
 
 > **name**: `string`
 
-Defined in: [resources/service-groups.ts:33](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/service-groups.ts#L33)
+Defined in: [resources/service-groups.ts:32](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/service-groups.ts#L32)
 
 ***
 
@@ -22,4 +22,4 @@ Defined in: [resources/service-groups.ts:33](https://github.com/RichardMcQuiston
 
 > `optional` **rate\_ids\_services?**: [`ServiceGroupRateService`](../type-aliases/ServiceGroupRateService.md)[]
 
-Defined in: [resources/service-groups.ts:34](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/service-groups.ts#L34)
+Defined in: [resources/service-groups.ts:33](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/service-groups.ts#L33)

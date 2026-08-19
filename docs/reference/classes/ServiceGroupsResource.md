@@ -6,7 +6,7 @@
 
 # Class: ServiceGroupsResource
 
-Defined in: [resources/service-groups.ts:42](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/service-groups.ts#L42)
+Defined in: [resources/service-groups.ts:41](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/service-groups.ts#L41)
 
 ## Constructors
 
@@ -14,7 +14,7 @@ Defined in: [resources/service-groups.ts:42](https://github.com/RichardMcQuiston
 
 > **new ServiceGroupsResource**(`client`): `ServiceGroupsResource`
 
-Defined in: [resources/service-groups.ts:43](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/service-groups.ts#L43)
+Defined in: [resources/service-groups.ts:42](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/service-groups.ts#L42)
 
 #### Parameters
 
@@ -32,7 +32,7 @@ Defined in: [resources/service-groups.ts:43](https://github.com/RichardMcQuiston
 
 > **create**(`request`): `Promise`\<[`ServiceGroup`](../interfaces/ServiceGroup.md)\>
 
-Defined in: [resources/service-groups.ts:51](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/service-groups.ts#L51)
+Defined in: [resources/service-groups.ts:59](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/service-groups.ts#L59)
 
 Creates a new service group bundling one or more carrier service levels.
 
@@ -52,7 +52,7 @@ Creates a new service group bundling one or more carrier service levels.
 
 > **delete**(`serviceGroupId`): `Promise`\<`void`\>
 
-Defined in: [resources/service-groups.ts:63](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/service-groups.ts#L63)
+Defined in: [resources/service-groups.ts:71](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/service-groups.ts#L71)
 
 Deletes a service group.
 
@@ -70,21 +70,22 @@ Deletes a service group.
 
 ### list()
 
-> **list**(`query?`): `Promise`\<[`PaginatedList`](../interfaces/PaginatedList.md)\<[`ServiceGroup`](../interfaces/ServiceGroup.md)\>\>
+> **list**(): `Promise`\<[`ServiceGroup`](../interfaces/ServiceGroup.md)[]\>
 
-Defined in: [resources/service-groups.ts:46](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/service-groups.ts#L46)
+Defined in: [resources/service-groups.ts:54](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/service-groups.ts#L54)
 
-Retrieves a single page of previously created service groups.
+Retrieves every previously created service group.
 
-#### Parameters
-
-##### query?
-
-[`ListQuery`](../interfaces/ListQuery.md)
+**Confirmed** by live-contract testing (ROADMAP.md Stage 5) against
+`/service-groups` (hyphenated) — an earlier guess of `/service_groups`
+404'd live. Unlike every other list endpoint in this package, the real
+response is a bare JSON array, not a `{count, next, previous, results}`
+(or even `{results}`) envelope — there's no pagination to page through,
+hence no `ListQuery` parameter here.
 
 #### Returns
 
-`Promise`\<[`PaginatedList`](../interfaces/PaginatedList.md)\<[`ServiceGroup`](../interfaces/ServiceGroup.md)\>\>
+`Promise`\<[`ServiceGroup`](../interfaces/ServiceGroup.md)[]\>
 
 ***
 
@@ -92,7 +93,7 @@ Retrieves a single page of previously created service groups.
 
 > **update**(`serviceGroupId`, `request`): `Promise`\<[`ServiceGroup`](../interfaces/ServiceGroup.md)\>
 
-Defined in: [resources/service-groups.ts:56](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/service-groups.ts#L56)
+Defined in: [resources/service-groups.ts:64](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/service-groups.ts#L64)
 
 Updates an existing service group's name or service-level selection.
 

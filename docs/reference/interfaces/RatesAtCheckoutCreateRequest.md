@@ -6,7 +6,7 @@
 
 # Interface: RatesAtCheckoutCreateRequest
 
-Defined in: [resources/rates-at-checkout.ts:25](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/rates-at-checkout.ts#L25)
+Defined in: [resources/rates-at-checkout.ts:25](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/rates-at-checkout.ts#L25)
 
 Rates at Checkout has no reachable OpenAPI coverage (ROADMAP.md §2
 "Coverage gap" — not one of the 9 resources with a mirrored spec).
@@ -31,7 +31,7 @@ explicit `parcel`. They're grouped in one file because they share the
 
 > `optional` **address\_from?**: `string` \| [`AddressCreateRequest`](AddressCreateRequest.md)
 
-Defined in: [resources/rates-at-checkout.ts:27](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/rates-at-checkout.ts#L27)
+Defined in: [resources/rates-at-checkout.ts:27](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/rates-at-checkout.ts#L27)
 
 Existing address object ID, or an inline address. Best-effort — may default to the account's default address when omitted.
 
@@ -41,7 +41,7 @@ Existing address object ID, or an inline address. Best-effort — may default to
 
 > **address\_to**: `string` \| [`AddressCreateRequest`](AddressCreateRequest.md)
 
-Defined in: [resources/rates-at-checkout.ts:29](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/rates-at-checkout.ts#L29)
+Defined in: [resources/rates-at-checkout.ts:29](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/rates-at-checkout.ts#L29)
 
 Existing address object ID, or an inline address.
 
@@ -51,7 +51,7 @@ Existing address object ID, or an inline address.
 
 > `optional` **carrier\_accounts?**: `string`[]
 
-Defined in: [resources/rates-at-checkout.ts:33](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/rates-at-checkout.ts#L33)
+Defined in: [resources/rates-at-checkout.ts:33](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/rates-at-checkout.ts#L33)
 
 Restrict quoting to these Carrier Account object IDs. Omit to quote across all connected carriers.
 
@@ -61,6 +61,6 @@ Restrict quoting to these Carrier Account object IDs. Omit to quote across all c
 
 > `optional` **parcel?**: `string` \| [`ParcelCreateRequest`](ParcelCreateRequest.md)
 
-Defined in: [resources/rates-at-checkout.ts:31](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/rates-at-checkout.ts#L31)
+Defined in: [resources/rates-at-checkout.ts:31](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/rates-at-checkout.ts#L31)
 
 Existing parcel object ID, or an inline parcel. Falls back to the default parcel template (see `getDefaultParcelTemplate`) when omitted — unconfirmed fallback behavior.

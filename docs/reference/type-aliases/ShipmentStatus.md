@@ -8,4 +8,4 @@
 
 > **ShipmentStatus** = `"WAITING"` \| `"QUEUED"` \| `"SUCCESS"` \| `"ERROR"`
 
-Defined in: [resources/shipments.ts:7](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/shipments.ts#L7)
+Defined in: [resources/shipments.ts:7](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/shipments.ts#L7)

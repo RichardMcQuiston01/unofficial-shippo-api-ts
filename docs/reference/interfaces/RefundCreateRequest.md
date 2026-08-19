@@ -6,7 +6,7 @@
 
 # Interface: RefundCreateRequest
 
-Defined in: [resources/refunds.ts:15](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/refunds.ts#L15)
+Defined in: [resources/refunds.ts:15](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/refunds.ts#L15)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [resources/refunds.ts:15](https://github.com/RichardMcQuiston01/unof
 
 > `optional` **async?**: `boolean`
 
-Defined in: [resources/refunds.ts:19](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/refunds.ts#L19)
+Defined in: [resources/refunds.ts:19](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/refunds.ts#L19)
 
 If true, the refund is processed asynchronously rather than in the response.
 
@@ -24,6 +24,6 @@ If true, the refund is processed asynchronously rather than in the response.
 
 > **transaction**: `string`
 
-Defined in: [resources/refunds.ts:17](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/refunds.ts#L17)
+Defined in: [resources/refunds.ts:17](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/refunds.ts#L17)
 
 Object ID of the transaction (label) to refund.

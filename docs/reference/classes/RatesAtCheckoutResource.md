@@ -6,7 +6,7 @@
 
 # Class: RatesAtCheckoutResource
 
-Defined in: [resources/rates-at-checkout.ts:36](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/rates-at-checkout.ts#L36)
+Defined in: [resources/rates-at-checkout.ts:36](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/rates-at-checkout.ts#L36)
 
 ## Constructors
 
@@ -14,7 +14,7 @@ Defined in: [resources/rates-at-checkout.ts:36](https://github.com/RichardMcQuis
 
 > **new RatesAtCheckoutResource**(`client`): `RatesAtCheckoutResource`
 
-Defined in: [resources/rates-at-checkout.ts:37](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/rates-at-checkout.ts#L37)
+Defined in: [resources/rates-at-checkout.ts:37](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/rates-at-checkout.ts#L37)
 
 #### Parameters
 
@@ -32,7 +32,7 @@ Defined in: [resources/rates-at-checkout.ts:37](https://github.com/RichardMcQuis
 
 > **create**(`request`): `Promise`\<[`RateList`](../interfaces/RateList.md)\>
 
-Defined in: [resources/rates-at-checkout.ts:49](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/rates-at-checkout.ts#L49)
+Defined in: [resources/rates-at-checkout.ts:49](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/rates-at-checkout.ts#L49)
 
 Computes live shippable rates for a checkout flow without first
 creating a Shipment. Reuses `RateList` from `./rates`
@@ -59,7 +59,7 @@ this endpoint.
 
 > **deleteDefaultParcelTemplate**(): `Promise`\<`void`\>
 
-Defined in: [resources/rates-at-checkout.ts:76](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/rates-at-checkout.ts#L76)
+Defined in: [resources/rates-at-checkout.ts:76](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/rates-at-checkout.ts#L76)
 
 Clears the account-level default parcel template.
 
@@ -73,7 +73,7 @@ Clears the account-level default parcel template.
 
 > **getDefaultParcelTemplate**(): `Promise`\<[`Parcel`](../interfaces/Parcel.md) \| `undefined`\>
 
-Defined in: [resources/rates-at-checkout.ts:61](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/rates-at-checkout.ts#L61)
+Defined in: [resources/rates-at-checkout.ts:61](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/rates-at-checkout.ts#L61)
 
 Retrieves the account-level default parcel template used by `create()`
 when called without an explicit `parcel`. Returns `undefined` if none
@@ -90,7 +90,7 @@ confirms whether the endpoint 404s instead when unset.
 
 > **updateDefaultParcelTemplate**(`request`): `Promise`\<[`Parcel`](../interfaces/Parcel.md)\>
 
-Defined in: [resources/rates-at-checkout.ts:69](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d5e63cc7bddf23b738b612ed189591debd6a9b06/src/resources/rates-at-checkout.ts#L69)
+Defined in: [resources/rates-at-checkout.ts:69](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/rates-at-checkout.ts#L69)
 
 Sets the account-level default parcel template used by `create()` when no `parcel` is given.
 
