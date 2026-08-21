@@ -6,7 +6,7 @@
 
 # Interface: TransactionCreateRequest
 
-Defined in: [resources/transactions.ts:28](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/transactions.ts#L28)
+Defined in: [resources/transactions.ts:28](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/transactions.ts#L28)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [resources/transactions.ts:28](https://github.com/RichardMcQuiston01
 
 > `optional` **async?**: `boolean`
 
-Defined in: [resources/transactions.ts:34](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/transactions.ts#L34)
+Defined in: [resources/transactions.ts:34](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/transactions.ts#L34)
 
 If true, the label is generated asynchronously rather than in the response.
 
@@ -24,7 +24,7 @@ If true, the label is generated asynchronously rather than in the response.
 
 > **label\_file\_type**: [`LabelFileType`](../type-aliases/LabelFileType.md)
 
-Defined in: [resources/transactions.ts:31](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/transactions.ts#L31)
+Defined in: [resources/transactions.ts:31](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/transactions.ts#L31)
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: [resources/transactions.ts:31](https://github.com/RichardMcQuiston01
 
 > `optional` **metadata?**: `string`
 
-Defined in: [resources/transactions.ts:32](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/transactions.ts#L32)
+Defined in: [resources/transactions.ts:32](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/transactions.ts#L32)
 
 ***
 
@@ -40,6 +40,6 @@ Defined in: [resources/transactions.ts:32](https://github.com/RichardMcQuiston01
 
 > **rate**: `string`
 
-Defined in: [resources/transactions.ts:30](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/transactions.ts#L30)
+Defined in: [resources/transactions.ts:30](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/transactions.ts#L30)
 
 Object ID of the rate to purchase a label for.

@@ -6,7 +6,7 @@
 
 # Class: TrackingResource
 
-Defined in: [resources/tracking.ts:42](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/tracking.ts#L42)
+Defined in: [resources/tracking.ts:42](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/tracking.ts#L42)
 
 ## Constructors
 
@@ -14,7 +14,7 @@ Defined in: [resources/tracking.ts:42](https://github.com/RichardMcQuiston01/uno
 
 > **new TrackingResource**(`client`): `TrackingResource`
 
-Defined in: [resources/tracking.ts:43](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/tracking.ts#L43)
+Defined in: [resources/tracking.ts:43](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/tracking.ts#L43)
 
 #### Parameters
 
@@ -32,7 +32,7 @@ Defined in: [resources/tracking.ts:43](https://github.com/RichardMcQuiston01/uno
 
 > **create**(`request`): `Promise`\<[`TrackingStatus`](../interfaces/TrackingStatus.md)\>
 
-Defined in: [resources/tracking.ts:46](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/tracking.ts#L46)
+Defined in: [resources/tracking.ts:46](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/tracking.ts#L46)
 
 Registers a shipment for tracking, so Shippo starts polling the carrier for updates.
 
@@ -52,7 +52,7 @@ Registers a shipment for tracking, so Shippo starts polling the carrier for upda
 
 > **get**(`carrier`, `trackingNumber`): `Promise`\<[`TrackingStatus`](../interfaces/TrackingStatus.md)\>
 
-Defined in: [resources/tracking.ts:51](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/tracking.ts#L51)
+Defined in: [resources/tracking.ts:51](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/tracking.ts#L51)
 
 Retrieves the current tracking status for a carrier + tracking number pair.
 

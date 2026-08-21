@@ -6,7 +6,7 @@
 
 # Class: BatchesResource
 
-Defined in: [resources/batches.ts:88](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/batches.ts#L88)
+Defined in: [resources/batches.ts:88](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/batches.ts#L88)
 
 ## Constructors
 
@@ -14,7 +14,7 @@ Defined in: [resources/batches.ts:88](https://github.com/RichardMcQuiston01/unof
 
 > **new BatchesResource**(`client`): `BatchesResource`
 
-Defined in: [resources/batches.ts:89](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/batches.ts#L89)
+Defined in: [resources/batches.ts:89](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/batches.ts#L89)
 
 #### Parameters
 
@@ -32,7 +32,7 @@ Defined in: [resources/batches.ts:89](https://github.com/RichardMcQuiston01/unof
 
 > **addShipments**(`batchId`, `shipmentIds`): `Promise`\<[`Batch`](../interfaces/Batch.md)\>
 
-Defined in: [resources/batches.ts:108](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/batches.ts#L108)
+Defined in: [resources/batches.ts:108](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/batches.ts#L108)
 
 Adds shipments to an existing batch. Endpoint path and body shape are
 best-effort — see `BatchShipmentIds`'s doc comment.
@@ -57,7 +57,7 @@ best-effort — see `BatchShipmentIds`'s doc comment.
 
 > **create**(`request`): `Promise`\<[`Batch`](../interfaces/Batch.md)\>
 
-Defined in: [resources/batches.ts:95](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/batches.ts#L95)
+Defined in: [resources/batches.ts:95](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/batches.ts#L95)
 
 Creates a new batch. Endpoint path is best-effort (not confirmed by any
 reachable OpenAPI spec) — see this module's doc comments.
@@ -78,7 +78,7 @@ reachable OpenAPI spec) — see this module's doc comments.
 
 > **get**(`batchId`): `Promise`\<[`Batch`](../interfaces/Batch.md)\>
 
-Defined in: [resources/batches.ts:100](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/batches.ts#L100)
+Defined in: [resources/batches.ts:100](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/batches.ts#L100)
 
 Retrieves a single batch by its object ID.
 
@@ -98,7 +98,7 @@ Retrieves a single batch by its object ID.
 
 > **purchase**(`batchId`): `Promise`\<[`Batch`](../interfaces/Batch.md)\>
 
-Defined in: [resources/batches.ts:118](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/batches.ts#L118)
+Defined in: [resources/batches.ts:118](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/batches.ts#L118)
 
 Purchases labels for every shipment in the batch. Endpoint path is
 best-effort — see this module's doc comments.
@@ -119,7 +119,7 @@ best-effort — see this module's doc comments.
 
 > **removeShipments**(`batchId`, `shipmentIds`): `Promise`\<[`Batch`](../interfaces/Batch.md)\>
 
-Defined in: [resources/batches.ts:126](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/batches.ts#L126)
+Defined in: [resources/batches.ts:126](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/batches.ts#L126)
 
 Removes shipments from an existing batch. Endpoint path and body shape
 are best-effort — see `BatchShipmentIds`'s doc comment.

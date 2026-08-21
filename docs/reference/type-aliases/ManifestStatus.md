@@ -8,7 +8,7 @@
 
 > **ManifestStatus** = `"WAITING"` \| `"QUEUED"` \| `"SUCCESS"` \| `"ERROR"`
 
-Defined in: [resources/manifests.ts:15](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/manifests.ts#L15)
+Defined in: [resources/manifests.ts:15](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/manifests.ts#L15)
 
 No OpenAPI spec was reachable for Manifests while building this package
 (ROADMAP.md §2 "Coverage gap"). Method names (`list`, `create`, `get`)

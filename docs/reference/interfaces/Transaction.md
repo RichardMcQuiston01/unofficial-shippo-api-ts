@@ -6,7 +6,7 @@
 
 # Interface: Transaction
 
-Defined in: [resources/transactions.ts:11](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/transactions.ts#L11)
+Defined in: [resources/transactions.ts:11](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/transactions.ts#L11)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [resources/transactions.ts:11](https://github.com/RichardMcQuiston01
 
 > `optional` **commercial\_invoice\_url?**: `string`
 
-Defined in: [resources/transactions.ts:20](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/transactions.ts#L20)
+Defined in: [resources/transactions.ts:20](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/transactions.ts#L20)
 
 URL to the commercial invoice, present for international shipments.
 
@@ -24,7 +24,7 @@ URL to the commercial invoice, present for international shipments.
 
 > `optional` **label\_url?**: `string`
 
-Defined in: [resources/transactions.ts:18](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/transactions.ts#L18)
+Defined in: [resources/transactions.ts:18](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/transactions.ts#L18)
 
 URL to the shipping label file (PDF/PNG/ZPL, per the request's `label_file_type`).
 
@@ -34,7 +34,7 @@ URL to the shipping label file (PDF/PNG/ZPL, per the request's `label_file_type`
 
 > `optional` **metadata?**: `string`
 
-Defined in: [resources/transactions.ts:23](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/transactions.ts#L23)
+Defined in: [resources/transactions.ts:23](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/transactions.ts#L23)
 
 ***
 
@@ -42,7 +42,7 @@ Defined in: [resources/transactions.ts:23](https://github.com/RichardMcQuiston01
 
 > **object\_created**: `string`
 
-Defined in: [resources/transactions.ts:24](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/transactions.ts#L24)
+Defined in: [resources/transactions.ts:24](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/transactions.ts#L24)
 
 ***
 
@@ -50,7 +50,7 @@ Defined in: [resources/transactions.ts:24](https://github.com/RichardMcQuiston01
 
 > **object\_id**: `string`
 
-Defined in: [resources/transactions.ts:12](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/transactions.ts#L12)
+Defined in: [resources/transactions.ts:12](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/transactions.ts#L12)
 
 ***
 
@@ -58,7 +58,7 @@ Defined in: [resources/transactions.ts:12](https://github.com/RichardMcQuiston01
 
 > **object\_updated**: `string`
 
-Defined in: [resources/transactions.ts:25](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/transactions.ts#L25)
+Defined in: [resources/transactions.ts:25](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/transactions.ts#L25)
 
 ***
 
@@ -66,7 +66,7 @@ Defined in: [resources/transactions.ts:25](https://github.com/RichardMcQuiston01
 
 > **rate**: `string`
 
-Defined in: [resources/transactions.ts:22](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/transactions.ts#L22)
+Defined in: [resources/transactions.ts:22](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/transactions.ts#L22)
 
 Object ID of the rate this label was purchased for.
 
@@ -76,7 +76,7 @@ Object ID of the rate this label was purchased for.
 
 > **status**: [`TransactionStatus`](../type-aliases/TransactionStatus.md)
 
-Defined in: [resources/transactions.ts:13](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/transactions.ts#L13)
+Defined in: [resources/transactions.ts:13](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/transactions.ts#L13)
 
 ***
 
@@ -84,7 +84,7 @@ Defined in: [resources/transactions.ts:13](https://github.com/RichardMcQuiston01
 
 > `optional` **tracking\_number?**: `string`
 
-Defined in: [resources/transactions.ts:14](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/transactions.ts#L14)
+Defined in: [resources/transactions.ts:14](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/transactions.ts#L14)
 
 ***
 
@@ -92,7 +92,7 @@ Defined in: [resources/transactions.ts:14](https://github.com/RichardMcQuiston01
 
 > `optional` **tracking\_status?**: [`TrackingStatusValue`](../type-aliases/TrackingStatusValue.md)
 
-Defined in: [resources/transactions.ts:16](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/transactions.ts#L16)
+Defined in: [resources/transactions.ts:16](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/transactions.ts#L16)
 
 ***
 
@@ -100,4 +100,4 @@ Defined in: [resources/transactions.ts:16](https://github.com/RichardMcQuiston01
 
 > `optional` **tracking\_url\_provider?**: `string`
 
-Defined in: [resources/transactions.ts:15](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/transactions.ts#L15)
+Defined in: [resources/transactions.ts:15](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/transactions.ts#L15)

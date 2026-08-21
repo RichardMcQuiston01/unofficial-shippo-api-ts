@@ -12,12 +12,13 @@ Shippo. It targets individuals and businesses building an app to manage their ow
 behalf of other businesses. See [`ROADMAP.md`](./ROADMAP.md) for the full delivery plan,
 architecture decisions, and scope.
 
-**Status: pre-alpha.** All 19 in-scope resources are built and have been through a full
+**Status: `0.1.0`, pre-1.0.** All 19 in-scope resources are built and have been through a full
 integration/consistency pass — everything from validating an address through buying a label to
 managing webhooks, batches, customs, and carrier accounts uses the same naming and error
 conventions throughout. (`Shippo Accounts` and the Platform API are permanently out of scope —
-see `ROADMAP.md`'s Target User section.) Not yet published to npm, and not yet hardened for
-production use — see the field-level caveats below before relying on the newer resources.
+see `ROADMAP.md`'s Target User section.) Published to npm, but not yet hardened for production
+use — see the field-level caveats below before relying on the newer resources, and
+`CONTRIBUTING.md`'s "Releases" section for what `1.0.0` is gated on.
 
 ## Getting Started
 
@@ -29,8 +30,6 @@ production use — see the field-level caveats below before relying on the newer
   (the build output targets both).
 
 ### Installation
-
-Not yet published. Once an initial version ships:
 
 ```bash
 bun add @richardmcquiston01/shippo-api
@@ -202,8 +201,8 @@ See [`CONTRIBUTING.md`](./CONTRIBUTING.md) for the branch/PR workflow.
 
 ## Buy Me a Coffee
 
-I developed this while I currently looking for work. If this app has helped you or someone you
-know, please consider donating. I appreciate it.
+I developed this while I'm currently looking for work. If this app has helped you or someone
+you know, please consider donating. I appreciate it.
 
 [**Donate via Stripe**](https://donate.stripe.com/00w5kD3Gj1Xo9v7gVOcs800), or scan:
 

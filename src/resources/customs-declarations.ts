@@ -1,5 +1,5 @@
 import type { ShippoClient } from "../client";
-import type { ListQuery, PaginatedList } from "../pagination";
+import type { ListQuery, UnconfirmedPaginatedList } from "../pagination";
 import type { CustomsItem, CustomsItemCreateRequest } from "./customs-items";
 
 /**
@@ -57,11 +57,18 @@ export class CustomsDeclarationsResource {
     });
   }
 
-  /** Retrieves a single page of previously created customs declarations. */
-  async list(query?: ListQuery): Promise<PaginatedList<CustomsDeclaration>> {
-    return this.client.request<PaginatedList<CustomsDeclaration>>("GET", "/customs/declarations", {
-      query,
-    });
+  /**
+   * Retrieves a single page of previously created customs declarations.
+   *
+   * **Confirmed** by live-contract testing (ROADMAP.md Stage 5): the real
+   * envelope omits `count`, unlike the confirmed-spec resources' pagination.
+   */
+  async list(query?: ListQuery): Promise<UnconfirmedPaginatedList<CustomsDeclaration>> {
+    return this.client.request<UnconfirmedPaginatedList<CustomsDeclaration>>(
+      "GET",
+      "/customs/declarations",
+      { query },
+    );
   }
 
   /** Retrieves a single customs declaration by its object ID. */

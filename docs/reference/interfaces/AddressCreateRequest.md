@@ -6,7 +6,7 @@
 
 # Interface: AddressCreateRequest
 
-Defined in: [resources/addresses.ts:40](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/addresses.ts#L40)
+Defined in: [resources/addresses.ts:40](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/addresses.ts#L40)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [resources/addresses.ts:40](https://github.com/RichardMcQuiston01/un
 
 > **city**: `string`
 
-Defined in: [resources/addresses.ts:43](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/addresses.ts#L43)
+Defined in: [resources/addresses.ts:43](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/addresses.ts#L43)
 
 ***
 
@@ -22,7 +22,7 @@ Defined in: [resources/addresses.ts:43](https://github.com/RichardMcQuiston01/un
 
 > `optional` **company?**: `string`
 
-Defined in: [resources/addresses.ts:48](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/addresses.ts#L48)
+Defined in: [resources/addresses.ts:48](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/addresses.ts#L48)
 
 ***
 
@@ -30,7 +30,7 @@ Defined in: [resources/addresses.ts:48](https://github.com/RichardMcQuiston01/un
 
 > **country**: `string`
 
-Defined in: [resources/addresses.ts:47](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/addresses.ts#L47)
+Defined in: [resources/addresses.ts:47](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/addresses.ts#L47)
 
 ISO 3166-1 alpha-2 country code.
 
@@ -40,7 +40,7 @@ ISO 3166-1 alpha-2 country code.
 
 > `optional` **email?**: `string`
 
-Defined in: [resources/addresses.ts:51](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/addresses.ts#L51)
+Defined in: [resources/addresses.ts:51](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/addresses.ts#L51)
 
 ***
 
@@ -48,7 +48,7 @@ Defined in: [resources/addresses.ts:51](https://github.com/RichardMcQuiston01/un
 
 > `optional` **is\_residential?**: `boolean`
 
-Defined in: [resources/addresses.ts:52](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/addresses.ts#L52)
+Defined in: [resources/addresses.ts:52](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/addresses.ts#L52)
 
 ***
 
@@ -56,7 +56,7 @@ Defined in: [resources/addresses.ts:52](https://github.com/RichardMcQuiston01/un
 
 > **name**: `string`
 
-Defined in: [resources/addresses.ts:41](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/addresses.ts#L41)
+Defined in: [resources/addresses.ts:41](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/addresses.ts#L41)
 
 ***
 
@@ -64,7 +64,7 @@ Defined in: [resources/addresses.ts:41](https://github.com/RichardMcQuiston01/un
 
 > `optional` **phone?**: `string`
 
-Defined in: [resources/addresses.ts:50](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/addresses.ts#L50)
+Defined in: [resources/addresses.ts:50](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/addresses.ts#L50)
 
 ***
 
@@ -72,7 +72,7 @@ Defined in: [resources/addresses.ts:50](https://github.com/RichardMcQuiston01/un
 
 > **state**: `string`
 
-Defined in: [resources/addresses.ts:44](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/addresses.ts#L44)
+Defined in: [resources/addresses.ts:44](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/addresses.ts#L44)
 
 ***
 
@@ -80,7 +80,7 @@ Defined in: [resources/addresses.ts:44](https://github.com/RichardMcQuiston01/un
 
 > **street1**: `string`
 
-Defined in: [resources/addresses.ts:42](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/addresses.ts#L42)
+Defined in: [resources/addresses.ts:42](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/addresses.ts#L42)
 
 ***
 
@@ -88,7 +88,7 @@ Defined in: [resources/addresses.ts:42](https://github.com/RichardMcQuiston01/un
 
 > `optional` **street2?**: `string`
 
-Defined in: [resources/addresses.ts:49](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/addresses.ts#L49)
+Defined in: [resources/addresses.ts:49](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/addresses.ts#L49)
 
 ***
 
@@ -96,7 +96,7 @@ Defined in: [resources/addresses.ts:49](https://github.com/RichardMcQuiston01/un
 
 > `optional` **validate?**: `boolean`
 
-Defined in: [resources/addresses.ts:54](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/addresses.ts#L54)
+Defined in: [resources/addresses.ts:54](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/addresses.ts#L54)
 
 Validate the address synchronously as part of creating it.
 
@@ -106,4 +106,4 @@ Validate the address synchronously as part of creating it.
 
 > **zip**: `string`
 
-Defined in: [resources/addresses.ts:45](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/addresses.ts#L45)
+Defined in: [resources/addresses.ts:45](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/addresses.ts#L45)

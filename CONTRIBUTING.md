@@ -73,6 +73,14 @@ Publishing requires an `NPM_TOKEN` repository secret (an npm automation token wi
 rights on the `@richardmcquiston01` scope) — set once by whoever administers the npm account,
 not something contributors need for day-to-day work.
 
+**After a release, merge `main` back into `dev`.** `changeset version`'s commit (the version
+bump in `package.json` and the new `CHANGELOG.md` section) lands on `main`, not `dev` — if
+nobody merges it back, `dev` stays permanently behind on the real version number and
+changelog, and every subsequent PR branched from `dev` inherits the stale `package.json`
+version. (This bit the `0.1.0` release itself: `SDK_VERSION` was correct in the published
+package but `dev` kept reporting `0.0.0` until the back-merge happened.) There's no
+automation for this yet — do it manually as the last step of cutting a release.
+
 **One-time note for the 0.1.0 release specifically**: `CHANGELOG.md` up to this point was
 hand-written directly under an `## [Unreleased]` heading (Keep a Changelog style), not built
 from individual changesets. The first `changeset version` run will insert its own `## 0.1.0`

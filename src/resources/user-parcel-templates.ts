@@ -1,5 +1,5 @@
 import type { ShippoClient } from "../client";
-import type { ListQuery, PaginatedList } from "../pagination";
+import type { ListQuery, UnconfirmedPaginatedList } from "../pagination";
 import type { DistanceUnit, MassUnit } from "./parcels";
 
 /**
@@ -7,10 +7,11 @@ import type { DistanceUnit, MassUnit } from "./parcels";
  * distinct from `CarrierParcelTemplate` (`./carrier-parcel-templates`),
  * which is predefined by Shippo/the carrier and read-only.
  *
- * **Unconfirmed / best effort**: not present in the reachable OpenAPI
- * mirror (ROADMAP.md §2 lists this among the 9 resources with no spec
- * coverage). Reasonably confident this mirrors `Parcel` (`./parcels`) plus
- * a `name`, based on the SDK method inventory and the resource's purpose.
+ * **Confirmed** by live-contract testing (ROADMAP.md Stage 5): unlike
+ * `Parcel` (`./parcels`), this resource's weight-unit field is named
+ * `weight_unit`, not `mass_unit` — an earlier guess assumed the `Parcel`
+ * naming applied here too, but `POST` with `mass_unit` set 400s live with
+ * `"weight_unit: Weight unit must be specified if weight is specified."`.
  */
 export interface UserParcelTemplate {
   object_id?: string;
@@ -20,7 +21,7 @@ export interface UserParcelTemplate {
   height?: string;
   distance_unit?: DistanceUnit;
   weight?: string;
-  mass_unit?: MassUnit;
+  weight_unit?: MassUnit;
   object_created?: string;
   object_updated?: string;
 }
@@ -32,7 +33,7 @@ export interface UserParcelTemplateCreateRequest {
   height: string;
   distance_unit: DistanceUnit;
   weight: string;
-  mass_unit: MassUnit;
+  weight_unit: MassUnit;
 }
 
 export interface UserParcelTemplateUpdateRequest {
@@ -42,22 +43,31 @@ export interface UserParcelTemplateUpdateRequest {
   height?: string;
   distance_unit?: DistanceUnit;
   weight?: string;
-  mass_unit?: MassUnit;
+  weight_unit?: MassUnit;
 }
 
 export class UserParcelTemplatesResource {
   constructor(private readonly client: ShippoClient) {}
 
-  /** Retrieves a single page of previously created user parcel templates. */
-  async list(query?: ListQuery): Promise<PaginatedList<UserParcelTemplate>> {
-    return this.client.request<PaginatedList<UserParcelTemplate>>("GET", "/user_parcel_templates", {
-      query,
-    });
+  /**
+   * Retrieves a single page of previously created user parcel templates.
+   *
+   * **Confirmed** by live-contract testing (ROADMAP.md Stage 5) against
+   * `/user-parcel-templates` (hyphenated, not the underscored path an
+   * earlier guess used) — the envelope has no `count`/`next`/`previous`,
+   * and `results` is `null` rather than `[]` when the account has none.
+   */
+  async list(query?: ListQuery): Promise<UnconfirmedPaginatedList<UserParcelTemplate>> {
+    return this.client.request<UnconfirmedPaginatedList<UserParcelTemplate>>(
+      "GET",
+      "/user-parcel-templates",
+      { query },
+    );
   }
 
   /** Creates a new reusable parcel template. */
   async create(request: UserParcelTemplateCreateRequest): Promise<UserParcelTemplate> {
-    return this.client.request<UserParcelTemplate>("POST", "/user_parcel_templates", {
+    return this.client.request<UserParcelTemplate>("POST", "/user-parcel-templates", {
       body: request,
     });
   }
@@ -66,7 +76,7 @@ export class UserParcelTemplatesResource {
   async get(userParcelTemplateId: string): Promise<UserParcelTemplate> {
     return this.client.request<UserParcelTemplate>(
       "GET",
-      `/user_parcel_templates/${userParcelTemplateId}`,
+      `/user-parcel-templates/${userParcelTemplateId}`,
     );
   }
 
@@ -77,13 +87,13 @@ export class UserParcelTemplatesResource {
   ): Promise<UserParcelTemplate> {
     return this.client.request<UserParcelTemplate>(
       "PUT",
-      `/user_parcel_templates/${userParcelTemplateId}`,
+      `/user-parcel-templates/${userParcelTemplateId}`,
       { body: request },
     );
   }
 
   /** Deletes a user parcel template. */
   async delete(userParcelTemplateId: string): Promise<void> {
-    return this.client.request<void>("DELETE", `/user_parcel_templates/${userParcelTemplateId}`);
+    return this.client.request<void>("DELETE", `/user-parcel-templates/${userParcelTemplateId}`);
   }
 }
