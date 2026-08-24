@@ -6,7 +6,7 @@
 
 # Interface: AddressValidationResults
 
-Defined in: [resources/addresses.ts:10](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/addresses.ts#L10)
+Defined in: [resources/addresses.ts:10](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/addresses.ts#L10)
 
 Result of validating an address. Not detailed in the OpenAPI mirror this
 package was built against (ROADMAP.md §2) — this shape is a best-effort
@@ -19,7 +19,7 @@ against a reachable primary source. Treat as advisory.
 
 > `optional` **is\_valid?**: `boolean`
 
-Defined in: [resources/addresses.ts:11](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/addresses.ts#L11)
+Defined in: [resources/addresses.ts:11](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/addresses.ts#L11)
 
 ***
 
@@ -27,7 +27,7 @@ Defined in: [resources/addresses.ts:11](https://github.com/RichardMcQuiston01/un
 
 > `optional` **messages?**: `object`[]
 
-Defined in: [resources/addresses.ts:12](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/addresses.ts#L12)
+Defined in: [resources/addresses.ts:12](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/addresses.ts#L12)
 
 #### code?
 

@@ -6,7 +6,7 @@
 
 # Class: TransactionsResource
 
-Defined in: [resources/transactions.ts:37](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/transactions.ts#L37)
+Defined in: [resources/transactions.ts:37](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/transactions.ts#L37)
 
 ## Constructors
 
@@ -14,7 +14,7 @@ Defined in: [resources/transactions.ts:37](https://github.com/RichardMcQuiston01
 
 > **new TransactionsResource**(`client`): `TransactionsResource`
 
-Defined in: [resources/transactions.ts:38](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/transactions.ts#L38)
+Defined in: [resources/transactions.ts:38](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/transactions.ts#L38)
 
 #### Parameters
 
@@ -32,7 +32,7 @@ Defined in: [resources/transactions.ts:38](https://github.com/RichardMcQuiston01
 
 > **create**(`request`): `Promise`\<[`Transaction`](../interfaces/Transaction.md)\>
 
-Defined in: [resources/transactions.ts:41](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/transactions.ts#L41)
+Defined in: [resources/transactions.ts:41](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/transactions.ts#L41)
 
 Purchases a shipping label for the given rate.
 
@@ -52,7 +52,7 @@ Purchases a shipping label for the given rate.
 
 > **get**(`transactionId`): `Promise`\<[`Transaction`](../interfaces/Transaction.md)\>
 
-Defined in: [resources/transactions.ts:51](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/transactions.ts#L51)
+Defined in: [resources/transactions.ts:51](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/transactions.ts#L51)
 
 Retrieves a single transaction by its object ID.
 
@@ -72,7 +72,7 @@ Retrieves a single transaction by its object ID.
 
 > **list**(`query?`): `Promise`\<[`PaginatedList`](../interfaces/PaginatedList.md)\<[`Transaction`](../interfaces/Transaction.md)\>\>
 
-Defined in: [resources/transactions.ts:46](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/transactions.ts#L46)
+Defined in: [resources/transactions.ts:46](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/transactions.ts#L46)
 
 Retrieves a single page of previously purchased transactions (labels).
 

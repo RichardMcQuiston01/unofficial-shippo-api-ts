@@ -6,7 +6,7 @@
 
 # Interface: Batch
 
-Defined in: [resources/batches.ts:39](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/batches.ts#L39)
+Defined in: [resources/batches.ts:39](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/batches.ts#L39)
 
 `Batch` object. Field *names* are grounded in Shippo's own webhook
 AsyncAPI spec (`asyncapi/shippo-webhooks-asyncapi.yaml` in the
@@ -26,7 +26,7 @@ CONVENTIONS.md` "Spec cross-checking".
 
 > `optional` **batch\_shipments?**: [`BatchShipment`](../type-aliases/BatchShipment.md)[]
 
-Defined in: [resources/batches.ts:48](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/batches.ts#L48)
+Defined in: [resources/batches.ts:48](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/batches.ts#L48)
 
 ***
 
@@ -34,7 +34,7 @@ Defined in: [resources/batches.ts:48](https://github.com/RichardMcQuiston01/unof
 
 > `optional` **default\_carrier\_account?**: `string`
 
-Defined in: [resources/batches.ts:44](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/batches.ts#L44)
+Defined in: [resources/batches.ts:44](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/batches.ts#L44)
 
 ***
 
@@ -42,7 +42,7 @@ Defined in: [resources/batches.ts:44](https://github.com/RichardMcQuiston01/unof
 
 > `optional` **default\_servicelevel\_token?**: `string`
 
-Defined in: [resources/batches.ts:45](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/batches.ts#L45)
+Defined in: [resources/batches.ts:45](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/batches.ts#L45)
 
 ***
 
@@ -50,7 +50,7 @@ Defined in: [resources/batches.ts:45](https://github.com/RichardMcQuiston01/unof
 
 > `optional` **label\_filetype?**: `string`
 
-Defined in: [resources/batches.ts:46](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/batches.ts#L46)
+Defined in: [resources/batches.ts:46](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/batches.ts#L46)
 
 ***
 
@@ -58,7 +58,7 @@ Defined in: [resources/batches.ts:46](https://github.com/RichardMcQuiston01/unof
 
 > `optional` **metadata?**: `string`
 
-Defined in: [resources/batches.ts:47](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/batches.ts#L47)
+Defined in: [resources/batches.ts:47](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/batches.ts#L47)
 
 ***
 
@@ -66,7 +66,7 @@ Defined in: [resources/batches.ts:47](https://github.com/RichardMcQuiston01/unof
 
 > `optional` **object\_created?**: `string`
 
-Defined in: [resources/batches.ts:50](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/batches.ts#L50)
+Defined in: [resources/batches.ts:50](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/batches.ts#L50)
 
 ***
 
@@ -74,7 +74,7 @@ Defined in: [resources/batches.ts:50](https://github.com/RichardMcQuiston01/unof
 
 > `optional` **object\_id?**: `string`
 
-Defined in: [resources/batches.ts:40](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/batches.ts#L40)
+Defined in: [resources/batches.ts:40](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/batches.ts#L40)
 
 ***
 
@@ -82,7 +82,7 @@ Defined in: [resources/batches.ts:40](https://github.com/RichardMcQuiston01/unof
 
 > `optional` **object\_owner?**: `string`
 
-Defined in: [resources/batches.ts:43](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/batches.ts#L43)
+Defined in: [resources/batches.ts:43](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/batches.ts#L43)
 
 ***
 
@@ -90,7 +90,7 @@ Defined in: [resources/batches.ts:43](https://github.com/RichardMcQuiston01/unof
 
 > `optional` **object\_results?**: [`BatchObjectResult`](../type-aliases/BatchObjectResult.md)[]
 
-Defined in: [resources/batches.ts:49](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/batches.ts#L49)
+Defined in: [resources/batches.ts:49](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/batches.ts#L49)
 
 ***
 
@@ -98,7 +98,7 @@ Defined in: [resources/batches.ts:49](https://github.com/RichardMcQuiston01/unof
 
 > `optional` **object\_updated?**: `string`
 
-Defined in: [resources/batches.ts:51](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/batches.ts#L51)
+Defined in: [resources/batches.ts:51](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/batches.ts#L51)
 
 ***
 
@@ -106,6 +106,6 @@ Defined in: [resources/batches.ts:51](https://github.com/RichardMcQuiston01/unof
 
 > `optional` **status?**: [`BatchStatus`](../type-aliases/BatchStatus.md)
 
-Defined in: [resources/batches.ts:42](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/batches.ts#L42)
+Defined in: [resources/batches.ts:42](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/batches.ts#L42)
 
 Inferred by analogy with other async resources — not confirmed for Batches. See `BatchStatus`.

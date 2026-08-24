@@ -8,7 +8,7 @@
 
 > **CarrierAccountParameters** = `Record`\<`string`, `unknown`\>
 
-Defined in: [resources/carrier-accounts.ts:11](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/carrier-accounts.ts#L11)
+Defined in: [resources/carrier-accounts.ts:11](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/carrier-accounts.ts#L11)
 
 Carrier-specific authentication parameters (account number, API key,
 meter number, etc.). Genuinely carrier-dependent — what a carrier

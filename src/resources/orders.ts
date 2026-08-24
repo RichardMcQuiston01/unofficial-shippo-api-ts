@@ -1,5 +1,5 @@
 import type { ShippoClient } from "../client";
-import type { ListQuery, PaginatedList } from "../pagination";
+import type { ListQuery, UnconfirmedPaginatedList } from "../pagination";
 import type { Address, AddressCreateRequest } from "./addresses";
 
 /**
@@ -80,9 +80,14 @@ export class OrdersResource {
     return this.client.request<Order>("POST", "/orders", { body: request });
   }
 
-  /** Retrieves a single page of previously created orders. */
-  async list(query?: ListQuery): Promise<PaginatedList<Order>> {
-    return this.client.request<PaginatedList<Order>>("GET", "/orders", { query });
+  /**
+   * Retrieves a single page of previously created orders.
+   *
+   * **Confirmed** by live-contract testing (ROADMAP.md Stage 5): the real
+   * envelope omits `count`, unlike the confirmed-spec resources' pagination.
+   */
+  async list(query?: ListQuery): Promise<UnconfirmedPaginatedList<Order>> {
+    return this.client.request<UnconfirmedPaginatedList<Order>>("GET", "/orders", { query });
   }
 
   /** Retrieves a single order by its object ID. */

@@ -6,7 +6,7 @@
 
 # Interface: ServiceGroup
 
-Defined in: [resources/service-groups.ts:26](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/service-groups.ts#L26)
+Defined in: [resources/service-groups.ts:25](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/service-groups.ts#L25)
 
 Bundles multiple carrier service levels together for rate-shopping /
 checkout purposes (e.g. "show customers only these 3 service levels at
@@ -23,7 +23,7 @@ resource's stated purpose only.
 
 > `optional` **name?**: `string`
 
-Defined in: [resources/service-groups.ts:28](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/service-groups.ts#L28)
+Defined in: [resources/service-groups.ts:27](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/service-groups.ts#L27)
 
 ***
 
@@ -31,7 +31,7 @@ Defined in: [resources/service-groups.ts:28](https://github.com/RichardMcQuiston
 
 > `optional` **object\_id?**: `string`
 
-Defined in: [resources/service-groups.ts:27](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/service-groups.ts#L27)
+Defined in: [resources/service-groups.ts:26](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/service-groups.ts#L26)
 
 ***
 
@@ -39,4 +39,4 @@ Defined in: [resources/service-groups.ts:27](https://github.com/RichardMcQuiston
 
 > `optional` **rate\_ids\_services?**: [`ServiceGroupRateService`](../type-aliases/ServiceGroupRateService.md)[]
 
-Defined in: [resources/service-groups.ts:29](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/service-groups.ts#L29)
+Defined in: [resources/service-groups.ts:28](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/service-groups.ts#L28)

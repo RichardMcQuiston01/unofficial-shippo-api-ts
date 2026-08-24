@@ -6,7 +6,7 @@
 
 # Class: Shippo
 
-Defined in: [index.ts:133](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/index.ts#L133)
+Defined in: [index.ts:136](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/index.ts#L136)
 
 ## Constructors
 
@@ -14,7 +14,7 @@ Defined in: [index.ts:133](https://github.com/RichardMcQuiston01/unofficial-ship
 
 > **new Shippo**(`options`): `Shippo`
 
-Defined in: [index.ts:164](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/index.ts#L164)
+Defined in: [index.ts:167](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/index.ts#L167)
 
 #### Parameters
 
@@ -32,7 +32,7 @@ Defined in: [index.ts:164](https://github.com/RichardMcQuiston01/unofficial-ship
 
 > `readonly` **addresses**: [`AddressesResource`](AddressesResource.md)
 
-Defined in: [index.ts:143](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/index.ts#L143)
+Defined in: [index.ts:146](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/index.ts#L146)
 
 ***
 
@@ -40,7 +40,7 @@ Defined in: [index.ts:143](https://github.com/RichardMcQuiston01/unofficial-ship
 
 > `readonly` **batches**: [`BatchesResource`](BatchesResource.md)
 
-Defined in: [index.ts:151](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/index.ts#L151)
+Defined in: [index.ts:154](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/index.ts#L154)
 
 ***
 
@@ -48,7 +48,7 @@ Defined in: [index.ts:151](https://github.com/RichardMcQuiston01/unofficial-ship
 
 > `readonly` **carrierAccounts**: [`CarrierAccountsResource`](CarrierAccountsResource.md)
 
-Defined in: [index.ts:157](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/index.ts#L157)
+Defined in: [index.ts:160](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/index.ts#L160)
 
 ***
 
@@ -56,7 +56,7 @@ Defined in: [index.ts:157](https://github.com/RichardMcQuiston01/unofficial-ship
 
 > `readonly` **carrierParcelTemplates**: [`CarrierParcelTemplatesResource`](CarrierParcelTemplatesResource.md)
 
-Defined in: [index.ts:158](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/index.ts#L158)
+Defined in: [index.ts:161](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/index.ts#L161)
 
 ***
 
@@ -64,7 +64,7 @@ Defined in: [index.ts:158](https://github.com/RichardMcQuiston01/unofficial-ship
 
 > `readonly` **client**: [`ShippoClient`](ShippoClient.md)
 
-Defined in: [index.ts:141](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/index.ts#L141)
+Defined in: [index.ts:144](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/index.ts#L144)
 
 The underlying HTTP transport. Escape hatch for any endpoint not yet
 wrapped in a typed resource method below — call
@@ -78,7 +78,7 @@ shows up via `JSON.stringify` or `console.log` on either object.
 
 > `readonly` **customsDeclarations**: [`CustomsDeclarationsResource`](CustomsDeclarationsResource.md)
 
-Defined in: [index.ts:153](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/index.ts#L153)
+Defined in: [index.ts:156](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/index.ts#L156)
 
 ***
 
@@ -86,7 +86,7 @@ Defined in: [index.ts:153](https://github.com/RichardMcQuiston01/unofficial-ship
 
 > `readonly` **customsItems**: [`CustomsItemsResource`](CustomsItemsResource.md)
 
-Defined in: [index.ts:154](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/index.ts#L154)
+Defined in: [index.ts:157](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/index.ts#L157)
 
 ***
 
@@ -94,7 +94,7 @@ Defined in: [index.ts:154](https://github.com/RichardMcQuiston01/unofficial-ship
 
 > `readonly` **manifests**: [`ManifestsResource`](ManifestsResource.md)
 
-Defined in: [index.ts:155](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/index.ts#L155)
+Defined in: [index.ts:158](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/index.ts#L158)
 
 ***
 
@@ -102,7 +102,7 @@ Defined in: [index.ts:155](https://github.com/RichardMcQuiston01/unofficial-ship
 
 > `readonly` **orders**: [`OrdersResource`](OrdersResource.md)
 
-Defined in: [index.ts:156](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/index.ts#L156)
+Defined in: [index.ts:159](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/index.ts#L159)
 
 ***
 
@@ -110,7 +110,7 @@ Defined in: [index.ts:156](https://github.com/RichardMcQuiston01/unofficial-ship
 
 > `readonly` **parcels**: [`ParcelsResource`](ParcelsResource.md)
 
-Defined in: [index.ts:144](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/index.ts#L144)
+Defined in: [index.ts:147](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/index.ts#L147)
 
 ***
 
@@ -118,7 +118,7 @@ Defined in: [index.ts:144](https://github.com/RichardMcQuiston01/unofficial-ship
 
 > `readonly` **pickups**: [`PickupsResource`](PickupsResource.md)
 
-Defined in: [index.ts:161](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/index.ts#L161)
+Defined in: [index.ts:164](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/index.ts#L164)
 
 ***
 
@@ -126,7 +126,7 @@ Defined in: [index.ts:161](https://github.com/RichardMcQuiston01/unofficial-ship
 
 > `readonly` **rates**: [`RatesResource`](RatesResource.md)
 
-Defined in: [index.ts:146](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/index.ts#L146)
+Defined in: [index.ts:149](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/index.ts#L149)
 
 ***
 
@@ -134,7 +134,7 @@ Defined in: [index.ts:146](https://github.com/RichardMcQuiston01/unofficial-ship
 
 > `readonly` **ratesAtCheckout**: [`RatesAtCheckoutResource`](RatesAtCheckoutResource.md)
 
-Defined in: [index.ts:162](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/index.ts#L162)
+Defined in: [index.ts:165](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/index.ts#L165)
 
 ***
 
@@ -142,7 +142,7 @@ Defined in: [index.ts:162](https://github.com/RichardMcQuiston01/unofficial-ship
 
 > `readonly` **refunds**: [`RefundsResource`](RefundsResource.md)
 
-Defined in: [index.ts:152](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/index.ts#L152)
+Defined in: [index.ts:155](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/index.ts#L155)
 
 ***
 
@@ -150,7 +150,7 @@ Defined in: [index.ts:152](https://github.com/RichardMcQuiston01/unofficial-ship
 
 > `readonly` **serviceGroups**: [`ServiceGroupsResource`](ServiceGroupsResource.md)
 
-Defined in: [index.ts:160](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/index.ts#L160)
+Defined in: [index.ts:163](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/index.ts#L163)
 
 ***
 
@@ -158,7 +158,7 @@ Defined in: [index.ts:160](https://github.com/RichardMcQuiston01/unofficial-ship
 
 > `readonly` **shipments**: [`ShipmentsResource`](ShipmentsResource.md)
 
-Defined in: [index.ts:145](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/index.ts#L145)
+Defined in: [index.ts:148](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/index.ts#L148)
 
 ***
 
@@ -166,7 +166,7 @@ Defined in: [index.ts:145](https://github.com/RichardMcQuiston01/unofficial-ship
 
 > `readonly` **tracking**: [`TrackingResource`](TrackingResource.md)
 
-Defined in: [index.ts:148](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/index.ts#L148)
+Defined in: [index.ts:151](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/index.ts#L151)
 
 ***
 
@@ -174,7 +174,7 @@ Defined in: [index.ts:148](https://github.com/RichardMcQuiston01/unofficial-ship
 
 > `readonly` **transactions**: [`TransactionsResource`](TransactionsResource.md)
 
-Defined in: [index.ts:147](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/index.ts#L147)
+Defined in: [index.ts:150](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/index.ts#L150)
 
 ***
 
@@ -182,7 +182,7 @@ Defined in: [index.ts:147](https://github.com/RichardMcQuiston01/unofficial-ship
 
 > `readonly` **userParcelTemplates**: [`UserParcelTemplatesResource`](UserParcelTemplatesResource.md)
 
-Defined in: [index.ts:159](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/index.ts#L159)
+Defined in: [index.ts:162](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/index.ts#L162)
 
 ***
 
@@ -190,4 +190,4 @@ Defined in: [index.ts:159](https://github.com/RichardMcQuiston01/unofficial-ship
 
 > `readonly` **webhooks**: [`WebhooksResource`](WebhooksResource.md)
 
-Defined in: [index.ts:150](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/index.ts#L150)
+Defined in: [index.ts:153](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/index.ts#L153)

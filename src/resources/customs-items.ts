@@ -1,5 +1,5 @@
 import type { ShippoClient } from "../client";
-import type { ListQuery, PaginatedList } from "../pagination";
+import type { ListQuery, UnconfirmedPaginatedList } from "../pagination";
 import type { MassUnit } from "./parcels";
 
 /**
@@ -51,9 +51,16 @@ export class CustomsItemsResource {
     return this.client.request<CustomsItem>("POST", "/customs/items", { body: request });
   }
 
-  /** Retrieves a single page of previously created customs items. */
-  async list(query?: ListQuery): Promise<PaginatedList<CustomsItem>> {
-    return this.client.request<PaginatedList<CustomsItem>>("GET", "/customs/items", { query });
+  /**
+   * Retrieves a single page of previously created customs items.
+   *
+   * **Confirmed** by live-contract testing (ROADMAP.md Stage 5): the real
+   * envelope omits `count`, unlike the confirmed-spec resources' pagination.
+   */
+  async list(query?: ListQuery): Promise<UnconfirmedPaginatedList<CustomsItem>> {
+    return this.client.request<UnconfirmedPaginatedList<CustomsItem>>("GET", "/customs/items", {
+      query,
+    });
   }
 
   /** Retrieves a single customs item by its object ID. */

@@ -6,7 +6,7 @@
 
 # Class: RefundsResource
 
-Defined in: [resources/refunds.ts:22](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/refunds.ts#L22)
+Defined in: [resources/refunds.ts:22](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/refunds.ts#L22)
 
 ## Constructors
 
@@ -14,7 +14,7 @@ Defined in: [resources/refunds.ts:22](https://github.com/RichardMcQuiston01/unof
 
 > **new RefundsResource**(`client`): `RefundsResource`
 
-Defined in: [resources/refunds.ts:23](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/refunds.ts#L23)
+Defined in: [resources/refunds.ts:23](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/refunds.ts#L23)
 
 #### Parameters
 
@@ -32,7 +32,7 @@ Defined in: [resources/refunds.ts:23](https://github.com/RichardMcQuiston01/unof
 
 > **create**(`request`): `Promise`\<[`Refund`](../interfaces/Refund.md)\>
 
-Defined in: [resources/refunds.ts:31](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/refunds.ts#L31)
+Defined in: [resources/refunds.ts:31](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/refunds.ts#L31)
 
 Requests a refund for a previously purchased label (transaction).
 
@@ -52,7 +52,7 @@ Requests a refund for a previously purchased label (transaction).
 
 > **get**(`refundId`): `Promise`\<[`Refund`](../interfaces/Refund.md)\>
 
-Defined in: [resources/refunds.ts:36](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/refunds.ts#L36)
+Defined in: [resources/refunds.ts:36](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/refunds.ts#L36)
 
 Retrieves a single refund by its object ID.
 
@@ -72,7 +72,7 @@ Retrieves a single refund by its object ID.
 
 > **list**(`query?`): `Promise`\<[`PaginatedList`](../interfaces/PaginatedList.md)\<[`Refund`](../interfaces/Refund.md)\>\>
 
-Defined in: [resources/refunds.ts:26](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/refunds.ts#L26)
+Defined in: [resources/refunds.ts:26](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/refunds.ts#L26)
 
 Retrieves a single page of previously requested refunds.
 

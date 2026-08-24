@@ -6,7 +6,7 @@
 
 # Interface: WebhookCreateRequest
 
-Defined in: [resources/webhooks.ts:39](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/webhooks.ts#L39)
+Defined in: [resources/webhooks.ts:39](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/webhooks.ts#L39)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [resources/webhooks.ts:39](https://github.com/RichardMcQuiston01/uno
 
 > `optional` **active?**: `boolean`
 
-Defined in: [resources/webhooks.ts:42](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/webhooks.ts#L42)
+Defined in: [resources/webhooks.ts:42](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/webhooks.ts#L42)
 
 ***
 
@@ -22,7 +22,7 @@ Defined in: [resources/webhooks.ts:42](https://github.com/RichardMcQuiston01/uno
 
 > **event**: [`WebhookEventType`](../type-aliases/WebhookEventType.md)
 
-Defined in: [resources/webhooks.ts:41](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/webhooks.ts#L41)
+Defined in: [resources/webhooks.ts:41](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/webhooks.ts#L41)
 
 ***
 
@@ -30,4 +30,4 @@ Defined in: [resources/webhooks.ts:41](https://github.com/RichardMcQuiston01/uno
 
 > **url**: `string`
 
-Defined in: [resources/webhooks.ts:40](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/webhooks.ts#L40)
+Defined in: [resources/webhooks.ts:40](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/webhooks.ts#L40)

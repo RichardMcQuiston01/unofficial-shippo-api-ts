@@ -6,7 +6,7 @@
 
 # Interface: CustomsItemCreateRequest
 
-Defined in: [resources/customs-items.ts:34](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/customs-items.ts#L34)
+Defined in: [resources/customs-items.ts:34](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/customs-items.ts#L34)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [resources/customs-items.ts:34](https://github.com/RichardMcQuiston0
 
 > **description**: `string`
 
-Defined in: [resources/customs-items.ts:35](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/customs-items.ts#L35)
+Defined in: [resources/customs-items.ts:35](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/customs-items.ts#L35)
 
 ***
 
@@ -22,7 +22,7 @@ Defined in: [resources/customs-items.ts:35](https://github.com/RichardMcQuiston0
 
 > **mass\_unit**: [`MassUnit`](../type-aliases/MassUnit.md)
 
-Defined in: [resources/customs-items.ts:38](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/customs-items.ts#L38)
+Defined in: [resources/customs-items.ts:38](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/customs-items.ts#L38)
 
 ***
 
@@ -30,7 +30,7 @@ Defined in: [resources/customs-items.ts:38](https://github.com/RichardMcQuiston0
 
 > **net\_weight**: `string`
 
-Defined in: [resources/customs-items.ts:37](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/customs-items.ts#L37)
+Defined in: [resources/customs-items.ts:37](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/customs-items.ts#L37)
 
 ***
 
@@ -38,7 +38,7 @@ Defined in: [resources/customs-items.ts:37](https://github.com/RichardMcQuiston0
 
 > **origin\_country**: `string`
 
-Defined in: [resources/customs-items.ts:41](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/customs-items.ts#L41)
+Defined in: [resources/customs-items.ts:41](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/customs-items.ts#L41)
 
 ***
 
@@ -46,7 +46,7 @@ Defined in: [resources/customs-items.ts:41](https://github.com/RichardMcQuiston0
 
 > **quantity**: `number`
 
-Defined in: [resources/customs-items.ts:36](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/customs-items.ts#L36)
+Defined in: [resources/customs-items.ts:36](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/customs-items.ts#L36)
 
 ***
 
@@ -54,7 +54,7 @@ Defined in: [resources/customs-items.ts:36](https://github.com/RichardMcQuiston0
 
 > `optional` **sku\_code?**: `string`
 
-Defined in: [resources/customs-items.ts:43](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/customs-items.ts#L43)
+Defined in: [resources/customs-items.ts:43](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/customs-items.ts#L43)
 
 ***
 
@@ -62,7 +62,7 @@ Defined in: [resources/customs-items.ts:43](https://github.com/RichardMcQuiston0
 
 > `optional` **tariff\_number?**: `string`
 
-Defined in: [resources/customs-items.ts:42](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/customs-items.ts#L42)
+Defined in: [resources/customs-items.ts:42](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/customs-items.ts#L42)
 
 ***
 
@@ -70,7 +70,7 @@ Defined in: [resources/customs-items.ts:42](https://github.com/RichardMcQuiston0
 
 > **value\_amount**: `string`
 
-Defined in: [resources/customs-items.ts:39](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/customs-items.ts#L39)
+Defined in: [resources/customs-items.ts:39](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/customs-items.ts#L39)
 
 ***
 
@@ -78,4 +78,4 @@ Defined in: [resources/customs-items.ts:39](https://github.com/RichardMcQuiston0
 
 > **value\_currency**: `string`
 
-Defined in: [resources/customs-items.ts:40](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/customs-items.ts#L40)
+Defined in: [resources/customs-items.ts:40](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/customs-items.ts#L40)

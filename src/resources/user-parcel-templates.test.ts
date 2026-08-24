@@ -13,13 +13,13 @@ const SAMPLE_TEMPLATE: UserParcelTemplate = {
   height: "4",
   distance_unit: "in",
   weight: "2",
-  mass_unit: "lb",
+  weight_unit: "lb",
   object_created: "2026-01-01T00:00:00Z",
   object_updated: "2026-01-01T00:00:00Z",
 };
 
 describe("UserParcelTemplatesResource", () => {
-  test("list() gets /user_parcel_templates with query params and returns a page", async () => {
+  test("list() gets /user-parcel-templates with query params and returns a page", async () => {
     const { fetch, calls } = createMockFetch(() => ({
       body: { count: 1, next: null, previous: null, results: [SAMPLE_TEMPLATE] },
     }));
@@ -29,12 +29,22 @@ describe("UserParcelTemplatesResource", () => {
 
     expect(page.results).toEqual([SAMPLE_TEMPLATE]);
     const url = new URL(calls[0]?.url ?? "");
-    expect(url.pathname).toBe("/user_parcel_templates");
+    expect(url.pathname).toBe("/user-parcel-templates");
     expect(url.searchParams.get("page")).toBe("1");
     expect(url.searchParams.get("results")).toBe("5");
   });
 
-  test("create() posts to /user_parcel_templates and returns the created template", async () => {
+  test("list() tolerates a null results envelope, matching live behavior on an empty account", async () => {
+    const { fetch } = createMockFetch(() => ({ body: { results: null } }));
+    const templates = new UserParcelTemplatesResource(new ShippoClient({ apiKey: "key", fetch }));
+
+    const page = await templates.list();
+
+    expect(page.results).toBeNull();
+    expect(page.count).toBeUndefined();
+  });
+
+  test("create() posts to /user-parcel-templates and returns the created template", async () => {
     const { fetch, calls } = createMockFetch(() => ({ status: 201, body: SAMPLE_TEMPLATE }));
     const templates = new UserParcelTemplatesResource(new ShippoClient({ apiKey: "key", fetch }));
 
@@ -45,11 +55,11 @@ describe("UserParcelTemplatesResource", () => {
       height: "4",
       distance_unit: "in",
       weight: "2",
-      mass_unit: "lb",
+      weight_unit: "lb",
     });
 
     expect(result).toEqual(SAMPLE_TEMPLATE);
-    expect(calls[0]?.url).toBe("https://api.goshippo.com/user_parcel_templates");
+    expect(calls[0]?.url).toBe("https://api.goshippo.com/user-parcel-templates");
     expect(calls[0]?.method).toBe("POST");
   });
 
@@ -60,10 +70,10 @@ describe("UserParcelTemplatesResource", () => {
     const result = await templates.get("upt_123");
 
     expect(result).toEqual(SAMPLE_TEMPLATE);
-    expect(calls[0]?.url).toBe("https://api.goshippo.com/user_parcel_templates/upt_123");
+    expect(calls[0]?.url).toBe("https://api.goshippo.com/user-parcel-templates/upt_123");
   });
 
-  test("update() puts to /user_parcel_templates/{id} and returns the updated template", async () => {
+  test("update() puts to /user-parcel-templates/{id} and returns the updated template", async () => {
     const updated = { ...SAMPLE_TEMPLATE, name: "My renamed box" };
     const { fetch, calls } = createMockFetch(() => ({ body: updated }));
     const templates = new UserParcelTemplatesResource(new ShippoClient({ apiKey: "key", fetch }));
@@ -71,18 +81,18 @@ describe("UserParcelTemplatesResource", () => {
     const result = await templates.update("upt_123", { name: "My renamed box" });
 
     expect(result.name).toBe("My renamed box");
-    expect(calls[0]?.url).toBe("https://api.goshippo.com/user_parcel_templates/upt_123");
+    expect(calls[0]?.url).toBe("https://api.goshippo.com/user-parcel-templates/upt_123");
     expect(calls[0]?.method).toBe("PUT");
   });
 
-  test("delete() sends DELETE to /user_parcel_templates/{id} and resolves with no value", async () => {
+  test("delete() sends DELETE to /user-parcel-templates/{id} and resolves with no value", async () => {
     const { fetch, calls } = createMockFetch(() => ({ status: 204 }));
     const templates = new UserParcelTemplatesResource(new ShippoClient({ apiKey: "key", fetch }));
 
     const result = await templates.delete("upt_123");
 
     expect(result).toBeUndefined();
-    expect(calls[0]?.url).toBe("https://api.goshippo.com/user_parcel_templates/upt_123");
+    expect(calls[0]?.url).toBe("https://api.goshippo.com/user-parcel-templates/upt_123");
     expect(calls[0]?.method).toBe("DELETE");
   });
 

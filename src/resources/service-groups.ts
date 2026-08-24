@@ -1,5 +1,4 @@
 import type { ShippoClient } from "../client";
-import type { ListQuery, PaginatedList } from "../pagination";
 
 /**
  * A single carrier service level entry within a service group's selection.
@@ -42,25 +41,34 @@ export interface ServiceGroupUpdateRequest {
 export class ServiceGroupsResource {
   constructor(private readonly client: ShippoClient) {}
 
-  /** Retrieves a single page of previously created service groups. */
-  async list(query?: ListQuery): Promise<PaginatedList<ServiceGroup>> {
-    return this.client.request<PaginatedList<ServiceGroup>>("GET", "/service_groups", { query });
+  /**
+   * Retrieves every previously created service group.
+   *
+   * **Confirmed** by live-contract testing (ROADMAP.md Stage 5) against
+   * `/service-groups` (hyphenated) — an earlier guess of `/service_groups`
+   * 404'd live. Unlike every other list endpoint in this package, the real
+   * response is a bare JSON array, not a `{count, next, previous, results}`
+   * (or even `{results}`) envelope — there's no pagination to page through,
+   * hence no `ListQuery` parameter here.
+   */
+  async list(): Promise<ServiceGroup[]> {
+    return this.client.request<ServiceGroup[]>("GET", "/service-groups");
   }
 
   /** Creates a new service group bundling one or more carrier service levels. */
   async create(request: ServiceGroupCreateRequest): Promise<ServiceGroup> {
-    return this.client.request<ServiceGroup>("POST", "/service_groups", { body: request });
+    return this.client.request<ServiceGroup>("POST", "/service-groups", { body: request });
   }
 
   /** Updates an existing service group's name or service-level selection. */
   async update(serviceGroupId: string, request: ServiceGroupUpdateRequest): Promise<ServiceGroup> {
-    return this.client.request<ServiceGroup>("PUT", `/service_groups/${serviceGroupId}`, {
+    return this.client.request<ServiceGroup>("PUT", `/service-groups/${serviceGroupId}`, {
       body: request,
     });
   }
 
   /** Deletes a service group. */
   async delete(serviceGroupId: string): Promise<void> {
-    return this.client.request<void>("DELETE", `/service_groups/${serviceGroupId}`);
+    return this.client.request<void>("DELETE", `/service-groups/${serviceGroupId}`);
   }
 }

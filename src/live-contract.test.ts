@@ -60,7 +60,9 @@ liveDescribe("live contract: core happy path", () => {
     // assertions below don't fully pin it down.
     console.log("Live validation_results shape:", JSON.stringify(validated.validation_results));
 
-    expect(validated.object_id).toBe(address.object_id);
+    // Discovery: validate() returns a *new* Address object_id, not the one
+    // passed in -- see the doc comment on AddressesResource#validate.
+    expect(typeof validated.object_id).toBe("string");
     expect(validated.validation_results).toBeDefined();
   });
 
@@ -144,7 +146,7 @@ liveDescribe("live contract: unconfirmed-spec resources (read-only smoke checks)
   test("list() on every no-spec resource returns the assumed PaginatedList envelope", async () => {
     const shippo = createLiveShippo();
 
-    const checks: Array<[string, () => Promise<{ count: number; results: unknown[] }>]> = [
+    const checks: Array<[string, () => Promise<{ count?: number; results: unknown[] | null }>]> = [
       ["customsDeclarations", () => shippo.customsDeclarations.list()],
       ["customsItems", () => shippo.customsItems.list()],
       ["manifests", () => shippo.manifests.list()],
@@ -152,15 +154,22 @@ liveDescribe("live contract: unconfirmed-spec resources (read-only smoke checks)
       ["carrierAccounts", () => shippo.carrierAccounts.list()],
       ["carrierParcelTemplates", () => shippo.carrierParcelTemplates.list()],
       ["userParcelTemplates", () => shippo.userParcelTemplates.list()],
-      ["serviceGroups", () => shippo.serviceGroups.list()],
     ];
 
     for (const [name, call] of checks) {
       const page = await call();
       console.log(`Live list() envelope for ${name}:`, JSON.stringify(page).slice(0, 300));
-      expect(typeof page.count).toBe("number");
-      expect(Array.isArray(page.results)).toBe(true);
+      // These are no-spec resources -- count/next/previous aren't
+      // guaranteed, and results can be null instead of [] when empty.
+      expect(page.count === undefined || typeof page.count === "number").toBe(true);
+      expect(page.results === null || Array.isArray(page.results)).toBe(true);
     }
+
+    // serviceGroups is the outlier: the real response is a bare array, not
+    // a {results: [...]} envelope at all -- see ServiceGroupsResource#list.
+    const serviceGroups = await shippo.serviceGroups.list();
+    console.log("Live list() envelope for serviceGroups:", JSON.stringify(serviceGroups));
+    expect(Array.isArray(serviceGroups)).toBe(true);
   });
 });
 
@@ -187,7 +196,12 @@ liveDescribe("live contract: standalone creates for no-spec resources", () => {
 
     const created = await shippo.userParcelTemplates.create({
       name: "Live contract test template",
-      ...TEST_PARCEL,
+      length: TEST_PARCEL.length,
+      width: TEST_PARCEL.width,
+      height: TEST_PARCEL.height,
+      distance_unit: TEST_PARCEL.distance_unit,
+      weight: TEST_PARCEL.weight,
+      weight_unit: TEST_PARCEL.mass_unit,
     });
     console.log("Live UserParcelTemplate:", JSON.stringify(created));
     expect(created.object_id).toBeTruthy();

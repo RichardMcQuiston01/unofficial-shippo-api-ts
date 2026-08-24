@@ -6,7 +6,7 @@
 
 # Class: ParcelsResource
 
-Defined in: [resources/parcels.ts:31](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/parcels.ts#L31)
+Defined in: [resources/parcels.ts:31](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/parcels.ts#L31)
 
 ## Constructors
 
@@ -14,7 +14,7 @@ Defined in: [resources/parcels.ts:31](https://github.com/RichardMcQuiston01/unof
 
 > **new ParcelsResource**(`client`): `ParcelsResource`
 
-Defined in: [resources/parcels.ts:32](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/parcels.ts#L32)
+Defined in: [resources/parcels.ts:32](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/parcels.ts#L32)
 
 #### Parameters
 
@@ -32,7 +32,7 @@ Defined in: [resources/parcels.ts:32](https://github.com/RichardMcQuiston01/unof
 
 > **create**(`request`): `Promise`\<[`Parcel`](../interfaces/Parcel.md)\>
 
-Defined in: [resources/parcels.ts:35](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/parcels.ts#L35)
+Defined in: [resources/parcels.ts:35](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/parcels.ts#L35)
 
 Creates a new parcel describing a package's dimensions and weight.
 
@@ -52,7 +52,7 @@ Creates a new parcel describing a package's dimensions and weight.
 
 > **get**(`parcelId`): `Promise`\<[`Parcel`](../interfaces/Parcel.md)\>
 
-Defined in: [resources/parcels.ts:45](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/parcels.ts#L45)
+Defined in: [resources/parcels.ts:45](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/parcels.ts#L45)
 
 Retrieves a single parcel by its object ID.
 
@@ -72,7 +72,7 @@ Retrieves a single parcel by its object ID.
 
 > **list**(`query?`): `Promise`\<[`PaginatedList`](../interfaces/PaginatedList.md)\<[`Parcel`](../interfaces/Parcel.md)\>\>
 
-Defined in: [resources/parcels.ts:40](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/parcels.ts#L40)
+Defined in: [resources/parcels.ts:40](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/parcels.ts#L40)
 
 Retrieves a single page of previously created parcels.
 

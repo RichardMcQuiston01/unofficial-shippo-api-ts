@@ -81,6 +81,7 @@
 - [Transaction](interfaces/Transaction.md)
 - [TransactionCreateRequest](interfaces/TransactionCreateRequest.md)
 - [TransactionWebhookEvent](interfaces/TransactionWebhookEvent.md)
+- [UnconfirmedPaginatedList](interfaces/UnconfirmedPaginatedList.md)
 - [UserParcelTemplate](interfaces/UserParcelTemplate.md)
 - [UserParcelTemplateCreateRequest](interfaces/UserParcelTemplateCreateRequest.md)
 - [UserParcelTemplateUpdateRequest](interfaces/UserParcelTemplateUpdateRequest.md)

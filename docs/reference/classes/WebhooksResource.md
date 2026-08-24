@@ -6,7 +6,7 @@
 
 # Class: WebhooksResource
 
-Defined in: [resources/webhooks.ts:58](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/webhooks.ts#L58)
+Defined in: [resources/webhooks.ts:58](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/webhooks.ts#L58)
 
 ## Constructors
 
@@ -14,7 +14,7 @@ Defined in: [resources/webhooks.ts:58](https://github.com/RichardMcQuiston01/uno
 
 > **new WebhooksResource**(`client`): `WebhooksResource`
 
-Defined in: [resources/webhooks.ts:59](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/webhooks.ts#L59)
+Defined in: [resources/webhooks.ts:59](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/webhooks.ts#L59)
 
 #### Parameters
 
@@ -32,7 +32,7 @@ Defined in: [resources/webhooks.ts:59](https://github.com/RichardMcQuiston01/uno
 
 > **create**(`request`): `Promise`\<[`Webhook`](../interfaces/Webhook.md)\>
 
-Defined in: [resources/webhooks.ts:67](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/webhooks.ts#L67)
+Defined in: [resources/webhooks.ts:67](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/webhooks.ts#L67)
 
 Registers a new webhook subscription for a single event type.
 
@@ -52,7 +52,7 @@ Registers a new webhook subscription for a single event type.
 
 > **delete**(`webhookId`): `Promise`\<`void`\>
 
-Defined in: [resources/webhooks.ts:82](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/webhooks.ts#L82)
+Defined in: [resources/webhooks.ts:82](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/webhooks.ts#L82)
 
 Deletes a webhook subscription so it no longer receives deliveries.
 
@@ -72,7 +72,7 @@ Deletes a webhook subscription so it no longer receives deliveries.
 
 > **get**(`webhookId`): `Promise`\<[`Webhook`](../interfaces/Webhook.md)\>
 
-Defined in: [resources/webhooks.ts:72](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/webhooks.ts#L72)
+Defined in: [resources/webhooks.ts:72](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/webhooks.ts#L72)
 
 Retrieves a single webhook subscription by its object ID.
 
@@ -92,7 +92,7 @@ Retrieves a single webhook subscription by its object ID.
 
 > **list**(`query?`): `Promise`\<[`PaginatedList`](../interfaces/PaginatedList.md)\<[`Webhook`](../interfaces/Webhook.md)\>\>
 
-Defined in: [resources/webhooks.ts:62](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/webhooks.ts#L62)
+Defined in: [resources/webhooks.ts:62](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/webhooks.ts#L62)
 
 Retrieves a single page of registered webhook subscriptions.
 
@@ -112,7 +112,7 @@ Retrieves a single page of registered webhook subscriptions.
 
 > **update**(`webhookId`, `request`): `Promise`\<[`Webhook`](../interfaces/Webhook.md)\>
 
-Defined in: [resources/webhooks.ts:77](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/webhooks.ts#L77)
+Defined in: [resources/webhooks.ts:77](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/webhooks.ts#L77)
 
 Updates an existing webhook subscription's URL, event, or active state.
 

@@ -1,5 +1,6 @@
 import { describe, expect, test } from "bun:test";
 
+import packageJson from "../package.json";
 import { ShippoClient } from "./client";
 import { ShippoError } from "./errors";
 import { SDK_VERSION, Shippo } from "./index";
@@ -67,5 +68,13 @@ describe("Shippo", () => {
 describe("SDK_VERSION", () => {
   test("is a semver-shaped string", () => {
     expect(SDK_VERSION).toMatch(/^\d+\.\d+\.\d+$/);
+  });
+
+  test("matches package.json's version exactly", () => {
+    // Regression test: SDK_VERSION was hardcoded at one point and drifted
+    // out of sync with the actual published version. It's now derived
+    // from package.json directly, but assert equality anyway so a future
+    // regression back to a hardcoded string fails loudly here.
+    expect(SDK_VERSION).toBe(packageJson.version);
   });
 });

@@ -6,7 +6,7 @@
 
 # Class: CustomsItemsResource
 
-Defined in: [resources/customs-items.ts:46](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/customs-items.ts#L46)
+Defined in: [resources/customs-items.ts:46](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/customs-items.ts#L46)
 
 ## Constructors
 
@@ -14,7 +14,7 @@ Defined in: [resources/customs-items.ts:46](https://github.com/RichardMcQuiston0
 
 > **new CustomsItemsResource**(`client`): `CustomsItemsResource`
 
-Defined in: [resources/customs-items.ts:47](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/customs-items.ts#L47)
+Defined in: [resources/customs-items.ts:47](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/customs-items.ts#L47)
 
 #### Parameters
 
@@ -32,7 +32,7 @@ Defined in: [resources/customs-items.ts:47](https://github.com/RichardMcQuiston0
 
 > **create**(`request`): `Promise`\<[`CustomsItem`](../interfaces/CustomsItem.md)\>
 
-Defined in: [resources/customs-items.ts:50](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/customs-items.ts#L50)
+Defined in: [resources/customs-items.ts:50](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/customs-items.ts#L50)
 
 Creates a new customs item describing one line item for customs declarations.
 
@@ -52,7 +52,7 @@ Creates a new customs item describing one line item for customs declarations.
 
 > **get**(`customsItemId`): `Promise`\<[`CustomsItem`](../interfaces/CustomsItem.md)\>
 
-Defined in: [resources/customs-items.ts:60](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/customs-items.ts#L60)
+Defined in: [resources/customs-items.ts:67](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/customs-items.ts#L67)
 
 Retrieves a single customs item by its object ID.
 
@@ -70,11 +70,14 @@ Retrieves a single customs item by its object ID.
 
 ### list()
 
-> **list**(`query?`): `Promise`\<[`PaginatedList`](../interfaces/PaginatedList.md)\<[`CustomsItem`](../interfaces/CustomsItem.md)\>\>
+> **list**(`query?`): `Promise`\<[`UnconfirmedPaginatedList`](../interfaces/UnconfirmedPaginatedList.md)\<[`CustomsItem`](../interfaces/CustomsItem.md)\>\>
 
-Defined in: [resources/customs-items.ts:55](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/d0d69db2f4048abbd574a3b8cc036ffc876da36f/src/resources/customs-items.ts#L55)
+Defined in: [resources/customs-items.ts:60](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/blob/942f0967e40e5e379d5a2098d7bac96c0887b7fc/src/resources/customs-items.ts#L60)
 
 Retrieves a single page of previously created customs items.
+
+**Confirmed** by live-contract testing (ROADMAP.md Stage 5): the real
+envelope omits `count`, unlike the confirmed-spec resources' pagination.
 
 #### Parameters
 
@@ -84,4 +87,4 @@ Retrieves a single page of previously created customs items.
 
 #### Returns
 
-`Promise`\<[`PaginatedList`](../interfaces/PaginatedList.md)\<[`CustomsItem`](../interfaces/CustomsItem.md)\>\>
+`Promise`\<[`UnconfirmedPaginatedList`](../interfaces/UnconfirmedPaginatedList.md)\<[`CustomsItem`](../interfaces/CustomsItem.md)\>\>
