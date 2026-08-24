@@ -1,5 +1,47 @@
 # CHANGELOG
 
+## 1.0.0
+
+### Major Changes
+
+- [#18](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/pull/18) [`b49458b`](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/commit/b49458b40d9ddc6b2b3a201b905af8509b14d15d) Thanks [@RichardMcQuiston01](https://github.com/RichardMcQuiston01)! - Release 1.0.0.
+
+  Per `CONTRIBUTING.md`'s semver policy, `major` stays unused until the package meets its 1.0.0
+  bar: not just "all planned resources and tests exist," but "the types have held up against
+  genuine Shippo API responses, including from a live account." That bar is now met —
+  `bun run test:live` has run against a real Shippo test-mode account (see `ROADMAP.md`'s Stage 5
+  entry) and every discrepancy it surfaced was fixed and incorporated before this release,
+  including breaking client-contract corrections such as `ServiceGroupsResource.list()`'s
+  signature change. This changeset carries no code change of its own; it exists to combine with
+  the other pending patch/minor changesets and drive the version bump straight from `0.1.0` to
+  `1.0.0` (a `major` bump always resets to the next whole version, even below `1.0.0`).
+
+### Minor Changes
+
+- [#17](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/pull/17) [`047e88f`](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/commit/047e88faf729db15833a260d94f73f0aa67feb30) Thanks [@RichardMcQuiston01](https://github.com/RichardMcQuiston01)! - Fix contract mismatches surfaced by running the live-contract suite (`bun run test:live`)
+  against a real Shippo test-mode account for the first time (ROADMAP.md Stage 5):
+
+  - `UserParcelTemplatesResource` and `CarrierParcelTemplatesResource` used guessed, incorrect
+    paths (`/user_parcel_templates`, `/carrier_parcel_templates`) that 404 live. Corrected to
+    `/user-parcel-templates` and `/parcel-templates`.
+  - `ServiceGroupsResource` had the same path bug (`/service_groups` → `/service-groups`), plus
+    a second issue: its `list()` response is a bare JSON array, not a paginated envelope —
+    `list()` no longer takes a `ListQuery` and now returns `ServiceGroup[]` directly.
+  - `UserParcelTemplate`'s weight-unit field is `weight_unit`, not `mass_unit` as guessed by
+    analogy to `Parcel` — `create()`/`update()` 400 live otherwise.
+  - `AddressesResource#validate()`'s doc comment now reflects that the returned `Address` can
+    have a different `object_id` than the one passed in.
+  - Added `UnconfirmedPaginatedList<T>` (exported from the package root) for the no-spec
+    resources whose `list()` envelope doesn't reliably include `count`/`next`/`previous` and can
+    return `results: null` instead of `[]` when empty, replacing the stricter `PaginatedList<T>`
+    on those resources' `list()` return types.
+
+### Patch Changes
+
+- [#16](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/pull/16) [`69f63da`](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/commit/69f63daa1fbb2b0a4b3764a763aea503f0ae1389) Thanks [@RichardMcQuiston01](https://github.com/RichardMcQuiston01)! - Fix `SDK_VERSION` being hardcoded to `"0.0.0"` instead of reflecting the package's actual
+  published version. It's now derived directly from `package.json` at build time, so it can't
+  drift out of sync again.
+
 All notable changes to this project are documented in this file.
 
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
