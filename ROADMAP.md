@@ -2,8 +2,9 @@
 
 Status: **`v0.1.0` published to npm.** Stages 0–4 are built: foundation/tooling, core HTTP
 client, all 19 in-scope resources, and a full integration/consistency pass across them. Stage 5
-(testing & validation hardening) is partially shipped — the live-contract scaffold exists and
-is documented, but hasn't been run against a real account yet (needs a test-mode API key).
+(testing & validation hardening) is shipped — the live-contract suite has been run against a
+real test-mode account, and every discrepancy it surfaced has been fixed (see Stage 5's section
+below for the details).
 Stage 6 (documentation & examples) is shipped — README, generated per-resource reference, and a
 runnable `examples/` directory now exist. Stage 7 (release engineering) is **fully shipped and
 live** — `@richardmcquiston01/shippo-api@0.1.0` is on the npm registry with provenance attached;
