@@ -41,11 +41,20 @@ jobs:
       - name: format + lint + typecheck + test + build
         run: bun run ci
 
+      # v2 is required for @changesets/cli v3 (this repo's version, see
+      # package.json) -- v1 greps publish-script stdout for a "New tag: "
+      # line to know what to tag/release, but CLI v3 replaced that with a
+      # spinner UI ("Creating git tags..."), so v1 silently skips both the
+      # git tag push and the GitHub release even though npm publish (which
+      # doesn't depend on that detection) still succeeds. v2 reads a
+      # CHANGESETS_OUTPUT file instead, which isn't affected by CLI output
+      # formatting.
       - name: Create release PR or publish to npm
-        uses: changesets/action@v1
+        uses: changesets/action@v2
         with:
-          version: bun run version
-          publish: bun run release
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          version-script: bun run version
+          publish-script: bun run release
+          create-github-releases: true
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
