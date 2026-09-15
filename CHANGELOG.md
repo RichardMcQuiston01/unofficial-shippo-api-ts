@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## 1.0.1
+
+### Patch Changes
+
+- [#36](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/pull/36) [`2320126`](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/commit/232012695b0c512696501bac369ebb911bb9f2e0) Thanks [@RichardMcQuiston01](https://github.com/RichardMcQuiston01)! - Align README's "Buy Me a Coffee" section with the standard donation-ask wording used across
+  other repos, dropping the bespoke "currently looking for work" framing. No code change; this
+  gets the corrected README onto the published npm package page.
+
 ## 1.0.0
 
 ### Major Changes
