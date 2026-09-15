@@ -1,6 +1,6 @@
 {
   "name": "@richardmcquiston01/shippo-api",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Framework agnostic TypeScript client for Shippo's shipping API.",
   "license": "Apache-2.0",
   "author": "Richard McQuiston",
@@ -71,7 +71,7 @@
     "@eslint/js": "^9.19.0",
     "@types/bun": "^1.2.0",
     "@types/express": "^5.0.6",
-    "eslint": "^9.19.0",
+    "eslint": "^10.10.0",
     "eslint-config-prettier": "^10.1.8",
     "express": "^5.2.1",
     "globals": "^17.11.0",
