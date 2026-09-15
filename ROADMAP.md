@@ -533,6 +533,17 @@ coherent:
 - Triage issues/PRs. Platform API / `Shippo Accounts` support stays out of
   scope unless the target user (§1) changes from "manage your own
   shipping" to "manage shipping for other businesses."
+- **Kicked off.** `.github/dependabot.yml` added: weekly PRs against `dev`
+  for both the npm devDependency set (patch/minor grouped into one PR;
+  majors stay individual, since they're more likely to need a look — e.g.
+  an ESLint flat-config or TypeDoc output change) and the GitHub Actions
+  versions pinned in `.github/workflows/*.yml`. No open issues/PRs to
+  triage as of this writing. Watching Shippo's own API changelog for
+  breaking changes couldn't be automated from this environment yet —
+  `docs.goshippo.com`/`goshippo.com` are still blocked by this sandbox's
+  network egress policy (unlike `api.goshippo.com`, allowlisted for
+  Stage 5's live-contract run) — revisit if/when that's opened up, or
+  handle it manually in the meantime.
 
 ## 5. Multi-agent execution model
 
