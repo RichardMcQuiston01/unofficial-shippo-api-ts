@@ -16,8 +16,9 @@
  * parsed payload is NOT proof it came from Shippo. Re-fetch by
  * `object_id` before acting on anything sensitive.
  *
- * This imports from the local source (`../src/index`) since the package
- * isn't published to npm yet. Once it is, replace that import with:
+ * This imports from the local source (`../src/index`) so it runs against
+ * this checkout without a separate install step. In your own app, install
+ * the published package and import from it instead:
  *
  *   import { parseEvent, Shippo } from "@richardmcquiston01/shippo-api";
  */

@@ -1,9 +1,9 @@
 # Examples
 
 Runnable scripts demonstrating this package's core flows. Each imports from `../src/index`
-(the local source) rather than `@richardmcquiston01/shippo-api`, since the package isn't
-published to npm yet — every file has a comment at the top noting the one-line swap once it
-is.
+(the local source) rather than the published `@richardmcquiston01/shippo-api` package, so they
+run against this checkout without a separate install step — every file has a comment at the
+top with the one-line swap to use in your own app.
 
 Run any of them with Bun from the repo root:
 
