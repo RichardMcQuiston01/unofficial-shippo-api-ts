@@ -201,8 +201,8 @@ See [`CONTRIBUTING.md`](./CONTRIBUTING.md) for the branch/PR workflow.
 
 ## Buy Me a Coffee
 
-I developed this while I'm currently looking for work. If this app has helped you or someone
-you know, please consider donating. I appreciate it.
+If this app, code, or repository has helped you or someone you know, please consider donating.
+I appreciate any help to offset the costs of development and/or AI Credits.
 
 [**Donate via Stripe**](https://donate.stripe.com/00w5kD3Gj1Xo9v7gVOcs800), or scan:
 
