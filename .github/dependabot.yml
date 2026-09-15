@@ -1,0 +1,32 @@
+version: 2
+updates:
+  # devDependencies in package.json. Dependabot's npm ecosystem works off
+  # package.json/the npm registry regardless of which package manager
+  # actually installs them, so this covers bun.lock's contents too even
+  # though Dependabot itself doesn't understand the bun.lock format --
+  # it opens PRs bumping package.json, and `bun install` regenerates the
+  # lockfile to match (see CONTRIBUTING.md's branch/PR workflow; CI's
+  # `bun install --frozen-lockfile` step catches a stale lockfile).
+  - package-ecosystem: "npm"
+    directory: "/"
+    target-branch: "dev"
+    schedule:
+      interval: "weekly"
+    groups:
+      # Patch/minor bumps land together in one PR to cut down on review
+      # noise for a ~12-package devDependency set; major bumps (more
+      # likely to need a look, e.g. an ESLint flat-config or TypeDoc
+      # output change) stay one PR each.
+      dev-dependencies:
+        applies-to: version-updates
+        update-types:
+          - "patch"
+          - "minor"
+
+  # Workflow actions (actions/checkout, oven-sh/setup-bun, changesets/action,
+  # etc.) pinned in .github/workflows/*.yml.
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    target-branch: "dev"
+    schedule:
+      interval: "weekly"
