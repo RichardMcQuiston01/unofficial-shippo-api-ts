@@ -94,19 +94,29 @@ it creates from scratch.
 
 ### Semver policy
 
-While the package is pre-1.0 (`0.x.y`), treat changeset bump types as: **patch** for bug fixes
-and internal improvements with no API change, **minor** for new features and for breaking
-changes alike (standard semver behavior below `1.0.0` — every `0.x` bump is allowed to break
-callers, but we still use "minor" to signal "bigger than a patch" rather than reaching for a
-`major` bump that doesn't mean anything yet at `0.x`). **Major** stays unused until `1.0.0`.
+**As of `1.0.0`, standard semver applies**: **patch** for bug fixes and internal improvements
+with no API change, **minor** for backward-compatible new features, **major** for anything that
+breaks an existing caller (a renamed/removed export, a changed method signature, a narrowed
+return type, etc.).
 
-`1.0.0` is warranted once the package has real-world usage signal beyond its own exit
-criteria — i.e. not simply "all planned resources and tests exist" (that bar was already met
-going into this stage), but "the types have held up against genuine Shippo API responses,
-including from a live account, without a breaking correction being needed." Concretely: once
-the live-contract suite (`bun run test:live`, see below) has actually been run against a real
-account and any discrepancies it surfaces have been fixed — not just built and left unrun.
-Revisit this policy in `ROADMAP.md` once that happens.
+<details>
+<summary>Pre-1.0 history, for context</summary>
+
+While the package was pre-1.0 (`0.x.y`), changeset bump types instead meant: **patch** for bug
+fixes and internal improvements with no API change, **minor** for new features and for breaking
+changes alike (standard semver behavior below `1.0.0` — every `0.x` bump is allowed to break
+callers, but "minor" signaled "bigger than a patch" rather than reaching for a `major` bump that
+didn't mean anything yet at `0.x`), and **major** stayed unused.
+
+`1.0.0` itself was warranted once the package had real-world usage signal beyond its own exit
+criteria — i.e. not simply "all planned resources and tests exist," but "the types have held up
+against genuine Shippo API responses, including from a live account, without a breaking
+correction being needed." That happened: the live-contract suite (`bun run test:live`, see
+below) ran against a real account, surfaced 5 real contract mismatches (wrong endpoint paths,
+a wrong field name, a `list()` response shape assumption that didn't hold for every resource —
+see `ROADMAP.md`'s Stage 5 section), and every one was fixed before the `1.0.0` release.
+
+</details>
 
 ## Code style
 

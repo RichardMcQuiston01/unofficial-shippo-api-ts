@@ -1,15 +1,13 @@
 # Roadmap: `unofficial-shippo-api-ts`
 
-Status: **`v0.1.0` published to npm.** Stages 0–4 are built: foundation/tooling, core HTTP
-client, all 19 in-scope resources, and a full integration/consistency pass across them. Stage 5
-(testing & validation hardening) is shipped — the live-contract suite has been run against a
-real test-mode account, and every discrepancy it surfaced has been fixed (see Stage 5's section
-below for the details).
-Stage 6 (documentation & examples) is shipped — README, generated per-resource reference, and a
-runnable `examples/` directory now exist. Stage 7 (release engineering) is **fully shipped and
-live** — `@richardmcquiston01/shippo-api@0.1.0` is on the npm registry with provenance attached;
-see Stage 7's section for how the first release actually went (one manual workaround needed,
-now documented). See each stage's section below for what shipped and what's still open.
+Status: **`v1.0.0` published to npm.** All 8 stages are shipped: foundation/tooling, core HTTP
+client, all 19 in-scope resources, a full integration/consistency pass, testing & validation
+hardening (the live-contract suite has run against a real test-mode account, and every
+discrepancy it surfaced has been fixed — see Stage 5's section below), documentation &
+examples, and release engineering. `@richardmcquiston01/shippo-api` went from `0.1.0` to
+`1.0.0` once that live-contract bar was met, per the semver policy in `CONTRIBUTING.md`'s
+"Releases" section. See each stage's section below for what shipped and how each release
+actually went.
 
 ## 1. Goal
 
@@ -529,7 +527,7 @@ coherent:
   Every release after this one won't hit that specific issue, since `[Unreleased]` is now empty
   and changesets owns each new version section from scratch.
 
-### Stage 8 — Maintenance (ongoing, post-v0.1.0)
+### Stage 8 — Maintenance (ongoing, post-v1.0.0)
 - Watch Shippo's API changelog for breaking changes.
 - Dependabot/renovate for the (minimal) dev dependency set.
 - Triage issues/PRs. Platform API / `Shippo Accounts` support stays out of

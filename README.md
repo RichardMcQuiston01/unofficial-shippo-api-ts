@@ -12,13 +12,13 @@ Shippo. It targets individuals and businesses building an app to manage their ow
 behalf of other businesses. See [`ROADMAP.md`](./ROADMAP.md) for the full delivery plan,
 architecture decisions, and scope.
 
-**Status: `0.1.0`, pre-1.0.** All 19 in-scope resources are built and have been through a full
+**Status: `1.0.0`.** All 19 in-scope resources are built and have been through a full
 integration/consistency pass — everything from validating an address through buying a label to
 managing webhooks, batches, customs, and carrier accounts uses the same naming and error
 conventions throughout. (`Shippo Accounts` and the Platform API are permanently out of scope —
-see `ROADMAP.md`'s Target User section.) Published to npm, but not yet hardened for production
-use — see the field-level caveats below before relying on the newer resources, and
-`CONTRIBUTING.md`'s "Releases" section for what `1.0.0` is gated on.
+see `ROADMAP.md`'s Target User section.) The live-contract suite has run against a real
+Shippo test-mode account and every discrepancy it surfaced has been fixed — see the field-level
+notes below and `ROADMAP.md`'s Stage 5 section for specifics.
 
 ## Getting Started
 
