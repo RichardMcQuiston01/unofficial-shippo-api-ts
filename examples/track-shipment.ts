@@ -16,8 +16,9 @@
  * against this package's own live-contract suite (ROADMAP.md §2) — if
  * it doesn't work for you, pass a real carrier/tracking number instead.
  *
- * This imports from the local source (`../src/index`) since the package
- * isn't published to npm yet. Once it is, replace that import with:
+ * This imports from the local source (`../src/index`) so it runs against
+ * this checkout without a separate install step. In your own app, install
+ * the published package and import from it instead:
  *
  *   import { Shippo } from "@richardmcquiston01/shippo-api";
  */
