@@ -182,10 +182,41 @@ Retries are automatic but deliberately conservative (see `ShippoClientOptions`):
 ### Examples
 
 Runnable scripts in [`examples/`](./examples): validating an address, the core
-shipment-to-purchased-label flow, tracking a shipment, and receiving + parsing an inbound
-webhook (plain Node `http`, and Express) — including the re-fetch-by-`object_id` mitigation
-for the lack of webhook signature verification. See
-[`examples/README.md`](./examples/README.md) for how to run them.
+shipment-to-purchased-label flow, tracking a shipment, and receiving an inbound webhook (plain
+Node `http`, and Express). See [`examples/README.md`](./examples/README.md) for how to run them.
+
+### Webhook security
+
+`parseEvent()` only parses; it does not authenticate the sender. Shippo documents three
+controls ([webhook security](https://docs.goshippo.com/tracking/webhook-security)):
+
+- **URL token** — a self-generated secret you append to the webhook URL (`?token=...`).
+  Available to every account. Check it with `verifyWebhookToken(received, expected)`
+  (constant-time).
+- **HMAC signature** — the `Shippo-Auth-Signature` header (`t=<unix>,v1=<hex>`). Not
+  self-serve: Shippo enables it and shares the secret. Check it with
+  `verifyWebhookSignature({ rawBody, header, secret })`, which uses a constant-time compare,
+  rejects timestamps more than 5 minutes off (`toleranceSec`), and returns
+  `{ ok: false, reason }` instead of throwing. It needs the **raw** body bytes.
+- **IP allowlist** — Shippo's published US/EU ranges, enforced at your firewall or proxy.
+  Optional extra layer, not a substitute for the token or HMAC.
+
+Verify first, parse second, and acknowledge with a 2xx right away (Shippo retries after ~3
+seconds) before doing any API calls:
+
+```ts
+import { parseEvent, verifyWebhookSignature } from "@richardmcquiston01/shippo-api";
+
+const verdict = verifyWebhookSignature({
+  rawBody, // exact request bytes, e.g. from express.text()
+  header: req.get("shippo-auth-signature"),
+  secret: process.env.SHIPPO_WEBHOOK_SECRET!,
+});
+if (!verdict.ok) {
+  return res.sendStatus(401); // verdict.reason says why
+}
+const event = parseEvent(rawBody); // throws ShippoError on a malformed payload
+```
 
 ### Reference
 
