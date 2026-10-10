@@ -1,4 +1,4 @@
-import { ShippoApiError, ShippoError, ShippoNetworkError } from "./errors";
+import { redactUrl, ShippoApiError, ShippoError, ShippoNetworkError } from "./errors";
 
 const DEFAULT_BASE_URL = "https://api.goshippo.com";
 const DEFAULT_MAX_RETRIES = 2;
@@ -306,7 +306,7 @@ function parseRetryAfterMs(header: string | null): number | undefined {
 
 function networkErrorMessage(cause: unknown, url: string, attempt: number): string {
   const reason = cause instanceof Error ? cause.message : String(cause);
-  return `Shippo API request to ${url} failed on attempt ${attempt + 1}: ${reason}`;
+  return `Shippo API request to ${redactUrl(url)} failed on attempt ${attempt + 1}: ${reason}`;
 }
 
 function callerAbortError(

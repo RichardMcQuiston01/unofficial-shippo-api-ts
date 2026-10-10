@@ -296,6 +296,32 @@ describe("retries", () => {
   });
 });
 
+describe("error message redaction", () => {
+  test("a network error message omits the query string", async () => {
+    const client = new ShippoClient({ apiKey: "key", fetch: failingFetch(), maxRetries: 0 });
+
+    const error = await client
+      .request("GET", "/addresses", { query: { email: "jane@example.com" } })
+      .catch((e: unknown) => e);
+
+    expect(error).toBeInstanceOf(ShippoNetworkError);
+    expect((error as Error).message).toContain("https://api.goshippo.com/addresses");
+    expect((error as Error).message).not.toContain("jane@example.com");
+  });
+
+  test("an API error keeps the raw body on .body but not in .message", async () => {
+    const body = { parameters: { password: "carrier-secret" } };
+    const { fetch } = createMockFetch(() => ({ status: 400, body }));
+    const client = new ShippoClient({ apiKey: "key", fetch, maxRetries: 0 });
+
+    const error = await client.request("POST", "/carrier_accounts").catch((e: unknown) => e);
+
+    expect(error).toBeInstanceOf(ShippoApiError);
+    expect((error as ShippoApiError).body).toEqual(body);
+    expect((error as Error).message).not.toContain("carrier-secret");
+  });
+});
+
 describe("retry policy", () => {
   test.each(["POST", "PATCH"] as const)("does not retry a %s on a 5xx response", async (method) => {
     const { fetch, calls } = createMockFetch(() => ({ status: 503, body: { detail: "down" } }));

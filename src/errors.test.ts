@@ -48,9 +48,60 @@ describe("ShippoApiError message formatting", () => {
     expect(error.message).toContain("Internal Server Error");
   });
 
-  test("falls back to a JSON dump for an unrecognized object shape", () => {
-    const error = makeApiError({ weird: "shape", nested: { a: 1 } });
-    expect(error.message).toContain('"weird":"shape"');
+  test("never dumps an unrecognized object body into the message", () => {
+    const error = makeApiError({ parameters: { password: "carrier-secret", account_id: "123" } });
+    expect(error.message).not.toContain("carrier-secret");
+    expect(error.message).not.toContain("123");
+    expect(error.message).toBe(
+      "Shippo API request failed with 400 Bad Request (https://api.goshippo.com/addresses)",
+    );
+    expect(error.body).toEqual({ parameters: { password: "carrier-secret", account_id: "123" } });
+  });
+
+  test("omits field errors under sensitive keys", () => {
+    const error = makeApiError({
+      password: ["too short: hunter2"],
+      parameters: ["bad"],
+      zip: ["This field is required."],
+    });
+    expect(error.message).toContain("zip: This field is required.");
+    expect(error.message).not.toContain("hunter2");
+    expect(error.message).not.toContain("parameters");
+  });
+
+  test("ignores arrays that are not lists of strings", () => {
+    const error = makeApiError({ items: [{ ssn: "123-45-6789" }], flags: [1, 2] });
+    expect(error.message).not.toContain("object Object");
+    expect(error.message).not.toContain("123-45-6789");
+    expect(error.message).not.toContain("flags");
+  });
+
+  test("caps the detail at 500 characters", () => {
+    const error = makeApiError({ detail: "x".repeat(5000) });
+    expect(error.message.length).toBeLessThan(700);
+    expect(error.message).toContain("...");
+  });
+
+  test("caps a large string body and a large field-error list", () => {
+    expect(makeApiError("y".repeat(5000)).message.length).toBeLessThan(700);
+    expect(
+      makeApiError({ zip: Array.from({ length: 500 }, () => "bad") }).message.length,
+    ).toBeLessThan(700);
+  });
+
+  test("omits the query string, fragment, and userinfo from the URL", () => {
+    const error = new ShippoApiError({
+      status: 400,
+      statusText: "Bad Request",
+      body: undefined,
+      requestId: undefined,
+      retryAfterMs: undefined,
+      url: "https://user:pw@api.goshippo.com/addresses?name=Jane%20Doe&email=jane@example.com#frag",
+    });
+    expect(error.message).toContain("https://api.goshippo.com/addresses");
+    expect(error.message).not.toContain("Jane");
+    expect(error.message).not.toContain("jane@example.com");
+    expect(error.message).not.toContain("pw");
   });
 
   test("still produces a usable message for an undefined body", () => {

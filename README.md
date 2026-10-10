@@ -146,7 +146,7 @@ try {
 } catch (error) {
   if (error instanceof ShippoApiError) {
     // Shippo responded with a non-2xx status.
-    console.error(error.status, error.body, error.message);
+    console.error(error.status, error.requestId, error.message);
   } else if (error instanceof ShippoNetworkError) {
     // The request never got a response — timeout, DNS failure, etc.
     console.error(error.message);
@@ -159,8 +159,13 @@ try {
 `ShippoApiError` carries `status`, `body` (the raw response body — typed `unknown`, since
 Shippo's error body shape isn't confirmed by any reachable spec; see `ROADMAP.md` §2),
 `requestId` (from an `x-request-id` response header, if present), and `retryAfterMs` (parsed
-from a `Retry-After` header on 429s, if present). `.message` does best-effort extraction from
-`body` for a readable string, but `body` itself is what to inspect for anything precise.
+from a `Retry-After` header on 429s, if present).
+
+`.message` is safe to log: it holds the status line, the request path without its query
+string, and a short (max 500 characters) `detail` or field-error summary. It never contains a
+dump of the response body. **Treat `.body` as sensitive** — Shippo error bodies can echo the
+request (addresses, customs data, carrier account `parameters`) — and log `status` and
+`requestId` instead of the whole body.
 
 Retries are automatic but deliberately conservative (see `ShippoClientOptions`):
 
