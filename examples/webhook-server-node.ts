@@ -1,103 +1,104 @@
 /**
- * Receives and parses Shippo webhook deliveries using plain Node `http` —
- * no framework dependency. Run with:
+ * Receives Shippo webhook deliveries using plain Node `http` -- no framework
+ * dependency. Run with:
  *
- *   SHIPPO_TEST_API_KEY=shippo_test_... bun run examples/webhook-server-node.ts
+ *   SHIPPO_WEBHOOK_TOKEN=$(openssl rand -hex 24) \
+ *   SHIPPO_TEST_API_KEY=shippo_test_... \
+ *   bun run examples/webhook-server-node.ts
  *
- * Then point a webhook at this server (see `shippo.webhooks.create()`) or
- * POST a test payload at it directly:
+ * Register `https://<your-host>/webhooks/shippo?token=<SHIPPO_WEBHOOK_TOKEN>`
+ * with `shippo.webhooks.create()` (behind a TLS-terminating proxy; this server
+ * binds 127.0.0.1 only), or POST a test payload at it directly:
  *
- *   curl -X POST http://localhost:3000/webhooks/shippo \
+ *   curl -X POST "http://127.0.0.1:3000/webhooks/shippo?token=$SHIPPO_WEBHOOK_TOKEN" \
  *     -H 'content-type: application/json' \
  *     -d '{"event":"track_updated","test":true,"data":{"carrier":"usps","tracking_number":"123"}}'
  *
- * The key point this example demonstrates: Shippo's webhook spec has no
- * signature/shared-secret mechanism (see ROADMAP.md §2 and
- * `parseEvent()`'s own doc comment), so a successfully-parsed payload is
- * NOT proof it came from Shippo. Before acting on anything sensitive,
- * re-fetch the referenced object from the API by its `object_id` and act
- * on THAT, not on the webhook payload directly.
+ * What this demonstrates (see `webhook-handler.ts` for the shared parts):
+ *   - only `POST /webhooks/shippo` is served, with a capped body size
+ *   - the URL token and/or `Shippo-Auth-Signature` HMAC is verified against the
+ *     RAW body before anything is parsed
+ *   - 200 is sent immediately; the API re-fetch runs afterward, so a slow call
+ *     can't push the response past Shippo's ~3 second window and trigger retries
+ *   - repeat deliveries are ignored
  *
- * This imports from the local source (`../src/index`) so it runs against
- * this checkout without a separate install step. In your own app, install
- * the published package and import from it instead:
+ * This imports from the local source (`../src/index`) so it runs against this
+ * checkout without a separate install step. In your own app, install the
+ * published package and import from it instead:
  *
- *   import { parseEvent, Shippo } from "@richardmcquiston01/shippo-api";
+ *   import { parseEvent, Shippo, verifyWebhookToken } from "@richardmcquiston01/shippo-api";
  */
 
 import { createServer } from "node:http";
 
-import { parseEvent, Shippo } from "../src/index";
+import {
+  assertAuthenticationConfigured,
+  authenticate,
+  handleDelivery,
+  LISTEN_HOST,
+  MAX_BODY_BYTES,
+  parseDelivery,
+  WEBHOOK_PATH,
+} from "./webhook-handler";
 
-const apiKey = process.env["SHIPPO_TEST_API_KEY"];
-const shippo = apiKey ? new Shippo({ apiKey }) : undefined;
-if (!apiKey) {
-  console.warn(
-    "SHIPPO_TEST_API_KEY not set -- the server will still parse webhooks, but can't " +
-      "demonstrate the re-fetch-by-object_id mitigation below.",
-  );
-}
+assertAuthenticationConfigured();
 
 const server = createServer((req, res) => {
+  const requestUrl = new URL(req.url ?? "/", "http://localhost");
+  if (requestUrl.pathname !== WEBHOOK_PATH) {
+    res.writeHead(404).end();
+    return;
+  }
   if (req.method !== "POST") {
-    res.writeHead(405).end();
+    res.writeHead(405, { Allow: "POST" }).end();
     return;
   }
 
   const chunks: Buffer[] = [];
-  req.on("data", (chunk: Buffer) => chunks.push(chunk));
+  let receivedBytes = 0;
+  let tooLarge = false;
+
+  req.on("data", (chunk: Buffer) => {
+    receivedBytes += chunk.length;
+    if (receivedBytes > MAX_BODY_BYTES) {
+      tooLarge = true;
+      res.writeHead(413, { Connection: "close" }).end();
+      req.destroy();
+      return;
+    }
+    chunks.push(chunk);
+  });
+
   req.on("end", () => {
-    void (async () => {
-      const rawBody = Buffer.concat(chunks).toString("utf8");
+    if (tooLarge) {
+      return;
+    }
+    const rawBody = Buffer.concat(chunks).toString("utf8");
 
-      let event;
-      try {
-        event = parseEvent(rawBody);
-      } catch (error) {
-        console.error("Failed to parse webhook payload:", error);
-        res.writeHead(400).end();
-        return;
-      }
+    const rejection = authenticate({
+      rawBody,
+      requestUrl,
+      signatureHeader: req.headers["shippo-auth-signature"] as string | undefined,
+    });
+    if (rejection) {
+      console.warn(`Rejected webhook: ${rejection}`);
+      res.writeHead(401).end();
+      return;
+    }
 
-      console.log(`Received ${event.event} (test=${event.test})`);
+    const event = parseDelivery(rawBody);
+    if (!event) {
+      res.writeHead(400).end();
+      return;
+    }
 
-      switch (event.event) {
-        case "track_updated": {
-          // Don't trust event.data directly for anything that matters --
-          // re-fetch the authoritative status from the API.
-          if (shippo && event.data.carrier && event.data.tracking_number) {
-            const authoritative = await shippo.tracking.get(
-              event.data.carrier,
-              event.data.tracking_number,
-            );
-            console.log("Re-fetched tracking status:", authoritative.tracking_status?.status);
-          }
-          break;
-        }
-        case "transaction_created":
-        case "transaction_updated": {
-          if (shippo && event.data.object_id) {
-            const authoritative = await shippo.transactions.get(event.data.object_id);
-            console.log("Re-fetched transaction status:", authoritative.status);
-          }
-          break;
-        }
-        case "batch_created":
-        case "batch_purchased": {
-          if (shippo && event.data.object_id) {
-            const authoritative = await shippo.batches.get(event.data.object_id);
-            console.log("Re-fetched batch status:", authoritative.status);
-          }
-          break;
-        }
-      }
-
-      res.writeHead(200).end();
-    })();
+    // Acknowledge first, then do the slow work.
+    res.writeHead(200).end();
+    void handleDelivery(event, rawBody);
   });
 });
 
 const port = 3000;
-server.listen(port, () => {
-  console.log(`Webhook receiver listening on http://localhost:${port}`);
+server.listen(port, LISTEN_HOST, () => {
+  console.log(`Webhook receiver listening on http://${LISTEN_HOST}:${port}${WEBHOOK_PATH}`);
 });

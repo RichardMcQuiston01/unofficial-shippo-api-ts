@@ -129,9 +129,16 @@ export type {
   Webhook,
   WebhookCreateRequest,
   WebhookEventType,
+  WebhookSubscriptionEvent,
   WebhookUpdateRequest,
 } from "./resources/webhooks";
 export { parseEvent, WebhooksResource } from "./resources/webhooks";
+export type {
+  VerifyWebhookSignatureOptions,
+  WebhookSignatureFailureReason,
+  WebhookSignatureResult,
+} from "./webhook-verification";
+export { verifyWebhookSignature, verifyWebhookToken } from "./webhook-verification";
 
 export class Shippo {
   /**

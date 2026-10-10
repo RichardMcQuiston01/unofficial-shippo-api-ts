@@ -51,6 +51,19 @@ const SAMPLE_BATCH: Batch = {
 };
 
 describe("WebhooksResource", () => {
+  test('create() accepts the catch-all "all" subscription', async () => {
+    const { fetch, calls } = createMockFetch(() => ({
+      status: 201,
+      body: { ...SAMPLE_WEBHOOK, event: "all" },
+    }));
+    const webhooks = new WebhooksResource(new ShippoClient({ apiKey: "key", fetch }));
+
+    const result = await webhooks.create({ url: "https://example.com/hooks/shippo", event: "all" });
+
+    expect(result.event).toBe("all");
+    expect(JSON.parse(calls[0]?.body ?? "{}").event).toBe("all");
+  });
+
   test("list() gets /webhooks with query params and returns a page", async () => {
     const { fetch, calls } = createMockFetch(() => ({
       body: { count: 1, next: null, previous: null, results: [SAMPLE_WEBHOOK] },
@@ -126,6 +139,15 @@ describe("WebhooksResource", () => {
     expect((error as ShippoApiError).status).toBe(404);
   });
 });
+
+function captureError(fn: () => unknown): unknown {
+  try {
+    fn();
+  } catch (error) {
+    return error;
+  }
+  return undefined;
+}
 
 describe("parseEvent()", () => {
   test("parses a transaction_created event", () => {
@@ -214,8 +236,29 @@ describe("parseEvent()", () => {
     );
   });
 
-  test("throws a ShippoError for a malformed payload", () => {
-    expect(() => parseEvent("not json")).toThrow();
+  test("throws a ShippoError, with the SyntaxError as cause, for invalid JSON", () => {
+    const error = captureError(() => parseEvent("not json"));
+
+    expect(error).toBeInstanceOf(ShippoError);
+    expect((error as ShippoError).cause).toBeInstanceOf(SyntaxError);
+  });
+
+  test("throws a ShippoError when data is missing", () => {
     expect(() => parseEvent({ event: "transaction_created", test: false })).toThrow(ShippoError);
   });
+
+  test("throws a ShippoError when the test flag is missing", () => {
+    expect(() => parseEvent({ event: "track_updated", data: SAMPLE_TRACKING_STATUS })).toThrow(
+      ShippoError,
+    );
+  });
+
+  test.each(["false", "true", 0, 1, null])(
+    "throws a ShippoError for a non-boolean test flag %p",
+    (testValue) => {
+      expect(() =>
+        parseEvent({ event: "track_updated", test: testValue, data: SAMPLE_TRACKING_STATUS }),
+      ).toThrow(ShippoError);
+    },
+  );
 });
