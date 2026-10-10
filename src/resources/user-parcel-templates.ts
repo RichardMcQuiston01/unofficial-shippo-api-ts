@@ -1,4 +1,5 @@
 import type { ShippoClient } from "../client";
+import { apiPath } from "../api-path";
 import type { ListQuery, UnconfirmedPaginatedList } from "../pagination";
 import type { DistanceUnit, MassUnit } from "./parcels";
 
@@ -76,7 +77,7 @@ export class UserParcelTemplatesResource {
   async get(userParcelTemplateId: string): Promise<UserParcelTemplate> {
     return this.client.request<UserParcelTemplate>(
       "GET",
-      `/user-parcel-templates/${userParcelTemplateId}`,
+      apiPath("/user-parcel-templates", userParcelTemplateId),
     );
   }
 
@@ -87,13 +88,16 @@ export class UserParcelTemplatesResource {
   ): Promise<UserParcelTemplate> {
     return this.client.request<UserParcelTemplate>(
       "PUT",
-      `/user-parcel-templates/${userParcelTemplateId}`,
+      apiPath("/user-parcel-templates", userParcelTemplateId),
       { body: request },
     );
   }
 
   /** Deletes a user parcel template. */
   async delete(userParcelTemplateId: string): Promise<void> {
-    return this.client.request<void>("DELETE", `/user-parcel-templates/${userParcelTemplateId}`);
+    return this.client.request<void>(
+      "DELETE",
+      apiPath("/user-parcel-templates", userParcelTemplateId),
+    );
   }
 }

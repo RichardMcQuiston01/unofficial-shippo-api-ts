@@ -1,4 +1,5 @@
 import type { ShippoClient } from "../client";
+import { apiPath } from "../api-path";
 import type { ListQuery, PaginatedList } from "../pagination";
 
 /**
@@ -69,7 +70,7 @@ export class AddressesResource {
 
   /** Retrieves a single address by its object ID. */
   async get(addressId: string): Promise<Address> {
-    return this.client.request<Address>("GET", `/addresses/${addressId}`);
+    return this.client.request<Address>("GET", apiPath("/addresses", addressId));
   }
 
   /**
@@ -83,6 +84,6 @@ export class AddressesResource {
    * `object_id` matches `addressId`.
    */
   async validate(addressId: string): Promise<Address> {
-    return this.client.request<Address>("GET", `/addresses/${addressId}/validate`);
+    return this.client.request<Address>("GET", apiPath("/addresses", addressId, "validate"));
   }
 }

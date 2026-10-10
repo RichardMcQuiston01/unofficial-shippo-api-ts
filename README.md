@@ -162,10 +162,17 @@ Shippo's error body shape isn't confirmed by any reachable spec; see `ROADMAP.md
 from a `Retry-After` header on 429s, if present). `.message` does best-effort extraction from
 `body` for a readable string, but `body` itself is what to inspect for anything precise.
 
-You don't need to handle retries yourself: network errors and 429/5xx responses are retried
-automatically with exponential backoff (honoring `Retry-After` when present) before either
-error type reaches your code — see `ShippoClientOptions.maxRetries`/`retryDelayMs` to tune
-this, or set `maxRetries: 0` to disable it.
+Retries are automatic but deliberately conservative (see `ShippoClientOptions`):
+
+- `GET`, `PUT`, and `DELETE` are retried with exponential backoff on network errors, timeouts,
+  and 429/5xx responses, honoring `Retry-After` (capped at 60 seconds).
+- `POST` and `PATCH` (including `transactions.create` and `batches.purchase`, which buy labels)
+  are **only retried on 429**. A timeout or 5xx can arrive after Shippo already acted, and Shippo
+  documents no idempotency key, so a retry could buy a second label. If you've confirmed your
+  usage is safe, opt in with `retryNonIdempotent: true`.
+- Aborting the `signal` you pass to a request fails it immediately, including mid-backoff.
+- Set `maxRetries: 0` to disable retries entirely. `maxRetries`, `retryDelayMs`, and `timeoutMs`
+  are validated in the constructor.
 
 ### Examples
 

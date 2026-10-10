@@ -1,4 +1,5 @@
 import type { ShippoClient } from "../client";
+import { apiPath } from "../api-path";
 import type { ListQuery, PaginatedList } from "../pagination";
 
 export type DistanceUnit = "cm" | "in" | "ft" | "mm" | "m" | "yd";
@@ -43,6 +44,6 @@ export class ParcelsResource {
 
   /** Retrieves a single parcel by its object ID. */
   async get(parcelId: string): Promise<Parcel> {
-    return this.client.request<Parcel>("GET", `/parcels/${parcelId}`);
+    return this.client.request<Parcel>("GET", apiPath("/parcels", parcelId));
   }
 }

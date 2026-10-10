@@ -1,4 +1,5 @@
 import type { ShippoClient } from "../client";
+import { apiPath } from "../api-path";
 
 /**
  * A single carrier service level entry within a service group's selection.
@@ -62,13 +63,13 @@ export class ServiceGroupsResource {
 
   /** Updates an existing service group's name or service-level selection. */
   async update(serviceGroupId: string, request: ServiceGroupUpdateRequest): Promise<ServiceGroup> {
-    return this.client.request<ServiceGroup>("PUT", `/service-groups/${serviceGroupId}`, {
+    return this.client.request<ServiceGroup>("PUT", apiPath("/service-groups", serviceGroupId), {
       body: request,
     });
   }
 
   /** Deletes a service group. */
   async delete(serviceGroupId: string): Promise<void> {
-    return this.client.request<void>("DELETE", `/service-groups/${serviceGroupId}`);
+    return this.client.request<void>("DELETE", apiPath("/service-groups", serviceGroupId));
   }
 }

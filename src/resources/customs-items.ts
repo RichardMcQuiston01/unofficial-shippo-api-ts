@@ -1,4 +1,5 @@
 import type { ShippoClient } from "../client";
+import { apiPath } from "../api-path";
 import type { ListQuery, UnconfirmedPaginatedList } from "../pagination";
 import type { MassUnit } from "./parcels";
 
@@ -65,6 +66,6 @@ export class CustomsItemsResource {
 
   /** Retrieves a single customs item by its object ID. */
   async get(customsItemId: string): Promise<CustomsItem> {
-    return this.client.request<CustomsItem>("GET", `/customs/items/${customsItemId}`);
+    return this.client.request<CustomsItem>("GET", apiPath("/customs/items", customsItemId));
   }
 }
