@@ -21,11 +21,14 @@ key against example code.
 | `validate-address.ts`              | Creating and validating an address (`shippo.addresses`)                         |
 | `create-shipment-and-buy-label.ts` | The core happy path: shipment → rates → purchased label                         |
 | `track-shipment.ts`                | Looking up tracking status (`shippo.tracking`), with test-mode tracking numbers |
-| `webhook-server-node.ts`           | Receiving + parsing inbound webhooks with plain Node `http`                     |
+| `webhook-server-node.ts`           | Receiving + authenticating inbound webhooks with plain Node `http`              |
 | `webhook-server-express.ts`        | The same, using Express                                                         |
+| `webhook-handler.ts`               | Shared by the two webhook servers: auth, dedupe, ack-then-process               |
 
-The two webhook examples are the ones worth reading closely even if you don't run them: they
-show `parseEvent()` in context, and — more importantly — that Shippo's webhook spec has no
-signature verification, so they re-fetch the referenced object by `object_id` before treating
-anything in the payload as trustworthy. See each file's top comment and
-[`ROADMAP.md`](../ROADMAP.md) §2 for why.
+The two webhook examples are the ones worth reading closely even if you don't run them. They
+verify the delivery (URL token via `SHIPPO_WEBHOOK_TOKEN` and/or HMAC via
+`SHIPPO_WEBHOOK_SECRET`) against the raw body before parsing it, bind `127.0.0.1`, cap the body
+size, serve only `POST /webhooks/shippo`, respond `200` before doing any API calls, and ignore
+repeat deliveries. They refuse to start with neither control configured. HMAC secrets are only
+available once Shippo enables them for your account, so the URL token is what most accounts can
+use today. Shippo's published IP ranges are worth allowlisting at your proxy as an extra layer.

@@ -62,6 +62,16 @@ export class ShippoNetworkError extends ShippoError {
   }
 }
 
+/** Longest `detail`/field summary placed in `message`. The full body stays on `.body`. */
+const MAX_DETAIL_LENGTH = 500;
+
+/**
+ * Keys whose values commonly hold credentials or account data. Their values
+ * never appear in `message`, even as part of a field-error summary.
+ */
+const SENSITIVE_KEY_PATTERN =
+  /password|passwd|secret|token|api[_-]?key|authorization|credential|parameters|account[_-]?(id|number)/i;
+
 function formatMessage(options: {
   status: number;
   statusText: string;
@@ -69,42 +79,67 @@ function formatMessage(options: {
   url: string;
 }): string {
   const detail = extractDetail(options.body);
-  const base = `Shippo API request failed with ${options.status} ${options.statusText} (${options.url})`;
+  const base = `Shippo API request failed with ${options.status} ${options.statusText} (${redactUrl(options.url)})`;
   return detail ? `${base}: ${detail}` : base;
 }
 
 /**
- * Best-effort human-readable detail from an unknown error body. Handles the
- * shapes Django REST Framework (which Shippo's pagination matches) commonly
- * produces: `{ detail: string }` for auth/permission/not-found errors, and
- * `{ field: string[] }` for validation errors. Falls back to a compact JSON
- * dump, then nothing, rather than throwing while formatting an error.
+ * Drops the query string, fragment, and any userinfo from a URL before it is
+ * placed in an error message. List calls can carry names or emails in the
+ * query, and error messages end up in logs and error reporters.
+ */
+export function redactUrl(url: string): string {
+  try {
+    const parsed = new URL(url);
+    return `${parsed.origin}${parsed.pathname}`;
+  } catch {
+    return url.split(/[?#]/, 1)[0] ?? "";
+  }
+}
+
+/**
+ * Short, best-effort human-readable detail from an unknown error body.
+ * Handles the shapes Django REST Framework (which Shippo's pagination
+ * matches) commonly produces: `{ detail: string }` for auth/permission/
+ * not-found errors, and `{ field: string[] }` for validation errors.
+ *
+ * Deliberately never serializes an unrecognized body: Shippo error bodies
+ * can echo the request (addresses, customs data, carrier `parameters`), and
+ * `message` is what loggers and APM tools capture by default. Callers who
+ * need the raw response read `error.body`. Output is capped at
+ * `MAX_DETAIL_LENGTH` characters.
  */
 function extractDetail(body: unknown): string | undefined {
   if (typeof body === "string") {
-    return body.length > 0 ? body : undefined;
+    return body.length > 0 ? truncate(body) : undefined;
   }
 
-  if (body === null || typeof body !== "object") {
+  if (body === null || typeof body !== "object" || Array.isArray(body)) {
     return undefined;
   }
 
   const record = body as Record<string, unknown>;
 
   if (typeof record["detail"] === "string") {
-    return record["detail"];
+    return truncate(record["detail"]);
   }
 
   const fieldErrors = Object.entries(record)
-    .filter(([, value]) => Array.isArray(value))
-    .map(([field, value]) => `${field}: ${(value as unknown[]).join(", ")}`);
+    .filter(([field]) => !SENSITIVE_KEY_PATTERN.test(field))
+    .filter(
+      (entry): entry is [string, string[]] =>
+        Array.isArray(entry[1]) &&
+        entry[1].length > 0 &&
+        entry[1].every((message) => typeof message === "string"),
+    )
+    .map(([field, messages]) => `${field}: ${messages.join(", ")}`);
   if (fieldErrors.length > 0) {
-    return fieldErrors.join("; ");
+    return truncate(fieldErrors.join("; "));
   }
 
-  try {
-    return JSON.stringify(body);
-  } catch {
-    return undefined;
-  }
+  return undefined;
+}
+
+function truncate(text: string): string {
+  return text.length > MAX_DETAIL_LENGTH ? `${text.slice(0, MAX_DETAIL_LENGTH)}...` : text;
 }

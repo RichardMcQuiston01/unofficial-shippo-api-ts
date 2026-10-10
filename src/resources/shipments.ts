@@ -1,4 +1,5 @@
 import type { ShippoClient } from "../client";
+import { apiPath } from "../api-path";
 import type { ListQuery, PaginatedList } from "../pagination";
 import type { Address, AddressCreateRequest } from "./addresses";
 import type { Parcel, ParcelCreateRequest } from "./parcels";
@@ -60,6 +61,6 @@ export class ShipmentsResource {
 
   /** Retrieves a single shipment by its object ID. */
   async get(shipmentId: string): Promise<Shipment> {
-    return this.client.request<Shipment>("GET", `/shipments/${shipmentId}`);
+    return this.client.request<Shipment>("GET", apiPath("/shipments", shipmentId));
   }
 }

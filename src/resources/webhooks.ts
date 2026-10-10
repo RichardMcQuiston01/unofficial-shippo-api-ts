@@ -1,4 +1,5 @@
 import type { ShippoClient } from "../client";
+import { apiPath } from "../api-path";
 import { ShippoError } from "../errors";
 import type { ListQuery, PaginatedList } from "../pagination";
 import type { Batch } from "./batches";
@@ -17,6 +18,14 @@ export type WebhookEventType =
   | "batch_purchased"
   | "track_updated";
 
+/**
+ * Values accepted when creating or updating a webhook subscription: the
+ * concrete events above, or `"all"` (Shippo's catch-all subscription,
+ * https://docs.goshippo.com/tracking/creating-webhooks). Deliveries still
+ * arrive with a concrete `event`, so `parseEvent` keeps the narrower union.
+ */
+export type WebhookSubscriptionEvent = WebhookEventType | "all";
+
 const WEBHOOK_EVENT_TYPES: readonly WebhookEventType[] = [
   "transaction_created",
   "transaction_updated",
@@ -28,8 +37,8 @@ const WEBHOOK_EVENT_TYPES: readonly WebhookEventType[] = [
 export interface Webhook {
   object_id?: string;
   url?: string;
-  /** Each webhook subscribes to exactly one event, not an array. */
-  event?: WebhookEventType;
+  /** Each webhook subscribes to exactly one event (or `"all"`), not an array. */
+  event?: WebhookSubscriptionEvent;
   active?: boolean;
   is_test?: boolean;
   object_created?: string;
@@ -38,7 +47,7 @@ export interface Webhook {
 
 export interface WebhookCreateRequest {
   url: string;
-  event: WebhookEventType;
+  event: WebhookSubscriptionEvent;
   active?: boolean;
 }
 
@@ -51,7 +60,7 @@ export interface WebhookCreateRequest {
  */
 export interface WebhookUpdateRequest {
   url?: string;
-  event?: WebhookEventType;
+  event?: WebhookSubscriptionEvent;
   active?: boolean;
 }
 
@@ -70,17 +79,17 @@ export class WebhooksResource {
 
   /** Retrieves a single webhook subscription by its object ID. */
   async get(webhookId: string): Promise<Webhook> {
-    return this.client.request<Webhook>("GET", `/webhooks/${webhookId}`);
+    return this.client.request<Webhook>("GET", apiPath("/webhooks", webhookId));
   }
 
   /** Updates an existing webhook subscription's URL, event, or active state. */
   async update(webhookId: string, request: WebhookUpdateRequest): Promise<Webhook> {
-    return this.client.request<Webhook>("PUT", `/webhooks/${webhookId}`, { body: request });
+    return this.client.request<Webhook>("PUT", apiPath("/webhooks", webhookId), { body: request });
   }
 
   /** Deletes a webhook subscription so it no longer receives deliveries. */
   async delete(webhookId: string): Promise<void> {
-    return this.client.request<void>("DELETE", `/webhooks/${webhookId}`);
+    return this.client.request<void>("DELETE", apiPath("/webhooks", webhookId));
   }
 }
 
@@ -130,19 +139,30 @@ export type ShippoWebhookEvent =
  * `{ event, test, data }` envelope or `event` isn't one of the 5 known
  * values, rather than silently returning something mistyped.
  *
- * **This does not verify the delivery's authenticity.** Shippo's webhook
- * spec (the AsyncAPI mirror this module was built against — ROADMAP.md §2)
- * documents no signature or shared-secret mechanism, unlike Stripe/GitHub-
- * style webhooks — there is nothing to verify against, so this function
- * makes no such claim and callers must not treat a successful parse as
- * proof the request came from Shippo. Before trusting anything
- * security-sensitive in `data`, re-fetch the referenced object by its
- * `object_id` through the authenticated API (e.g. `shippo.transactions.get()`)
- * and treat this payload only as a trigger to do that, not as a source of
- * truth itself.
+ * **This does not authenticate the delivery.** Shippo documents three
+ * controls (https://docs.goshippo.com/tracking/webhook-security): an
+ * inbound IP allowlist, a self-generated token on the webhook URL, and an
+ * HMAC `Shippo-Auth-Signature` header. Run `verifyWebhookSignature()` (HMAC)
+ * and/or `verifyWebhookToken()` (URL token) on the raw request BEFORE
+ * calling this, and reject the request if they fail. A payload that parses
+ * is not proof it came from Shippo. For anything sensitive, still re-fetch
+ * the referenced object by its `object_id` through the authenticated API
+ * and treat the payload as a trigger only.
+ *
+ * `test` must be a boolean: a missing or non-boolean value is rejected
+ * rather than guessed, so a malformed delivery is never treated as live.
  */
 export function parseEvent(rawBody: string | object): ShippoWebhookEvent {
-  const parsed: unknown = typeof rawBody === "string" ? JSON.parse(rawBody) : rawBody;
+  let parsed: unknown;
+  if (typeof rawBody === "string") {
+    try {
+      parsed = JSON.parse(rawBody);
+    } catch (cause) {
+      throw new ShippoError("Invalid Shippo webhook payload: body is not valid JSON.", { cause });
+    }
+  } else {
+    parsed = rawBody;
+  }
 
   if (parsed === null || typeof parsed !== "object") {
     throw new ShippoError("Invalid Shippo webhook payload: expected a JSON object.");
@@ -158,13 +178,19 @@ export function parseEvent(rawBody: string | object): ShippoWebhookEvent {
     );
   }
 
+  if (typeof test !== "boolean") {
+    throw new ShippoError(
+      `Invalid Shippo webhook payload: "test" must be a boolean, received ${JSON.stringify(test)}.`,
+    );
+  }
+
   if (data === null || typeof data !== "object") {
     throw new ShippoError('Invalid Shippo webhook payload: missing or invalid "data" field.');
   }
 
   return {
     event,
-    test: Boolean(test),
+    test,
     data,
   } as ShippoWebhookEvent;
 }

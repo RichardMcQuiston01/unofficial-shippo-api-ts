@@ -195,10 +195,13 @@ for the package, not just a cross-check.
   chars, `Shippo-API-Version` header included on every delivery. No
   documented retry/backoff policy or expected-response-code contract —
   another Stage 1 spike item if we want to document "how to ack safely."
-- **No signature verification is documented.** Unlike Stripe/GitHub-style
-  webhooks (HMAC signature + shared secret), Shippo's spec has nothing
-  proving a request actually came from Shippo. This changes what the
-  package can honestly offer — see Architecture decisions and Risks below.
+- **Authentication is documented separately from the AsyncAPI spec.** The
+  spec itself says nothing about it, but Shippo's webhook security page
+  (https://docs.goshippo.com/tracking/webhook-security) describes an IP
+  allowlist, a self-generated URL token, and an HMAC
+  `Shippo-Auth-Signature` header (secret provisioned by Shippo). The package
+  exposes `verifyWebhookToken()` and `verifyWebhookSignature()` for the
+  latter two; `parseEvent()` still does not authenticate by itself.
 
 Given this, the plan is to add a **webhook event parsing module**
 (`shippo.webhooks.parseEvent(rawBody)`), separate from the `Webhooks`
