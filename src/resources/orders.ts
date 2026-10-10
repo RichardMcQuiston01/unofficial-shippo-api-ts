@@ -1,4 +1,5 @@
 import type { ShippoClient } from "../client";
+import { apiPath } from "../api-path";
 import type { ListQuery, UnconfirmedPaginatedList } from "../pagination";
 import type { Address, AddressCreateRequest } from "./addresses";
 
@@ -92,6 +93,6 @@ export class OrdersResource {
 
   /** Retrieves a single order by its object ID. */
   async get(orderId: string): Promise<Order> {
-    return this.client.request<Order>("GET", `/orders/${orderId}`);
+    return this.client.request<Order>("GET", apiPath("/orders", orderId));
   }
 }

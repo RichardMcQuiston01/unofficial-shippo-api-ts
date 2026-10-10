@@ -1,4 +1,5 @@
 import type { ShippoClient } from "../client";
+import { apiPath } from "../api-path";
 import type { ListQuery, UnconfirmedPaginatedList } from "../pagination";
 import type { Address, AddressCreateRequest } from "./addresses";
 
@@ -67,6 +68,6 @@ export class ManifestsResource {
 
   /** Retrieves a single manifest by its object ID. */
   async get(manifestId: string): Promise<Manifest> {
-    return this.client.request<Manifest>("GET", `/manifests/${manifestId}`);
+    return this.client.request<Manifest>("GET", apiPath("/manifests", manifestId));
   }
 }

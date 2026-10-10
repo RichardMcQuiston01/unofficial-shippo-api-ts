@@ -1,4 +1,5 @@
 import type { ShippoClient } from "../client";
+import { apiPath } from "../api-path";
 import { ShippoError } from "../errors";
 import type { ListQuery, PaginatedList } from "../pagination";
 import type { Batch } from "./batches";
@@ -70,17 +71,17 @@ export class WebhooksResource {
 
   /** Retrieves a single webhook subscription by its object ID. */
   async get(webhookId: string): Promise<Webhook> {
-    return this.client.request<Webhook>("GET", `/webhooks/${webhookId}`);
+    return this.client.request<Webhook>("GET", apiPath("/webhooks", webhookId));
   }
 
   /** Updates an existing webhook subscription's URL, event, or active state. */
   async update(webhookId: string, request: WebhookUpdateRequest): Promise<Webhook> {
-    return this.client.request<Webhook>("PUT", `/webhooks/${webhookId}`, { body: request });
+    return this.client.request<Webhook>("PUT", apiPath("/webhooks", webhookId), { body: request });
   }
 
   /** Deletes a webhook subscription so it no longer receives deliveries. */
   async delete(webhookId: string): Promise<void> {
-    return this.client.request<void>("DELETE", `/webhooks/${webhookId}`);
+    return this.client.request<void>("DELETE", apiPath("/webhooks", webhookId));
   }
 }
 
