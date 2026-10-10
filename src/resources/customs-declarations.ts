@@ -1,4 +1,5 @@
 import type { ShippoClient } from "../client";
+import { apiPath } from "../api-path";
 import type { ListQuery, UnconfirmedPaginatedList } from "../pagination";
 import type { CustomsItem, CustomsItemCreateRequest } from "./customs-items";
 
@@ -75,7 +76,7 @@ export class CustomsDeclarationsResource {
   async get(customsDeclarationId: string): Promise<CustomsDeclaration> {
     return this.client.request<CustomsDeclaration>(
       "GET",
-      `/customs/declarations/${customsDeclarationId}`,
+      apiPath("/customs/declarations", customsDeclarationId),
     );
   }
 }

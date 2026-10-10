@@ -1,4 +1,5 @@
 import type { ShippoClient } from "../client";
+import { apiPath } from "../api-path";
 import type { Address } from "./addresses";
 import type { ServiceLevel } from "./rates";
 
@@ -49,6 +50,6 @@ export class TrackingResource {
 
   /** Retrieves the current tracking status for a carrier + tracking number pair. */
   async get(carrier: string, trackingNumber: string): Promise<TrackingStatus> {
-    return this.client.request<TrackingStatus>("GET", `/tracks/${carrier}/${trackingNumber}`);
+    return this.client.request<TrackingStatus>("GET", apiPath("/tracks", carrier, trackingNumber));
   }
 }
