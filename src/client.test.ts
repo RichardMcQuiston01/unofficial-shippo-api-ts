@@ -90,14 +90,60 @@ describe("URL building", () => {
     expect(url.searchParams.has("unused")).toBe(false);
   });
 
-  test("uses an absolute path verbatim, bypassing baseUrl", async () => {
+  test("accepts an absolute URL on the configured origin", async () => {
     const { fetch, calls } = createMockFetch(() => ({ body: {} }));
     const client = new ShippoClient({ apiKey: "key", fetch, baseUrl: "https://example.test" });
 
-    await client.request("GET", "https://elsewhere.test/addresses?page=2");
+    await client.request("GET", "https://example.test/addresses?page=2");
 
-    expect(calls[0]?.url).toBe("https://elsewhere.test/addresses?page=2");
+    expect(calls[0]?.url).toBe("https://example.test/addresses?page=2");
   });
+
+  test.each([
+    "https://evil.example/steal",
+    "http://example.test/addresses",
+    "https://example.test:8443/addresses",
+    "@evil.example/steal",
+    ".evil.example/steal",
+    "addresses",
+    "",
+  ])("rejects %p without calling fetch or sending the token", async (path) => {
+    const { fetch, calls } = createMockFetch(() => ({ body: {} }));
+    const client = new ShippoClient({ apiKey: "key", fetch, baseUrl: "https://example.test" });
+
+    await expect(client.request("GET", path)).rejects.toBeInstanceOf(ShippoError);
+    expect(calls).toHaveLength(0);
+  });
+
+  test("does not follow redirects", async () => {
+    const { fetch, calls } = createMockFetch(() => ({
+      status: 302,
+      headers: { location: "https://evil.example/steal" },
+    }));
+    const client = new ShippoClient({ apiKey: "key", fetch, maxRetries: 0 });
+
+    await expect(client.request("GET", "/addresses")).rejects.toBeInstanceOf(ShippoApiError);
+    expect(calls).toHaveLength(1);
+  });
+});
+
+describe("baseUrl validation", () => {
+  test("rejects a non-https baseUrl", () => {
+    expect(() => new ShippoClient({ apiKey: "key", baseUrl: "http://api.goshippo.com" })).toThrow(
+      ShippoError,
+    );
+  });
+
+  test("rejects a baseUrl that is not a URL", () => {
+    expect(() => new ShippoClient({ apiKey: "key", baseUrl: "not a url" })).toThrow(ShippoError);
+  });
+
+  test.each(["http://localhost:3000", "http://127.0.0.1:8080", "http://[::1]:8080"])(
+    "allows loopback http baseUrl %p",
+    (baseUrl) => {
+      expect(() => new ShippoClient({ apiKey: "key", baseUrl })).not.toThrow();
+    },
+  );
 });
 
 describe("response handling", () => {

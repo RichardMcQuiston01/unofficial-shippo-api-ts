@@ -1,4 +1,5 @@
 import type { ShippoClient } from "../client";
+import { apiPath } from "../api-path";
 import type { ListQuery, PaginatedList } from "../pagination";
 
 export type RefundStatus = "QUEUED" | "PENDING" | "SUCCESS" | "ERROR";
@@ -34,6 +35,6 @@ export class RefundsResource {
 
   /** Retrieves a single refund by its object ID. */
   async get(refundId: string): Promise<Refund> {
-    return this.client.request<Refund>("GET", `/refunds/${refundId}`);
+    return this.client.request<Refund>("GET", apiPath("/refunds", refundId));
   }
 }

@@ -1,4 +1,5 @@
 import type { ShippoClient } from "../client";
+import { apiPath } from "../api-path";
 import type { ListQuery, PaginatedList } from "../pagination";
 
 /**
@@ -73,7 +74,10 @@ export class CarrierAccountsResource {
 
   /** Retrieves a single carrier account by its object ID. */
   async get(carrierAccountId: string): Promise<CarrierAccount> {
-    return this.client.request<CarrierAccount>("GET", `/carrier_accounts/${carrierAccountId}`);
+    return this.client.request<CarrierAccount>(
+      "GET",
+      apiPath("/carrier_accounts", carrierAccountId),
+    );
   }
 
   /** Updates an existing carrier account, e.g. to toggle `active` or rotate credentials. */
@@ -81,9 +85,13 @@ export class CarrierAccountsResource {
     carrierAccountId: string,
     request: CarrierAccountUpdateRequest,
   ): Promise<CarrierAccount> {
-    return this.client.request<CarrierAccount>("PUT", `/carrier_accounts/${carrierAccountId}`, {
-      body: request,
-    });
+    return this.client.request<CarrierAccount>(
+      "PUT",
+      apiPath("/carrier_accounts", carrierAccountId),
+      {
+        body: request,
+      },
+    );
   }
 
   /**
@@ -104,7 +112,7 @@ export class CarrierAccountsResource {
   ): Promise<CarrierAccountOauth2SigninResult> {
     return this.client.request<CarrierAccountOauth2SigninResult>(
       "POST",
-      `/carrier_accounts/${carrier}/oauth2/initiate`,
+      apiPath("/carrier_accounts", carrier, "oauth2", "initiate"),
       { body: request },
     );
   }
@@ -118,9 +126,13 @@ export class CarrierAccountsResource {
    * method inventory alone.
    */
   async register(carrier: string, request?: Record<string, unknown>): Promise<CarrierAccount> {
-    return this.client.request<CarrierAccount>("POST", `/carrier_accounts/${carrier}/register`, {
-      body: request,
-    });
+    return this.client.request<CarrierAccount>(
+      "POST",
+      apiPath("/carrier_accounts", carrier, "register"),
+      {
+        body: request,
+      },
+    );
   }
 
   /**
@@ -134,7 +146,7 @@ export class CarrierAccountsResource {
   async getRegistrationStatus(carrierAccountId: string): Promise<CarrierAccountRegistrationStatus> {
     return this.client.request<CarrierAccountRegistrationStatus>(
       "GET",
-      `/carrier_accounts/${carrierAccountId}/registration_status`,
+      apiPath("/carrier_accounts", carrierAccountId, "registration_status"),
     );
   }
 }

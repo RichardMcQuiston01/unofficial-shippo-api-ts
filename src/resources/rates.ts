@@ -1,4 +1,5 @@
 import type { ShippoClient } from "../client";
+import { apiPath } from "../api-path";
 
 export interface ServiceLevel {
   name?: string;
@@ -39,16 +40,19 @@ export class RatesResource {
 
   /** Retrieves a single previously-computed rate by its object ID. */
   async get(rateId: string): Promise<Rate> {
-    return this.client.request<Rate>("GET", `/rates/${rateId}`);
+    return this.client.request<Rate>("GET", apiPath("/rates", rateId));
   }
 
   /** Retrieves all rates computed for a shipment. */
   async listForShipment(shipmentId: string): Promise<RateList> {
-    return this.client.request<RateList>("GET", `/shipments/${shipmentId}/rates`);
+    return this.client.request<RateList>("GET", apiPath("/shipments", shipmentId, "rates"));
   }
 
   /** Retrieves a shipment's rates converted to the given ISO 4217 currency code. */
   async listForShipmentByCurrency(shipmentId: string, currencyCode: string): Promise<RateList> {
-    return this.client.request<RateList>("GET", `/shipments/${shipmentId}/rates/${currencyCode}`);
+    return this.client.request<RateList>(
+      "GET",
+      apiPath("/shipments", shipmentId, "rates", currencyCode),
+    );
   }
 }

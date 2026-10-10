@@ -1,4 +1,5 @@
 import type { ShippoClient } from "../client";
+import { apiPath } from "../api-path";
 import type { ListQuery, PaginatedList } from "../pagination";
 import type { TrackingStatusValue } from "./tracking";
 
@@ -49,6 +50,6 @@ export class TransactionsResource {
 
   /** Retrieves a single transaction by its object ID. */
   async get(transactionId: string): Promise<Transaction> {
-    return this.client.request<Transaction>("GET", `/transactions/${transactionId}`);
+    return this.client.request<Transaction>("GET", apiPath("/transactions", transactionId));
   }
 }

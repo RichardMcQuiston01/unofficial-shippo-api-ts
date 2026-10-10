@@ -1,4 +1,5 @@
 import type { RequestOptions, ShippoClient } from "./client";
+import { ShippoError } from "./errors";
 
 /**
  * The list-endpoint response shape confirmed against Shippo's OpenAPI
@@ -40,9 +41,14 @@ export interface ListQuery {
 
 /**
  * Iterates every item across every page of a list endpoint, following
- * `next` until it's `null`. One HTTP request per page, made lazily as the
- * generator is consumed — safe to `for await` over an unbounded resource
- * without fetching pages you never read.
+ * `next` until it is `null`, `undefined`, or empty. One HTTP request per
+ * page, made lazily as the generator is consumed — safe to `for await` over
+ * an unbounded resource without fetching pages you never read.
+ *
+ * Tolerates the `UnconfirmedPaginatedList` shape: a missing or `null`
+ * `results` is an empty page, and a missing `next` ends iteration. A `next`
+ * URL that was already requested throws a `ShippoError` rather than looping
+ * forever, and `next` is subject to the client's same-origin check.
  *
  * `list()` methods on resource modules return a single `PaginatedList<T>`
  * page (matching the raw API shape); reach for this helper when you want
@@ -53,18 +59,36 @@ export async function* paginate<T>(
   path: string,
   query?: RequestOptions["query"],
 ): AsyncGenerator<T, void, void> {
-  let nextUrl: string | null = path;
+  let nextUrl: string | null | undefined = path;
   let nextQuery: RequestOptions["query"] | undefined = query;
+  const requested = new Set<string>();
 
-  while (nextUrl !== null) {
-    const page: PaginatedList<T> = await client.request<PaginatedList<T>>("GET", nextUrl, {
-      query: nextQuery,
-    });
-    for (const item of page.results) {
+  while (nextUrl) {
+    const requestKey = pageKey(nextUrl, nextQuery);
+    if (requested.has(requestKey)) {
+      throw new ShippoError(
+        `Pagination loop detected: "${nextUrl}" was already requested. Stopping instead of ` +
+          `fetching it again.`,
+      );
+    }
+    requested.add(requestKey);
+
+    const page: PaginatedList<T> | UnconfirmedPaginatedList<T> = await client.request<
+      PaginatedList<T> | UnconfirmedPaginatedList<T>
+    >("GET", nextUrl, { query: nextQuery });
+    for (const item of page.results ?? []) {
       yield item;
     }
     nextUrl = page.next;
     // `next` is already a fully-qualified URL with its own query string.
     nextQuery = undefined;
   }
+}
+
+function pageKey(url: string, query: RequestOptions["query"]): string {
+  const params = Object.entries(query ?? {})
+    .filter(([, value]) => value !== undefined)
+    .map(([key, value]) => `${key}=${String(value)}`)
+    .sort();
+  return params.length > 0 ? `${url}?${params.join("&")}` : url;
 }
