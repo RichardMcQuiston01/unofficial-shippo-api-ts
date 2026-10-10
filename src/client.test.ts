@@ -250,6 +250,167 @@ describe("retries", () => {
   });
 });
 
+describe("retry policy", () => {
+  test.each(["POST", "PATCH"] as const)("does not retry a %s on a 5xx response", async (method) => {
+    const { fetch, calls } = createMockFetch(() => ({ status: 503, body: { detail: "down" } }));
+    const client = new ShippoClient({ apiKey: "key", fetch, ...FAST_RETRY, maxRetries: 2 });
+
+    await client.request(method, "/transactions", { body: {} }).catch(() => undefined);
+
+    expect(calls.length).toBe(1);
+  });
+
+  test("does not retry a POST after a network error", async () => {
+    let attempts = 0;
+    const droppedFetch = (async () => {
+      attempts += 1;
+      throw new Error("ECONNRESET");
+    }) as unknown as typeof fetch;
+    const client = new ShippoClient({
+      apiKey: "key",
+      fetch: droppedFetch,
+      ...FAST_RETRY,
+      maxRetries: 2,
+    });
+
+    await client.request("POST", "/transactions", { body: {} }).catch(() => undefined);
+
+    expect(attempts).toBe(1);
+  });
+
+  test("retries a POST on 429, since Shippo did not act on it", async () => {
+    const { fetch, calls } = createMockFetch((_call, index) =>
+      index === 0 ? { status: 429, body: { detail: "slow down" } } : { body: { ok: true } },
+    );
+    const client = new ShippoClient({ apiKey: "key", fetch, ...FAST_RETRY, maxRetries: 2 });
+
+    const result = await client.request("POST", "/transactions", { body: {} });
+
+    expect(result).toEqual({ ok: true });
+    expect(calls.length).toBe(2);
+  });
+
+  test("retries a POST on 5xx when retryNonIdempotent is set", async () => {
+    const { fetch, calls } = createMockFetch((_call, index) =>
+      index === 0 ? { status: 503, body: { detail: "down" } } : { body: { ok: true } },
+    );
+    const client = new ShippoClient({
+      apiKey: "key",
+      fetch,
+      ...FAST_RETRY,
+      maxRetries: 2,
+      retryNonIdempotent: true,
+    });
+
+    await client.request("POST", "/transactions", { body: {} });
+
+    expect(calls.length).toBe(2);
+  });
+
+  test("retries DELETE and PUT on 5xx", async () => {
+    for (const method of ["DELETE", "PUT"] as const) {
+      const { fetch, calls } = createMockFetch((_call, index) =>
+        index === 0 ? { status: 502, body: {} } : { body: {} },
+      );
+      const client = new ShippoClient({ apiKey: "key", fetch, ...FAST_RETRY, maxRetries: 1 });
+
+      await client.request(method, "/webhooks/abc");
+
+      expect(calls.length).toBe(2);
+    }
+  });
+
+  test("an already-aborted signal makes no fetch call and does not retry", async () => {
+    const { fetch, calls } = createMockFetch(() => ({ body: {} }));
+    const client = new ShippoClient({ apiKey: "key", fetch, ...FAST_RETRY, maxRetries: 2 });
+
+    const error = await client
+      .request("GET", "/addresses", { signal: AbortSignal.abort() })
+      .catch((e: unknown) => e);
+
+    expect(error).toBeInstanceOf(ShippoNetworkError);
+    expect(calls.length).toBe(0);
+  });
+
+  test("a caller abort during fetch is not retried", async () => {
+    const controller = new AbortController();
+    let attempts = 0;
+    const abortingFetch = (async () => {
+      attempts += 1;
+      controller.abort();
+      throw new DOMException("aborted", "AbortError");
+    }) as unknown as typeof fetch;
+    const client = new ShippoClient({
+      apiKey: "key",
+      fetch: abortingFetch,
+      ...FAST_RETRY,
+      maxRetries: 2,
+    });
+
+    const error = await client
+      .request("GET", "/addresses", { signal: controller.signal })
+      .catch((e: unknown) => e);
+
+    expect(error).toBeInstanceOf(ShippoNetworkError);
+    expect(attempts).toBe(1);
+  });
+
+  test("aborting during backoff cancels the sleep immediately", async () => {
+    const controller = new AbortController();
+    const { fetch, calls } = createMockFetch(() => ({
+      status: 503,
+      headers: { "retry-after": "30" },
+      body: {},
+    }));
+    const client = new ShippoClient({ apiKey: "key", fetch, maxRetries: 2 });
+
+    const started = Date.now();
+    const pending = client.request("GET", "/addresses", { signal: controller.signal });
+    setTimeout(() => controller.abort(), 20);
+    const error = await pending.catch((e: unknown) => e);
+
+    expect(error).toBeInstanceOf(ShippoNetworkError);
+    expect(calls.length).toBe(1);
+    expect(Date.now() - started).toBeLessThan(1000);
+  });
+
+  test("caps Retry-After at 60 seconds", async () => {
+    const realSetTimeout = globalThis.setTimeout;
+    const delays: number[] = [];
+    globalThis.setTimeout = ((handler: () => void, ms?: number) => {
+      delays.push(ms ?? 0);
+      return realSetTimeout(handler, 0);
+    }) as unknown as typeof setTimeout;
+    try {
+      const { fetch } = createMockFetch((_call, index) =>
+        index === 0
+          ? { status: 429, headers: { "retry-after": "86400" }, body: {} }
+          : { body: { ok: true } },
+      );
+      const client = new ShippoClient({ apiKey: "key", fetch, maxRetries: 1 });
+
+      await client.request("GET", "/addresses");
+    } finally {
+      globalThis.setTimeout = realSetTimeout;
+    }
+
+    expect(delays).toContain(60_000);
+    expect(Math.max(...delays)).toBe(60_000);
+  });
+
+  test.each([
+    ["maxRetries NaN", { maxRetries: Number.NaN }],
+    ["maxRetries negative", { maxRetries: -1 }],
+    ["maxRetries fractional", { maxRetries: 1.5 }],
+    ["retryDelayMs Infinity", { retryDelayMs: Number.POSITIVE_INFINITY }],
+    ["retryDelayMs negative", { retryDelayMs: -5 }],
+    ["timeoutMs NaN", { timeoutMs: Number.NaN }],
+    ["timeoutMs zero", { timeoutMs: 0 }],
+  ])("rejects %s in the constructor", (_name, options) => {
+    expect(() => new ShippoClient({ apiKey: "key", ...options })).toThrow(ShippoError);
+  });
+});
+
 describe("timeout", () => {
   test("aborts the request once timeoutMs elapses", async () => {
     const neverResolvingFetch = ((_input: string, init?: RequestInit) => {

@@ -4,7 +4,10 @@ const DEFAULT_BASE_URL = "https://api.goshippo.com";
 const DEFAULT_MAX_RETRIES = 2;
 const DEFAULT_RETRY_DELAY_MS = 300;
 const DEFAULT_TIMEOUT_MS = 30_000;
+const MAX_BACKOFF_MS = 60_000;
 const RETRYABLE_STATUS_CODES = new Set([429, 500, 502, 503, 504]);
+/** Methods that are safe to repeat after an ambiguous failure (RFC 9110 §9.2.2). */
+const IDEMPOTENT_METHODS = new Set<HttpMethod>(["GET", "PUT", "DELETE"]);
 
 export type HttpMethod = "GET" | "POST" | "PUT" | "PATCH" | "DELETE";
 
@@ -21,11 +24,22 @@ export interface ShippoClientOptions {
   apiVersion?: string;
   /** Injectable fetch implementation — defaults to the global `fetch`. */
   fetch?: typeof fetch;
-  /** Max retry attempts for network errors and 429/5xx responses. Default 2. */
+  /**
+   * Max retry attempts. Default 2. GET/PUT/DELETE are retried on network
+   * errors, timeouts, and 429/5xx. POST/PATCH (label purchases, refunds,
+   * pickups, ...) are only retried on 429, since a timeout or 5xx may
+   * arrive after Shippo already acted. Must be a non-negative integer.
+   */
   maxRetries?: number;
-  /** Base delay for exponential backoff between retries, in ms. Default 300. */
+  /**
+   * Also retry POST/PATCH on network errors and 5xx. Off by default because
+   * Shippo documents no idempotency key: a retried `transactions.create`
+   * can buy the label more than once.
+   */
+  retryNonIdempotent?: boolean;
+  /** Base delay for exponential backoff between retries, in ms. Default 300. Must be finite and >= 0. */
   retryDelayMs?: number;
-  /** Per-request timeout in ms, aborting the request if exceeded. Default 30000. */
+  /** Per-request timeout in ms, aborting the request if exceeded. Default 30000. Must be finite and > 0. */
   timeoutMs?: number;
 }
 
@@ -42,6 +56,7 @@ export class ShippoClient {
   #apiVersion: string | undefined;
   #fetch: typeof fetch;
   #maxRetries: number;
+  #retryNonIdempotent: boolean;
   #retryDelayMs: number;
   #timeoutMs: number;
 
@@ -55,21 +70,45 @@ export class ShippoClient {
     this.#apiVersion = options.apiVersion;
     this.#fetch = options.fetch ?? fetch;
     this.#maxRetries = options.maxRetries ?? DEFAULT_MAX_RETRIES;
+    this.#retryNonIdempotent = options.retryNonIdempotent ?? false;
     this.#retryDelayMs = options.retryDelayMs ?? DEFAULT_RETRY_DELAY_MS;
     this.#timeoutMs = options.timeoutMs ?? DEFAULT_TIMEOUT_MS;
+
+    if (!Number.isInteger(this.#maxRetries) || this.#maxRetries < 0) {
+      throw new ShippoError(
+        `Invalid maxRetries ${String(this.#maxRetries)}: expected a non-negative integer.`,
+      );
+    }
+    if (!Number.isFinite(this.#retryDelayMs) || this.#retryDelayMs < 0) {
+      throw new ShippoError(
+        `Invalid retryDelayMs ${String(this.#retryDelayMs)}: expected a finite number >= 0.`,
+      );
+    }
+    if (!Number.isFinite(this.#timeoutMs) || this.#timeoutMs <= 0) {
+      throw new ShippoError(
+        `Invalid timeoutMs ${String(this.#timeoutMs)}: expected a finite number > 0.`,
+      );
+    }
   }
 
   async request<T>(method: HttpMethod, path: string, options: RequestOptions = {}): Promise<T> {
     const url = this.#buildUrl(path, options.query);
 
     for (let attempt = 0; ; attempt++) {
+      if (options.signal?.aborted) {
+        throw callerAbortError(options.signal, url, attempt);
+      }
       try {
         return await this.#attempt<T>(method, url, options, attempt);
       } catch (error) {
-        if (!this.#shouldRetry(error, attempt)) {
+        if (!this.#shouldRetry(method, error, attempt, options.signal)) {
           throw error;
         }
-        await sleep(this.#backoffDelayMs(attempt, error));
+        try {
+          await sleep(this.#backoffDelayMs(attempt, error), options.signal);
+        } catch {
+          throw callerAbortError(options.signal, url, attempt + 1);
+        }
       }
     }
   }
@@ -105,6 +144,9 @@ export class ShippoClient {
         signal,
       });
     } catch (cause) {
+      if (options.signal?.aborted) {
+        throw callerAbortError(options.signal, url, attempt);
+      }
       throw new ShippoNetworkError(networkErrorMessage(cause, url, attempt), { cause });
     }
 
@@ -127,26 +169,34 @@ export class ShippoClient {
     return url.toString();
   }
 
-  #shouldRetry(error: unknown, attempt: number): boolean {
-    if (attempt >= this.#maxRetries) {
+  #shouldRetry(
+    method: HttpMethod,
+    error: unknown,
+    attempt: number,
+    signal: AbortSignal | undefined,
+  ): boolean {
+    if (signal?.aborted || attempt >= this.#maxRetries) {
       return false;
     }
+    const repeatable = IDEMPOTENT_METHODS.has(method) || this.#retryNonIdempotent;
     if (error instanceof ShippoNetworkError) {
-      return true;
+      return repeatable;
     }
     if (error instanceof ShippoApiError) {
-      return RETRYABLE_STATUS_CODES.has(error.status);
+      // A 429 means Shippo rejected the request without acting on it, so it is
+      // safe to repeat for any method.
+      return error.status === 429 || (repeatable && RETRYABLE_STATUS_CODES.has(error.status));
     }
     return false;
   }
 
   #backoffDelayMs(attempt: number, error: unknown): number {
     if (error instanceof ShippoApiError && error.retryAfterMs !== undefined) {
-      return error.retryAfterMs;
+      return Math.min(error.retryAfterMs, MAX_BACKOFF_MS);
     }
     const exponential = this.#retryDelayMs * 2 ** attempt;
     const jitter = Math.random() * this.#retryDelayMs;
-    return exponential + jitter;
+    return Math.min(exponential + jitter, MAX_BACKOFF_MS);
   }
 }
 
@@ -207,6 +257,32 @@ function networkErrorMessage(cause: unknown, url: string, attempt: number): stri
   return `Shippo API request to ${url} failed on attempt ${attempt + 1}: ${reason}`;
 }
 
-function sleep(ms: number): Promise<void> {
-  return new Promise((resolve) => setTimeout(resolve, ms));
+function callerAbortError(
+  signal: AbortSignal | undefined,
+  url: string,
+  attempt: number,
+): ShippoNetworkError {
+  return new ShippoNetworkError(
+    `Shippo API request to ${url} was aborted by the caller before attempt ${attempt + 1} completed.`,
+    { cause: signal?.reason },
+  );
+}
+
+/** Resolves after `ms`; rejects immediately if `signal` aborts first. */
+function sleep(ms: number, signal: AbortSignal | undefined): Promise<void> {
+  return new Promise((resolve, reject) => {
+    if (signal?.aborted) {
+      reject(signal.reason);
+      return;
+    }
+    const onAbort = (): void => {
+      clearTimeout(timer);
+      reject(signal?.reason);
+    };
+    const timer = setTimeout(() => {
+      signal?.removeEventListener("abort", onAbort);
+      resolve();
+    }, ms);
+    signal?.addEventListener("abort", onAbort, { once: true });
+  });
 }
