@@ -52,6 +52,7 @@ export interface RequestOptions {
 export class ShippoClient {
   readonly baseUrl: string;
 
+  #origin: string;
   #apiKey: string;
   #apiVersion: string | undefined;
   #fetch: typeof fetch;
@@ -67,6 +68,7 @@ export class ShippoClient {
 
     this.#apiKey = options.apiKey;
     this.baseUrl = options.baseUrl ?? DEFAULT_BASE_URL;
+    this.#origin = parseBaseOrigin(this.baseUrl);
     this.#apiVersion = options.apiVersion;
     this.#fetch = options.fetch ?? fetch;
     this.#maxRetries = options.maxRetries ?? DEFAULT_MAX_RETRIES;
@@ -141,6 +143,10 @@ export class ShippoClient {
         method,
         headers,
         body: options.body !== undefined ? JSON.stringify(options.body) : undefined,
+        // Never follow redirects: whether `Authorization` is stripped on a
+        // cross-origin hop depends on the runtime. A 3xx surfaces as a
+        // `ShippoApiError` instead.
+        redirect: "manual",
         signal,
       });
     } catch (cause) {
@@ -157,8 +163,29 @@ export class ShippoClient {
     return parseSuccessBody<T>(response);
   }
 
+  /**
+   * Resolves `path` to a full URL on the configured origin. The API token is
+   * attached to every request, so anything that would land on a different
+   * scheme, host, or port (an absolute URL, `@host`, `.host`, a pagination
+   * `next` link pointing elsewhere) is rejected before `fetch` is called.
+   */
   #buildUrl(path: string, query: RequestOptions["query"]): string {
-    const url = new URL(path.startsWith("http") ? path : `${this.baseUrl}${path}`);
+    let url: URL;
+    try {
+      url = new URL(path.startsWith("/") ? `${this.baseUrl}${path}` : path);
+    } catch (cause) {
+      throw new ShippoError(
+        `Invalid request path ${JSON.stringify(path)}: expected a path starting with "/" ` +
+          `or an absolute URL on ${this.#origin}.`,
+        { cause },
+      );
+    }
+    if (url.origin !== this.#origin) {
+      throw new ShippoError(
+        `Refusing to send the Shippo API token to ${url.origin}: request path ` +
+          `${JSON.stringify(path)} is not on the configured origin ${this.#origin}.`,
+      );
+    }
     if (query) {
       for (const [key, value] of Object.entries(query)) {
         if (value !== undefined) {
@@ -198,6 +225,31 @@ export class ShippoClient {
     const jitter = Math.random() * this.#retryDelayMs;
     return Math.min(exponential + jitter, MAX_BACKOFF_MS);
   }
+}
+
+const LOOPBACK_HOSTNAMES = new Set(["localhost", "127.0.0.1", "[::1]"]);
+
+/**
+ * Validates `baseUrl` and returns its origin. Plain `http://` is only
+ * allowed for loopback hosts so a live key isn't sent in cleartext by mistake.
+ */
+function parseBaseOrigin(baseUrl: string): string {
+  let url: URL;
+  try {
+    url = new URL(baseUrl);
+  } catch (cause) {
+    throw new ShippoError(`Invalid baseUrl ${JSON.stringify(baseUrl)}: not a valid URL.`, {
+      cause,
+    });
+  }
+  const isLoopbackHttp = url.protocol === "http:" && LOOPBACK_HOSTNAMES.has(url.hostname);
+  if (url.protocol !== "https:" && !isLoopbackHttp) {
+    throw new ShippoError(
+      `Invalid baseUrl ${JSON.stringify(baseUrl)}: must use https:// ` +
+        `(http:// is only allowed for localhost, 127.0.0.1, or [::1]).`,
+    );
+  }
+  return url.origin;
 }
 
 async function toApiError(response: Response, url: string): Promise<ShippoApiError> {

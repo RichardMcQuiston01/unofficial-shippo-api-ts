@@ -1,4 +1,5 @@
 import type { ShippoClient } from "../client";
+import { apiPath } from "../api-path";
 
 /**
  * Not confirmed for Batches specifically by any reachable source — inferred
@@ -98,7 +99,7 @@ export class BatchesResource {
 
   /** Retrieves a single batch by its object ID. */
   async get(batchId: string): Promise<Batch> {
-    return this.client.request<Batch>("GET", `/batches/${batchId}`);
+    return this.client.request<Batch>("GET", apiPath("/batches", batchId));
   }
 
   /**
@@ -106,7 +107,7 @@ export class BatchesResource {
    * best-effort — see `BatchShipmentIds`'s doc comment.
    */
   async addShipments(batchId: string, shipmentIds: BatchShipmentIds): Promise<Batch> {
-    return this.client.request<Batch>("POST", `/batches/${batchId}/add_shipments`, {
+    return this.client.request<Batch>("POST", apiPath("/batches", batchId, "add_shipments"), {
       body: { shipments: shipmentIds },
     });
   }
@@ -116,7 +117,7 @@ export class BatchesResource {
    * best-effort — see this module's doc comments.
    */
   async purchase(batchId: string): Promise<Batch> {
-    return this.client.request<Batch>("POST", `/batches/${batchId}/purchase`);
+    return this.client.request<Batch>("POST", apiPath("/batches", batchId, "purchase"));
   }
 
   /**
@@ -124,7 +125,7 @@ export class BatchesResource {
    * are best-effort — see `BatchShipmentIds`'s doc comment.
    */
   async removeShipments(batchId: string, shipmentIds: BatchShipmentIds): Promise<Batch> {
-    return this.client.request<Batch>("POST", `/batches/${batchId}/remove_shipments`, {
+    return this.client.request<Batch>("POST", apiPath("/batches", batchId, "remove_shipments"), {
       body: { shipments: shipmentIds },
     });
   }

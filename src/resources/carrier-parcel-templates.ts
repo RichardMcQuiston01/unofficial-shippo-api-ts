@@ -1,4 +1,5 @@
 import type { ShippoClient } from "../client";
+import { apiPath } from "../api-path";
 import type { ListQuery, UnconfirmedPaginatedList } from "../pagination";
 import type { DistanceUnit } from "./parcels";
 
@@ -52,6 +53,6 @@ export class CarrierParcelTemplatesResource {
    * `GET /parcel-templates/{token}`.
    */
   async get(token: string): Promise<CarrierParcelTemplate> {
-    return this.client.request<CarrierParcelTemplate>("GET", `/parcel-templates/${token}`);
+    return this.client.request<CarrierParcelTemplate>("GET", apiPath("/parcel-templates", token));
   }
 }

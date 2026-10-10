@@ -1,6 +1,7 @@
 import { describe, expect, test } from "bun:test";
 
 import { ShippoClient } from "./client";
+import { ShippoError } from "./errors";
 import { paginate } from "./pagination";
 import { createMockFetch } from "./testing/mock-fetch";
 
@@ -69,5 +70,86 @@ describe("paginate", () => {
     }
 
     expect(items).toEqual([]);
+  });
+
+  test.each([
+    ["omitted next", { count: 0, results: [] }],
+    ["empty-string next", { count: 0, next: "", results: [] }],
+  ])("stops after one page for %s", async (_name, body) => {
+    const { fetch, calls } = createMockFetch(() => ({ body }));
+    const client = new ShippoClient({ apiKey: "key", fetch, maxRetries: 0 });
+
+    const items: Address[] = [];
+    for await (const item of paginate<Address>(client, "/addresses")) {
+      items.push(item);
+    }
+
+    expect(items).toEqual([]);
+    expect(calls.length).toBe(1);
+  });
+
+  test.each([
+    ["null results", { results: null, next: null }],
+    ["missing results", { next: null }],
+  ])("treats %s as an empty page", async (_name, body) => {
+    const { fetch } = createMockFetch(() => ({ body }));
+    const client = new ShippoClient({ apiKey: "key", fetch, maxRetries: 0 });
+
+    const items: Address[] = [];
+    for await (const item of paginate<Address>(client, "/orders")) {
+      items.push(item);
+    }
+
+    expect(items).toEqual([]);
+  });
+
+  test("throws instead of looping when next repeats the current URL", async () => {
+    const { fetch, calls } = createMockFetch(() => ({
+      body: { next: "https://api.goshippo.com/addresses?page=2", results: [] },
+    }));
+    const client = new ShippoClient({ apiKey: "key", fetch, maxRetries: 0 });
+
+    const consume = async (): Promise<void> => {
+      for await (const _item of paginate<Address>(client, "/addresses")) {
+        // drain
+      }
+    };
+
+    await expect(consume()).rejects.toThrow(/loop detected/);
+    expect(calls.length).toBe(2);
+  });
+
+  test("throws when two pages point at each other", async () => {
+    const { fetch } = createMockFetch((_call, index) => ({
+      body: {
+        next: `https://api.goshippo.com/addresses?page=${index % 2 === 0 ? 2 : 1}`,
+        results: [],
+      },
+    }));
+    const client = new ShippoClient({ apiKey: "key", fetch, maxRetries: 0 });
+
+    const consume = async (): Promise<void> => {
+      for await (const _item of paginate<Address>(client, "/addresses?page=1")) {
+        // drain
+      }
+    };
+
+    await expect(consume()).rejects.toBeInstanceOf(ShippoError);
+  });
+
+  test("refuses a next URL on a different origin without sending the token", async () => {
+    const { fetch, calls } = createMockFetch(() => ({
+      body: { next: "https://evil.example/steal", results: [{ object_id: "a" }] },
+    }));
+    const client = new ShippoClient({ apiKey: "key", fetch, maxRetries: 0 });
+
+    const consume = async (): Promise<void> => {
+      for await (const _item of paginate<Address>(client, "/addresses")) {
+        // drain
+      }
+    };
+
+    await expect(consume()).rejects.toBeInstanceOf(ShippoError);
+    expect(calls.length).toBe(1);
   });
 });
