@@ -1,5 +1,19 @@
 # CHANGELOG
 
+## 1.1.0
+
+### Minor Changes
+
+- [#47](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/pull/47) [`08f11ec`](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/commit/08f11ecbfe17c259326ce05556104c5375f94422) Thanks [@RichardMcQuiston01](https://github.com/RichardMcQuiston01)! - Webhooks: added `verifyWebhookSignature()` (HMAC `Shippo-Auth-Signature`, constant-time, timestamp tolerance) and `verifyWebhookToken()` (constant-time URL token check), and corrected the docs that claimed Shippo deliveries cannot be authenticated. `parseEvent()` now requires a boolean `test` flag and throws `ShippoError` (with the `SyntaxError` as `cause`) for invalid JSON. `"all"` is now accepted when creating or updating a webhook subscription. The webhook examples now verify before parsing, bind `127.0.0.1`, cap the body, acknowledge before re-fetching, and ignore repeat deliveries. Fixes [#41](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/issues/41), [#42](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/issues/42).
+
+### Patch Changes
+
+- [#48](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/pull/48) [`066036e`](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/commit/066036e8994e22b036c062f5ad4d7bf467f06e0f) Thanks [@RichardMcQuiston01](https://github.com/RichardMcQuiston01)! - `ShippoApiError.message` no longer serializes the response body. It now holds the status line, the request path without its query string, and a short (max 500 characters) `detail` or field-error summary; unrecognized bodies are never dumped, only arrays of strings are summarized as field errors, and fields named like credentials (`password`, `parameters`, `token`, ...) are omitted. The raw body is still on `error.body`. Network error messages also drop the query string. README updated to log `status`/`requestId` and treat `body` as sensitive. Fixes [#44](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/issues/44).
+
+- [#45](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/pull/45) [`1b61043`](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/commit/1b6104323a077fef71847f47c810397c94e4e1d8) Thanks [@RichardMcQuiston01](https://github.com/RichardMcQuiston01)! - Security: requests can no longer send the API token off the configured origin. `request()` and `paginate()` reject any URL whose scheme, host, or port differs from `baseUrl` (including `@host`/`.host` tricks and off-origin `next` links), `http://` base URLs are rejected except for loopback, and redirects are no longer followed. Resource IDs, carrier codes, and tracking numbers are now percent-encoded per path segment (`.`/`..` and empty segments are rejected). `paginate()` now ends on a missing or empty `next`, treats `null`/missing `results` as an empty page, and throws a `ShippoError` on a repeated page URL instead of looping. Fixes [#38](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/issues/38), [#40](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/issues/40), [#43](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/issues/43).
+
+- [#46](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/pull/46) [`0908b5e`](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/commit/0908b5e265f487ca11d902c5e231a0f5ca9a7d52) Thanks [@RichardMcQuiston01](https://github.com/RichardMcQuiston01)! - Retries no longer repeat label purchases or ignore aborts. `POST`/`PATCH` are only retried on 429 (opt in to more with `retryNonIdempotent: true`), a caller `AbortSignal` fails the request immediately (including during backoff) instead of being retried, `Retry-After` and backoff delays are capped at 60 seconds, and `maxRetries`/`retryDelayMs`/`timeoutMs` are validated in the constructor. Fixes [#39](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/issues/39).
+
 ## 1.0.1
 
 ### Patch Changes
