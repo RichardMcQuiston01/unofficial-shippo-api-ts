@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 1.1.1
+
+### Patch Changes
+
+- [#52](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/pull/52) [`9c82eca`](https://github.com/RichardMcQuiston01/unofficial-shippo-api-ts/commit/9c82ecafa4f969116ead557bf8f5629ce3931773) Thanks [@RichardMcQuiston01](https://github.com/RichardMcQuiston01)! - Add a `funding` link to `package.json` so `npm fund` and the npm package page show the donate link. No code change.
+
 ## 1.1.0
 
 ### Minor Changes
